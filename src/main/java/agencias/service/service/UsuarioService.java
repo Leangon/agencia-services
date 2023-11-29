@@ -1,4 +1,4 @@
 package agencias.service.service;
 
-public class UsuarioService {
+public interface UsuarioService {
 }
