@@ -30,5 +30,8 @@ public class Reserva {
 
     @Column(name = "precio")
     private Double precio;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="fk_pago", nullable = false)
+    private Pago pago;
 
 }
