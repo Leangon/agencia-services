@@ -1,6 +1,6 @@
 package agencias.service.models.dto.Response;
 
-import agencias.service.models.dto.Request.ItinerarioRequestDto;
+import agencias.service.models.dto.Request.TicketRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ItineriarioResponseDto {
+public class TicketResponseDTO {
 
-    private ItinerarioRequestDto itineriarioDto;
+    private TicketRequestDTO ticket;
     private String message;
 }

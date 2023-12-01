@@ -33,10 +33,6 @@ public class Ticket {
     @Embedded
     private Pasajero pasajero;
 
-    @Positive(message = "Debe ser un numero positivo")
-    @Column(name = "precio")
-    private double precio;
-
     @ManyToOne
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
     private Vuelo vuelo;
