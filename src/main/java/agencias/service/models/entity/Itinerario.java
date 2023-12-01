@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,13 +25,23 @@ public class Itinerario {
     @Column(name = "ciudad_origen")
     @NotBlank(message = "Debe incluir una ciudad")
     private String ciudadOrigen;
+
     @Column(name = "pais_origen")
     @NotBlank(message = "Debe incluir un pais")
     private String paisOrigen;
+
     @Column(name = "ciudad_destino")
     @NotBlank(message = "Debe incluir una ciudad")
     private String ciudadDestino;
+
     @Column(name = "pais_destino")
     @NotBlank(message = "Debe incluir un pais")
     private String paisDestino;
+
+    @OneToMany(mappedBy = "itinerario")
+    private List<Vuelo> listaVuelos;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_reporte", referencedColumnName = "idReporte")
+    private Reporte reporte;
 }

@@ -23,4 +23,15 @@ public class Promocion {
    @Column(name = "descuento_promocional")
    @Positive(message = "No puede ser un número negativo")
    private int descuentoPromocional;
+
+   @OneToOne(mappedBy = "promocion")
+   private Usuario usuario;
+
+   @OneToOne
+   @JoinColumn(name = "fk_aerolinea", referencedColumnName = "id_aerolinea")
+   private Aerolinea aerolinea;
+
+   @ManyToOne
+   @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
+   private Vuelo vuelo;
 }

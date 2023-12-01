@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -16,9 +17,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente")
+    @Column(name = "id_usuario")
     private Long idCliente;
 
     @NotEmpty(message = "El nombre no puede estar vacio")
@@ -46,5 +48,13 @@ public class Usuario {
     @NotEmpty(message = "La fecha de nacimiento es requerido")
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Reserva> listaReservas;
+
+    @OneToOne
+    @JoinColumn(name = "fk_promocion", referencedColumnName = "id_promocion")
+    private Promocion promocion;
+
 
 }

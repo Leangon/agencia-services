@@ -3,12 +3,14 @@ package agencias.service.models.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "vuelo")
@@ -47,4 +49,22 @@ public class Vuelo {
     @Column(name = "hora_llegada")
     private String horaLLegada;
 
+    @OneToMany(mappedBy = "vuelo")
+    private List<Reserva> listaReservas;
+
+    @OneToMany(mappedBy = "vuelo")
+    private List<Promocion> listaPromociones;
+
+    @OneToMany(mappedBy = "vuelo")
+    private List<Ticket> listaTickets;
+
+    @NotNull(message = "Debe tener una aerolínea asociada")
+    @ManyToOne
+    @JoinColumn(name = "fk_aerolinea", referencedColumnName = "id_aerolinea")
+    private Aerolinea aerolinea;
+
+    @NotNull(message = "Debe tener un itinerario asociada")
+    @ManyToOne
+    @JoinColumn(name = "fk_itinerario", referencedColumnName = "id_itinerario")
+    private Itinerario itinerario;
 }
