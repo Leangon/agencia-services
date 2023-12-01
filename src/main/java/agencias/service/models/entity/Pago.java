@@ -25,8 +25,8 @@ public class Pago {
     private TipoPago tipoPago;
     private LocalDate fecha_pago;
     private Double monto;
-    @OneToMany(mappedBy = "pago", cascade = CascadeType.ALL)
-    private List<Reserva> reserva;
+    @OneToOne(mappedBy = "pago", cascade = CascadeType.ALL)
+    private Reserva reserva;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="fk_reporte", nullable = false)
     private Reporte reporte;

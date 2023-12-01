@@ -17,6 +17,6 @@ public class PagoRequestDTO {
     private Integer num_transaccion;
     private TipoPago tipoPago;
     private LocalDate fecha_pago;
-    private List<ReservaResponseDTO> reservaDto;
+    private List<ReservaRequestDTO> reservaDto;
 
 }

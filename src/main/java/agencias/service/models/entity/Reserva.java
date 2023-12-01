@@ -30,8 +30,8 @@ public class Reserva {
 
     @Column(name = "precio")
     private Double precio;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="fk_pago", nullable = false)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name="fk_pago", referencedColumnName = "IdPago")
     private Pago pago;
 
 }

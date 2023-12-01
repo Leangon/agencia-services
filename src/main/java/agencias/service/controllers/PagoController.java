@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("app")
 public class PagoController {
-    @Autowired
-    PagoServiceImpl pagoService;
+
+    private PagoService pagoService;
+
+    public PagoController(PagoServiceImpl pagoService) {
+        this.pagoService = pagoService;
+    }
 
     @GetMapping("/pago")
     public ResponseEntity<?> listarPagos(){

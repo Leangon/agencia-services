@@ -9,13 +9,19 @@ import agencias.service.repository.PagoRepository;
 import agencias.service.service.PagoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class PagoServiceImpl implements PagoService {
-    @Autowired
-    PagoRepository pagoRepo;
+
+    private PagoRepository pagoRepo;
+
+    public PagoServiceImpl(PagoRepository pagoRepo) {
+        this.pagoRepo = pagoRepo;
+    }
+
     @Override
     public List<PagoResponseDTO> listarPagos() {
         List<Pago> listPago = pagoRepo.findAll ();
@@ -32,7 +38,7 @@ public class PagoServiceImpl implements PagoService {
         ModelMapper mapper = new ModelMapper ();
         Pago pagoClass = mapper.map(pago, Pago.class);
 
-       pagoClass.getReserva ().forEach ( i -> i.setPago ( pagoClass ) );
+       //pagoClass.getReserva ().forEach ( i -> i.setPago ( pagoClass ) );
         //PENDIENTE determinar el monto de pago
 
 
