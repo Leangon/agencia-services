@@ -22,7 +22,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
     }
 
     @Override
-    public AerolineaResponseDTO mostrarAerolinea(Long idAerolinea) {
+    public AerolineaResponseDTO obtenerAerolinea(Long idAerolinea) {
         return null;
     }
 
