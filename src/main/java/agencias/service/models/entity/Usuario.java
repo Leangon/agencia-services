@@ -21,7 +21,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long idCliente;
+    private Long idUsuario;
 
     @NotEmpty(message = "El nombre no puede estar vacio")
     @Size(min = 4, max = 12, message = "El tamaño del nombre debe ser entre 4 y 12 caracteres")
@@ -55,6 +55,5 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "fk_promocion", referencedColumnName = "id_promocion")
     private Promocion promocion;
-
 
 }

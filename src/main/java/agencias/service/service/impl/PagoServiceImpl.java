@@ -77,7 +77,6 @@ public class PagoServiceImpl implements PagoService {
             throw new RuntimeException ( "No existe el pago que desea eliminar" );
         });
 
-
         pagoRepo.deleteById ( idPago );
         ResponseDeleteDto res = new ResponseDeleteDto ();
         res.setMensaje ( " El pago se elimino correctamente" );
