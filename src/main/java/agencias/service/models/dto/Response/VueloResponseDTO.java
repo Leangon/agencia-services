@@ -1,11 +1,16 @@
 package agencias.service.models.dto.Response;
 
+import agencias.service.models.dto.Request.AerolineaRequestDTO;
+import agencias.service.models.dto.Request.ItinerarioRequestDto;
+import agencias.service.models.dto.Request.ReservaRequestDTO;
+import agencias.service.models.dto.Request.TicketRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +24,8 @@ public class VueloResponseDTO {
     private LocalDate fecha;
     private String horaSalida;
     private String horaLLegada;
-
+    private List<ReservaRequestDTO> listaReservas;
+    private List<TicketRequestDTO> listaTickets;
+    private AerolineaRequestDTO aerolinea;
+    private ItinerarioRequestDto itinerario;
 }

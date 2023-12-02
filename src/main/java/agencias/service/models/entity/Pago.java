@@ -4,10 +4,7 @@ import agencias.service.models.enums.TipoPago;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.boot.model.internal.BinderHelper;
 
 import java.time.LocalDate;
@@ -17,6 +14,7 @@ import java.util.List;
 @Table(name = "pago")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pago {
@@ -30,6 +28,9 @@ public class Pago {
 
     @Positive(message = "Debe ser un número positivo")
     private Double monto;
+
+    @NotNull(message = "Debe tener una fecha de pago")
+    LocalDate fecha_pago;
 
     @NotNull(message = "Debe incluir una reserva asociada")
     @OneToOne(mappedBy = "pago", cascade = CascadeType.ALL)

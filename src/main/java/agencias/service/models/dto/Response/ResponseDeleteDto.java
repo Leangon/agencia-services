@@ -1,10 +1,10 @@
 package agencias.service.models.dto.Response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResponseDeleteDto {
     public String mensaje;
 }

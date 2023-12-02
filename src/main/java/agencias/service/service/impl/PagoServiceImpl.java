@@ -8,6 +8,7 @@ import agencias.service.models.entity.Reserva;
 import agencias.service.repository.PagoRepository;
 import agencias.service.service.PagoService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,18 +30,18 @@ public class PagoServiceImpl implements PagoService {
         List<PagoResponseDTO> pagoDtoList = new ArrayList<> ();
         listPago.stream ().forEach ( p -> pagoDtoList.add(mapper.map(p, PagoResponseDTO.class)) );
 
-
         return pagoDtoList;
     }
 
     @Override
     public PagoResponseDTO crearPago(PagoRequestDTO pago) {
         ModelMapper mapper = new ModelMapper ();
+        //mapper.getConfiguration().setAmbiguityIgnored(true);
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Pago pagoClass = mapper.map(pago, Pago.class);
 
        //pagoClass.getReserva ().forEach ( i -> i.setPago ( pagoClass ) );
         //PENDIENTE determinar el monto de pago
-
 
         Pago pagoPersist = pagoRepo.save(pagoClass);
         PagoResponseDTO pagoDto = new PagoResponseDTO ();
@@ -61,7 +62,6 @@ public class PagoServiceImpl implements PagoService {
         pagoDto.setPago ( mapper.map(pago,PagoRequestDTO.class) );
         pagoDto.setMensaje ( "se logro encontrar el pago buscado" );
 
-
         return pagoDto;
     }
 
@@ -79,7 +79,7 @@ public class PagoServiceImpl implements PagoService {
 
         pagoRepo.deleteById ( idPago );
         ResponseDeleteDto res = new ResponseDeleteDto ();
-        res.setMensaje ( " El pago se elimino correctamente" );
+        res.setMensaje ( "El pago se elimino correctamente" );
 
         return res;
     }
