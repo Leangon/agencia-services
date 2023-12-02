@@ -24,7 +24,7 @@ public class Reserva {
     @NotNull(message = "Debe incluir un medio de pago")
     @Column(name = "medio_pago")
     @Enumerated(EnumType.STRING)
-    TipoPago tipoPago;
+    private TipoPago tipoPago;
 
     @NotNull(message = "Debe incluir una fecha de reserva")
     @Column(name = "fecha_reserva")

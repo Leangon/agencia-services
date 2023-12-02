@@ -24,6 +24,10 @@ public class Ticket {
     @Column(name = "num_asiento")
     private int numAsiento;
 
+    @Positive(message = "Debe ser un numero positivo")
+    @Column(name = "precio")
+    private double precio;
+
     @NotNull(message = "Debe incluir una clase")
     @Enumerated(EnumType.STRING)
     @Column(name = "clase")
@@ -32,10 +36,6 @@ public class Ticket {
     @NotNull(message = "Debe incluir un pasajero")
     @Embedded
     private Pasajero pasajero;
-
-    @Positive(message = "Debe ser un numero positivo")
-    @Column(name = "precio")
-    private double precio;
 
     @ManyToOne
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")

@@ -2,6 +2,7 @@ package agencias.service.models.dto.Request;
 
 
 import agencias.service.models.dto.Response.ReservaResponseDTO;
+import agencias.service.models.entity.Reserva;
 import agencias.service.models.enums.TipoPago;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,6 @@ public class PagoRequestDTO {
     private Integer num_transaccion;
     private TipoPago tipoPago;
     private LocalDate fecha_pago;
-    private List<ReservaRequestDTO> reservaDto;
-
+    private List<ReservaRequestDTO> listaReservaDto;
+    private ReservaRequestDTO reservaDto;
 }
