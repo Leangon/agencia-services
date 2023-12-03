@@ -11,8 +11,12 @@ public interface AerolineaService {
 
         public AerolineaResponseDTO guardarAerolinea(AerolineaRequestDTO aerolinea );
         public AerolineaResponseDTO borrarAerolinea(Long idAerolinea );
-        public AerolineaResponseDTO obtenerAerolinea(Long  idAerolinea );
-        public List<AerolineaResponseDTO> listarAerolinea();
-    }
+
+    AerolineaResponseDTO traerAerolineaPorId(Long idAerolinea);
+
+    public List<AerolineaResponseDTO> listarAerolinea();
+
+
+}
 
 

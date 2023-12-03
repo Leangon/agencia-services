@@ -26,14 +26,14 @@ public class AerolineaController {
     }
 
 @GetMapping("/obtenerporid/{id}")
-    public ResponseEntity<?> obtenerAerolinea(@PathVariable Long id){
-        return new ResponseEntity<> (aerolineaService.obtenerAerolinea(id),HttpStatus.OK);
+    public ResponseEntity<?> traerAerolineaPorId(@PathVariable Long id){
+        return new ResponseEntity<> (aerolineaService.traerAerolineaPorId(id),HttpStatus.OK);
 }
 @PostMapping("/guardar")
-    public ResponseEntity<?> guardarAerolinea(AerolineaRequestDTO aerolinea){
+    public ResponseEntity<?> guardarAerolinea(@RequestBody AerolineaRequestDTO aerolinea){
          return new ResponseEntity<>(aerolineaService.guardarAerolinea(aerolinea),HttpStatus.OK) ;
 }
-@DeleteMapping("/borrar({id}")
+@DeleteMapping("/borrar/{id}")
     public ResponseEntity<?> borrarAerolinea(@PathVariable long id){
             return new ResponseEntity<>(aerolineaService.borrarAerolinea(id),HttpStatus.OK);
 }
