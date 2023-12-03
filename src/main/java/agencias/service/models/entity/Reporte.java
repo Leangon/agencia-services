@@ -31,6 +31,4 @@ public class Reporte {
     @OneToMany(mappedBy = "reporte")
     private List<Reserva> listaReservas;
 
-    @OneToMany(mappedBy = "reporte")
-    private List<Itinerario> listaItinerarios;
 }
