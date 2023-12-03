@@ -1,9 +1,12 @@
 package agencias.service.service.impl;
 
 import agencias.service.models.dto.Request.PagoRequestDTO;
+import agencias.service.models.dto.Request.ReporteRequestDTO;
+import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.dto.Response.PagoResponseDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.entity.Pago;
+import agencias.service.models.entity.Reporte;
 import agencias.service.models.entity.Reserva;
 import agencias.service.repository.PagoRepository;
 import agencias.service.service.PagoService;
@@ -67,8 +70,29 @@ public class PagoServiceImpl implements PagoService {
 
     @Override
     public PagoResponseDTO editarPago(PagoRequestDTO pago) {
+        ModelMapper mapper = new ModelMapper ();
+       Long idPagoDto = pago.getIdPago ();
+       Pago pagoE =pagoRepo.findById ( idPagoDto ).orElseThrow (()->{
+           throw new RuntimeException ( "No existe el pago que desea buscar" );
+       });
+       ReservaRequestDTO resDto = pago.getReservaDto ();
+       ReporteRequestDTO reporteDto =pago.getReporteDto ();
+       //seteo en pago lo que se obtiene del pago requestDto
+       pagoE.setFecha_pago ( pago.getFecha_pago () );
+       pagoE.setMonto ( pago.getMonto () );
+       pagoE.setReserva (mapper.map(resDto,Reserva.class));
+       pagoE.setReporte ( mapper.map(reporteDto, Reporte.class) );
+       pagoE.setNum_transaccion ( pago.getNum_transaccion () );
+       //guardo los cambios
+        Pago pagoEditado = pagoRepo.save ( pagoE );
 
-        return null;
+        PagoResponseDTO pagoResponseDto = new PagoResponseDTO ();
+       pagoResponseDto.setPago ( mapper.map(pagoEditado, PagoRequestDTO.class) );
+       pagoResponseDto.setMensaje ( "Se edito el pago Correctamente" );
+
+
+
+        return pagoResponseDto;
     }
 
     @Override
