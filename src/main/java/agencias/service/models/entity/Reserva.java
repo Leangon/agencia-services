@@ -1,12 +1,13 @@
 package agencias.service.models.entity;
 
-import agencias.service.models.enums.Clase;
 import agencias.service.models.enums.TipoPago;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "reservas")
@@ -44,6 +45,10 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
+
+    @NotEmpty(message = "Debe tener tickets asociados")
+    @OneToMany(mappedBy = "reserva")
+    List<Ticket> listaTickets;
 
     @ManyToOne
     @JoinColumn(name = "fk_reporte", referencedColumnName = "idReporte")

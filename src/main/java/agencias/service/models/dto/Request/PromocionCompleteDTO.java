@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PromocionRequestDto {
+public class PromocionCompleteDTO {
 
+    private Long idPromocion;
     private int descuentoPromocional;
     private UsuarioRequestDTO usuario;
     private AerolineaRequestDTO aerolinea;

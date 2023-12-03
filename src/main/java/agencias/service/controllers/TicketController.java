@@ -1,28 +1,30 @@
 package agencias.service.controllers;
 
-import agencias.service.models.dto.Request.PromocionCompleteDTO;
-import agencias.service.models.dto.Request.PromocionRequestDto;
-import agencias.service.service.PromocionService;
-import agencias.service.service.impl.PromocionServiceImpl;
+import agencias.service.models.dto.Request.TicketCompleteDTO;
+import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.service.TicketService;
+import agencias.service.service.impl.TicketServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/promocion")
-public class PromocionController {
+@RequestMapping("/api/ticket")
+@Validated
+public class TicketController {
 
-    PromocionService service;
+    TicketService service;
 
-    public PromocionController(PromocionServiceImpl service) {
+    public TicketController(TicketServiceImpl service) {
         this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody PromocionRequestDto promocionDto){
-        return new ResponseEntity<>(service.save(promocionDto), HttpStatus.OK);
+    public ResponseEntity<?>save(@Valid @RequestBody TicketRequestDTO ticketDto){
+        return new ResponseEntity<>(service.save(ticketDto), HttpStatus.OK);
     }
 
     @GetMapping
@@ -32,18 +34,20 @@ public class PromocionController {
 
     @GetMapping("{id}")
     public ResponseEntity<?>findById(@PathVariable @Positive(message = "debe ser un numero positivo")
-                                     Long id){
+                                          Long id){
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<?>update(@Valid @RequestBody PromocionCompleteDTO promocionDto){
-        return new ResponseEntity<>(service.update(promocionDto), HttpStatus.OK);
+    public ResponseEntity<?>update(@Valid @RequestBody TicketCompleteDTO ticketDto){
+        return new ResponseEntity<>(service.update(ticketDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?>delete(@PathVariable @Positive(message = "debe ser un numero positivo")
-                                   Long id){
+                                              Long id){
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
     }
+
 }
+
