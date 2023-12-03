@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -65,6 +66,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
 
 
     @Override
+
     public List<AerolineaResponseDTO> listarAerolinea() {
 
          List<Aerolinea> listaAerolineas=repoLinea.findAll();
@@ -74,5 +76,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
          return lineaDtoList;
 
     }
+
+
 
 }
