@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class VueloServiceImpl implements VueloService {
 
-    private VueloRepository vueloRepository;
+    private final VueloRepository vueloRepository;
 
     public VueloServiceImpl(VueloRepository vueloRepository){
         this.vueloRepository = vueloRepository;
@@ -28,7 +28,7 @@ public class VueloServiceImpl implements VueloService {
         ModelMapper modelMapper = new ModelMapper();
         List<VueloResponseDTO> vuelosDtoList = new ArrayList<>();
 
-        listaVuelos.stream().forEach(vuelo -> vuelosDtoList.add(modelMapper.map(vuelo, VueloResponseDTO.class)));
+        listaVuelos.forEach(vuelo -> vuelosDtoList.add(modelMapper.map(vuelo, VueloResponseDTO.class)));
 
         return vuelosDtoList;
     }
@@ -51,9 +51,7 @@ public class VueloServiceImpl implements VueloService {
     public VueloResponseDTO vueloPorId(Long idVuelo) {
         ModelMapper modelMapper = new ModelMapper();
 
-        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow( () -> {
-            throw new RuntimeException("No existe vuelo con ese id!");
-        });
+        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow( () -> new RuntimeException("No existe vuelo con ese id!"));
 
         VueloResponseDTO vueloResponseDTO = new VueloResponseDTO();
         vueloResponseDTO.setVuelo(modelMapper.map(vuelo, VueloRequestDTO.class));
@@ -64,22 +62,37 @@ public class VueloServiceImpl implements VueloService {
 
     @Override
     public ResponseDeleteDto eliminarVueloPorId(Long idVuelo) {
-        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow(() -> {
-            throw new RuntimeException("No encontramos el vuelo a eliminar!");
-        });
+        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow(() -> new RuntimeException("No encontramos el vuelo a eliminar!"));
 
         vueloRepository.deleteById(idVuelo);
-        ResponseDeleteDto mensaje = new ResponseDeleteDto("Vuelo eliminado correctamente!");
 
-        return mensaje;
+        return new ResponseDeleteDto("Vuelo eliminado correctamente!");
     }
 
     @Override
     public VueloResponseDTO editarVuelo(Long idVuelo, VueloRequestDTO vueloRequestDTO) {
-        Vuelo vueloExistente = vueloRepository.findById(idVuelo).orElseThrow(() -> {
-           throw new RuntimeException("No se encontró el vuelo a modificar");
-        });
+        Vuelo vueloExistente = vueloRepository.findById(idVuelo).orElseThrow(() -> new RuntimeException("No se encontró el vuelo a modificar"));
 
-        return null;
+        ModelMapper modelMapper = new ModelMapper();
+
+        Vuelo vueloEditado = modelMapper.map(vueloRequestDTO, Vuelo.class);
+        Vuelo vueloPersis = modelMapper.map(vueloRepository.findById(idVuelo), Vuelo.class);
+
+        vueloPersis.setNumVuelo(vueloEditado.getNumVuelo());
+        vueloPersis.setCantPasajeros(vueloEditado.getCantPasajeros());
+        vueloPersis.setDisponibilidad(vueloEditado.isDisponibilidad());
+        vueloPersis.setFecha(vueloEditado.getFecha());
+        vueloPersis.setHoraSalida(vueloEditado.getHoraSalida());
+        vueloPersis.setHoraLLegada(vueloEditado.getHoraLLegada());
+        vueloPersis.setListaReservas(vueloEditado.getListaReservas());
+        vueloPersis.setListaTickets(vueloEditado.getListaTickets());
+        vueloPersis.setListaPromociones(vueloEditado.getListaPromociones());
+        vueloPersis.setAerolinea(vueloEditado.getAerolinea());
+        vueloPersis.setItinerario(vueloEditado.getItinerario());
+
+        vueloRepository.save(vueloPersis);
+
+        return new VueloResponseDTO(vueloRequestDTO, "Vuelo editado y guardado correctamente!");
+
     }
 }

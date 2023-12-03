@@ -2,6 +2,7 @@ package agencias.service.utils;
 
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
+import agencias.service.models.entity.Vuelo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -53,6 +54,42 @@ public class VueloUtils {
         listaVuelos.add(vueloResponseDTO2);
 
         return listaVuelos;
+    }
+
+    public static Vuelo vuelo1(){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(134);
+        vuelo.setCantPasajeros(87);
+        vuelo.setDisponibilidad(true);
+        vuelo.setFecha(LocalDate.of(2023,12,25));
+        vuelo.setHoraSalida("23:00");
+        vuelo.setHoraLLegada("04:30");
+        vuelo.setListaReservas(null);
+        vuelo.setListaTickets(null);
+        vuelo.setAerolinea(null);
+        vuelo.setItinerario(null);
+        return vuelo;
+    }
+
+    public static Vuelo vuelo2(){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(134);
+        vuelo.setCantPasajeros(87);
+        vuelo.setDisponibilidad(true);
+        vuelo.setFecha(LocalDate.of(2023,12,25));
+        vuelo.setHoraSalida("23:00");
+        vuelo.setHoraLLegada("04:30");
+        vuelo.setListaReservas(null);
+        vuelo.setListaTickets(null);
+        vuelo.setAerolinea(null);
+        vuelo.setItinerario(null);
+        return vuelo;
+    }
+
+    public static List<Vuelo> ListaVuelos(){
+        return List.of(vuelo1(), vuelo2());
     }
 
 }
