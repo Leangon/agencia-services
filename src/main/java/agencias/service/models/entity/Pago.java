@@ -1,5 +1,6 @@
 package agencias.service.models.entity;
 
+import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.enums.TipoPago;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -39,4 +40,7 @@ public class Pago {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="fk_reporte", nullable = false)
     private Reporte reporte;
+
+
+
 }

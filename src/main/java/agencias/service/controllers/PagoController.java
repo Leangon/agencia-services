@@ -34,6 +34,10 @@ public class PagoController {
     public ResponseEntity<?> eliminarPago(@PathVariable long idPago){
         return new ResponseEntity<> ( pagoService.borrarPago ( idPago ), HttpStatus.OK );
     }
+    @PutMapping("/editarPago")
+    public ResponseEntity<?> editarPago(@RequestBody PagoRequestDTO pagoDto){
+        return new ResponseEntity<> ( pagoService.editarPago ( pagoDto ) , HttpStatus.OK);
+    }
 
 
 
