@@ -33,8 +33,8 @@ public class VueloController {
     }
 
     @PutMapping("/vuelo/{idVuelo}")
-    public ResponseEntity<?> modificarVuelo(@PathVariable Long idVuelo){
-        return new ResponseEntity<>(vueloService.editarVuelo(idVuelo), HttpStatus.OK);
+    public ResponseEntity<?> modificarVuelo(@PathVariable Long idVuelo, @RequestBody VueloRequestDTO vueloRequestDTO){
+        return new ResponseEntity<>(vueloService.editarVuelo(idVuelo, vueloRequestDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/vuelo/{idVuelo}")

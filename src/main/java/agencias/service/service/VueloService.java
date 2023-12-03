@@ -14,5 +14,5 @@ public interface VueloService {
 
     ResponseDeleteDto eliminarVueloPorId(Long idVuelo);
 
-    VueloResponseDTO editarVuelo(Long idVuelo);
+    VueloResponseDTO editarVuelo(Long idVuelo, VueloRequestDTO vueloRequestDTO);
 }

@@ -75,7 +75,11 @@ public class VueloServiceImpl implements VueloService {
     }
 
     @Override
-    public VueloResponseDTO editarVuelo(Long idVuelo) {
+    public VueloResponseDTO editarVuelo(Long idVuelo, VueloRequestDTO vueloRequestDTO) {
+        Vuelo vueloExistente = vueloRepository.findById(idVuelo).orElseThrow(() -> {
+           throw new RuntimeException("No se encontró el vuelo a modificar");
+        });
+
         return null;
     }
 }
