@@ -10,11 +10,16 @@ public interface AerolineaService {
 
 
         public AerolineaResponseDTO guardarAerolinea(AerolineaRequestDTO aerolinea );
-        public AerolineaResponseDTO borrarAerolinea(Long idAerolinea );
+
+    AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest);
+
+    public AerolineaResponseDTO borrarAerolinea(Long idAerolinea );
 
     AerolineaResponseDTO traerAerolineaPorId(Long idAerolinea);
 
     public List<AerolineaResponseDTO> listarAerolinea();
+
+
 
 
 }

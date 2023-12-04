@@ -33,8 +33,13 @@ public class AerolineaController {
     public ResponseEntity<?> guardarAerolinea(@RequestBody AerolineaRequestDTO aerolinea){
          return new ResponseEntity<>(aerolineaService.guardarAerolinea(aerolinea),HttpStatus.OK) ;
 }
+
+@PutMapping("/editar/{id}")
+    public ResponseEntity<?> editarAerolinea(@PathVariable Long id,@RequestBody AerolineaRequestDTO aerolineaRequest){
+        return new ResponseEntity<>(aerolineaService.editarAerolinea(id,aerolineaRequest),HttpStatus.OK) ;
+    }
 @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrarAerolinea(@PathVariable long id){
+    public ResponseEntity<?> borrarAerolinea(@PathVariable Long id){
             return new ResponseEntity<>(aerolineaService.borrarAerolinea(id),HttpStatus.OK);
 }
 

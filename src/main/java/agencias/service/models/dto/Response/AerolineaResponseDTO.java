@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AerolineaResponseDTO {
     private AerolineaRequestDTO aerolinea;
+
     private String message;
 
 }
