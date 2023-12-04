@@ -26,4 +26,8 @@ public class VueloResponseDTO {
     private List<ReservaRequestDTO> listaReservas;
     private List<TicketRequestDTO> listaTickets;
     private AerolineaRequestDTO aerolinea;
+    private VueloRequestDTO vuelo;
+    private String mensaje;
+
+
 }

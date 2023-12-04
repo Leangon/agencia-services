@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class VueloRequestDTO {
 
+    private Long idVuelo;
     private int numVuelo;
     private int cantPasajeros;
     private boolean disponibilidad;
