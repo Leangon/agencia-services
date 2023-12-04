@@ -28,8 +28,8 @@ public class Reporte {
     @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL)
     private List<Pago> listaPagos;
 
-    @OneToMany(mappedBy = "reporte")
-    private List<Reserva> listaReservas;
+/*    @OneToMany(mappedBy = "reporte")
+    private List<Reserva> listaReservas;*/
 
     @OneToMany(mappedBy = "reporte")
     private List<Itinerario> listaItinerarios;

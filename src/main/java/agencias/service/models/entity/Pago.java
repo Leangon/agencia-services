@@ -36,7 +36,4 @@ public class Pago {
     @OneToOne(mappedBy = "pago", cascade = CascadeType.ALL)
     private Reserva reserva;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="fk_reporte", nullable = false)
-    private Reporte reporte;
 }

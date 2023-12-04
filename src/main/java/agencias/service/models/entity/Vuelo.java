@@ -31,7 +31,7 @@ public class Vuelo {
 
     @Min(0)
     @Column(name = "cant_pasajeros")
-    private int cantPasajeros;
+    private int cantAsientos;
 
     @NotBlank(message = "El vuelo debe indicar si tiene disponibilidad de pasajeros o no")
     @Column(name = "disponibilidad")
@@ -49,14 +49,6 @@ public class Vuelo {
     @Column(name = "hora_llegada")
     private String horaLLegada;
 
-    @OneToMany(mappedBy = "vuelo")
-    private List<Reserva> listaReservas;
-
-    @OneToMany(mappedBy = "vuelo")
-    private List<Promocion> listaPromociones;
-
-    @OneToMany(mappedBy = "vuelo")
-    private List<Ticket> listaTickets;
 
     @NotNull(message = "Debe tener una aerolínea asociada")
     @ManyToOne

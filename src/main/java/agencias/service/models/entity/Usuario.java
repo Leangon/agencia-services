@@ -33,11 +33,11 @@ public class Usuario {
     @Column(name = "apellido")
     private String apellido;
 
-    @NotEmpty(message = "El DNI es requerido")
+    @NotNull(message = "El DNI es requerido")
     @Column(name = "dni", unique = true)
     private Long dni;
 
-    @NotEmpty
+    @NotNull(message = "El teléfono es requerido")
     @Column(name = "telefono", unique = true)
     private Long telefono;
 
@@ -45,15 +45,11 @@ public class Usuario {
     @Column(name = "email")
     private String email;
 
-    @NotEmpty(message = "La fecha de nacimiento es requerido")
+    @NotNull(message = "La fecha de nacimiento es requerido")
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Reserva> listaReservas;
-
-    @OneToOne
-    @JoinColumn(name = "fk_promocion", referencedColumnName = "id_promocion")
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Promocion promocion;
 
 }
