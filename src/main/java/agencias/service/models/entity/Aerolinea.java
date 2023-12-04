@@ -30,8 +30,6 @@ public class Aerolinea {
     @Column(name = "cuit")
     private String cuit;
 
-    @OneToOne(mappedBy = "aerolinea")
-    private Promocion promocion;
 
     @NotEmpty(message = "Debe tener vuelos asociados")
     @OneToMany(mappedBy = "aerolinea")

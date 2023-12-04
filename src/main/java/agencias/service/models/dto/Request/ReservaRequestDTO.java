@@ -16,7 +16,6 @@ public class ReservaRequestDTO {
     private LocalDate fechaReserva;
     private Double precio;
     private TipoPago tipoPago;
-    private PagoRequestDTO pago;
     private VueloRequestDTO vuelo;
     private UsuarioRequestDTO usuario;
 }
