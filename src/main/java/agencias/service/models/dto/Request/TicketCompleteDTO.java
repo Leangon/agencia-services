@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TicketRequestDTO {
+public class TicketCompleteDTO {
 
+    private Long idTicket;
     private int numAsiento;
     private double precio;
     private Clase clase;

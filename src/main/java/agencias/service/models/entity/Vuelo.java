@@ -41,13 +41,8 @@ public class Vuelo {
     @Column(name = "fecha")
     private LocalDate fecha;
 
-    @NotBlank(message = "El vuelo debe de tener una hora de salida")
-    @Column(name = "hora_salida")
-    private String horaSalida;
-
-    @NotBlank(message = "El vuelo debe de tener una hora de llegada")
-    @Column(name = "hora_llegada")
-    private String horaLLegada;
+    @Embedded
+    private Itinerario itinerario;
 
     @OneToMany(mappedBy = "vuelo")
     private List<Reserva> listaReservas;
@@ -62,9 +57,4 @@ public class Vuelo {
     @ManyToOne
     @JoinColumn(name = "fk_aerolinea", referencedColumnName = "id_aerolinea")
     private Aerolinea aerolinea;
-
-    @NotNull(message = "Debe tener un itinerario asociada")
-    @ManyToOne
-    @JoinColumn(name = "fk_itinerario", referencedColumnName = "id_itinerario")
-    private Itinerario itinerario;
 }
