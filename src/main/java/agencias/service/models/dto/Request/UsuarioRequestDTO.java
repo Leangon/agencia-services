@@ -18,6 +18,5 @@ public class UsuarioRequestDTO {
     private Long telefono;
     private String email;
     private LocalDate fechaNacimiento;
-    private List<ReservaRequestDTO> listaReservas;
-    private PromocionRequestDto promocion;
+
 }

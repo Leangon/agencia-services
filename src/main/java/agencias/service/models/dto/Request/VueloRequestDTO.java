@@ -18,8 +18,5 @@ public class VueloRequestDTO {
     private boolean disponibilidad;
     private LocalDate fecha;
     private Itinerario Itinerario;
-    private List<ReservaRequestDTO> listaReservas;
-    private List<TicketRequestDTO> listaTickets;
-    private List<PromocionRequestDto> listaPromociones;
     private AerolineaRequestDTO aerolinea;
 }

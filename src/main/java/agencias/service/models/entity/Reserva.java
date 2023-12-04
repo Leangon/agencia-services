@@ -41,16 +41,13 @@ public class Reserva {
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
     private Vuelo vuelo;
 
+    @NotEmpty(message = "Debe tener tickets asociados")
+    @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+    List<Ticket> tickets;
+
     @NotNull(message = "Debe tener un usuario asociado")
     @ManyToOne
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
 
-    @NotEmpty(message = "Debe tener tickets asociados")
-    @OneToMany(mappedBy = "reserva")
-    List<Ticket> listaTickets;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_reporte", referencedColumnName = "idReporte")
-    private Reporte reporte;
 }

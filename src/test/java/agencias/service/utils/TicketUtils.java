@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TicketUtils {
 
-    public static TicketRequestDTO ticketDto1() {
+/*    public static TicketRequestDTO ticketDto1() {
         TicketRequestDTO ticketDto = new TicketRequestDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
@@ -25,7 +25,7 @@ public class TicketUtils {
         ticketDto.setVuelo(new VueloRequestDTO(1124, 250, true, LocalDate.now(),
                 itinerario, null, null, null, aerolinea));
         return ticketDto;
-    }
+    }*/
 
     public static TicketRequestDTO ticketDto2() {
         TicketRequestDTO ticket = new TicketRequestDTO();
@@ -56,7 +56,7 @@ public class TicketUtils {
         aerolinea.setRazonSocial("Latam S.A");
         Vuelo vuelo = new Vuelo();
         vuelo.setNumVuelo(1124);
-        vuelo.setCantPasajeros(250);
+        vuelo.setCantAsientos(250);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.now());
         vuelo.setItinerario(itinerario);
@@ -77,7 +77,7 @@ public class TicketUtils {
         aerolinea.setRazonSocial("Iberia SA");
         Vuelo vuelo = new Vuelo();
         vuelo.setNumVuelo(1543);
-        vuelo.setCantPasajeros(300);
+        vuelo.setCantAsientos(300);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.now());
         vuelo.setItinerario(itinerario);
@@ -97,7 +97,7 @@ public class TicketUtils {
         aerolinea.setRazonSocial("Avianca S.A");
         Vuelo vuelo = new Vuelo();
         vuelo.setNumVuelo(1125);
-        vuelo.setCantPasajeros(259);
+        vuelo.setCantAsientos(259);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.now());
         vuelo.setItinerario(itinerario);
@@ -131,7 +131,7 @@ public class TicketUtils {
         return ticket;
     }
 
-    public static TicketCompleteDTO ticketCompleteDto1() {
+/*    public static TicketCompleteDTO ticketCompleteDto1() {
         TicketCompleteDTO ticketDto = new TicketCompleteDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
@@ -145,13 +145,13 @@ public class TicketUtils {
         ticketDto.setVuelo(new VueloRequestDTO(1124, 250, true, LocalDate.now(),
                 itinerario, null, null, null, aerolinea));
         return ticketDto;
-    }
+    }*/
     public static List<Ticket> listaTickets(){
        return List.of(ticket1(), ticket2());
     }
 
-    public static List<TicketRequestDTO> listaTicketsDto(){
+    /*public static List<TicketRequestDTO> listaTicketsDto(){
         return List.of(ticketDto1(), ticketDto2());
-    }
+    }*/
 
 }

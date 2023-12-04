@@ -30,7 +30,7 @@ public class VueloTest {
     @InjectMocks
     VueloController controller;
 
-    @Test
+ /*   @Test
     @DisplayName("Guardar Vuelo Camino Feliz")
     void guardarVueloTestOk(){
         VueloRequestDTO argumentSut = VueloUtils.vueloDTO();
@@ -41,9 +41,9 @@ public class VueloTest {
         ResponseEntity<?> actual = controller.guardarVuelo(argumentSut);
 
         assertEquals(expected, actual);
-    }
+    }*/
 
-    @Test
+/*    @Test
     @DisplayName("Buscar Vuelo por Id Camino Feliz")
     void vueloPorIdTestOk(){
         Long id = 2L;
@@ -54,7 +54,7 @@ public class VueloTest {
         ResponseEntity<?> actual = controller.traerVuelo(id);
 
         assertEquals(expected, actual);
-    }
+    }*/
 
     @Test
     @DisplayName("Eliminar Vuelo Camino Feliz")

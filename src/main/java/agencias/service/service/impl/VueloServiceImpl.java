@@ -41,7 +41,6 @@ public class VueloServiceImpl implements VueloService {
         Vuelo vueloPersist = vueloRepository.save(nuevoVuelo);
 
         VueloResponseDTO vueloDto = new VueloResponseDTO();
-        vueloDto.setVuelo(modelMapper.map(vueloPersist, VueloRequestDTO.class));
         vueloDto.setMensaje("Vuelo Guardado Correctamente!");
 
         return vueloDto;
@@ -54,7 +53,6 @@ public class VueloServiceImpl implements VueloService {
         Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow( () -> new RuntimeException("No existe vuelo con ese id!"));
 
         VueloResponseDTO vueloResponseDTO = new VueloResponseDTO();
-        vueloResponseDTO.setVuelo(modelMapper.map(vuelo, VueloRequestDTO.class));
         vueloResponseDTO.setMensaje("Vuelo encontrado!");
 
         return vueloResponseDTO;
@@ -79,20 +77,15 @@ public class VueloServiceImpl implements VueloService {
         Vuelo vueloPersis = modelMapper.map(vueloRepository.findById(idVuelo), Vuelo.class);
 
         vueloPersis.setNumVuelo(vueloEditado.getNumVuelo());
-        vueloPersis.setCantPasajeros(vueloEditado.getCantPasajeros());
+        vueloPersis.setCantAsientos(vueloEditado.getCantAsientos());
         vueloPersis.setDisponibilidad(vueloEditado.isDisponibilidad());
         vueloPersis.setFecha(vueloEditado.getFecha());
-        vueloPersis.setHoraSalida(vueloEditado.getHoraSalida());
-        vueloPersis.setHoraLLegada(vueloEditado.getHoraLLegada());
-        vueloPersis.setListaReservas(vueloEditado.getListaReservas());
-        vueloPersis.setListaTickets(vueloEditado.getListaTickets());
-        vueloPersis.setListaPromociones(vueloEditado.getListaPromociones());
         vueloPersis.setAerolinea(vueloEditado.getAerolinea());
         vueloPersis.setItinerario(vueloEditado.getItinerario());
 
         vueloRepository.save(vueloPersis);
 
-        return new VueloResponseDTO(vueloRequestDTO, "Vuelo editado y guardado correctamente!");
+        return null;
 
     }
 }

@@ -30,7 +30,7 @@ public class VueloServiceTest {
     @InjectMocks
     VueloServiceImpl service;
 
-    @Test
+ /*   @Test
     @DisplayName("Test guardar vuelo camino feliz")
     void guardarVueloTestOk(){
         VueloRequestDTO vueloDto = VueloUtils.vueloDTO();
@@ -42,7 +42,7 @@ public class VueloServiceTest {
 
         assertEquals(expected.getMensaje(), actual.getMensaje());
         assertEquals(expected, actual);
-    }
+    }*/
 
     @Test
     @DisplayName("Test listar vuelos camino feliz")

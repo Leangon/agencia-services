@@ -23,10 +23,7 @@ public class VueloResponseDTO {
     private LocalDate fecha;
     private String horaSalida;
     private String horaLLegada;
-    private List<ReservaRequestDTO> listaReservas;
-    private List<TicketRequestDTO> listaTickets;
     private AerolineaRequestDTO aerolinea;
-    private VueloRequestDTO vuelo;
     private String mensaje;
 
 

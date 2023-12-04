@@ -52,7 +52,6 @@ public class PagoUtils {
         p.setNum_transaccion(121);
         p.setMonto(150000.0);
         p.setReserva(null);
-        p.setReporte(null);
         return p;
     }
 
@@ -62,7 +61,6 @@ public class PagoUtils {
         p.setNum_transaccion(356);
         p.setMonto(123000.0);
         p.setReserva(null);
-        p.setReporte(null);
         return p;
     }
 

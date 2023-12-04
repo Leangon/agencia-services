@@ -81,7 +81,6 @@ public class PagoServiceImpl implements PagoService {
        pagoE.setFecha_pago ( pago.getFecha_pago () );
        pagoE.setMonto ( pago.getMonto () );
        pagoE.setReserva (mapper.map(resDto,Reserva.class));
-       pagoE.setReporte ( mapper.map(reporteDto, Reporte.class) );
        pagoE.setNum_transaccion ( pago.getNum_transaccion () );
        //guardo los cambios
         Pago pagoEditado = pagoRepo.save ( pagoE );

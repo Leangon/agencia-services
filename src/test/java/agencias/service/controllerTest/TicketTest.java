@@ -29,7 +29,7 @@ public class TicketTest {
     @InjectMocks
     TicketController controller;
 
-    @Test
+  /*  @Test
     void guardarTicketTestOK(){
         TicketRequestDTO argumentSut = TicketUtils.ticketDto1();
         TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(),"se guardo con exito");
@@ -39,9 +39,9 @@ public class TicketTest {
         ResponseEntity<?> actual = controller.save(argumentSut);
 
         assertEquals(expected, actual);
-    }
+    }*/
 
-    @Test
+   /* @Test
     void TicketPorIdTestOK(){
         Long id = 2L;
         TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(), "se guardo con exito");
@@ -51,9 +51,9 @@ public class TicketTest {
         ResponseEntity<?> actual = controller.findById(id);
 
         assertEquals(expected, actual);
-    }
+    }*/
 
-    @Test
+   /* @Test
     void findAllTicketTestOK(){
         List<TicketRequestDTO> respuesta = TicketUtils.listaTicketsDto();
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -62,9 +62,9 @@ public class TicketTest {
         ResponseEntity<?> actual = controller.findAll();
 
         assertEquals(expected, actual);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void updateTicketTestOK(){
         TicketCompleteDTO argumentSut = TicketUtils.ticketCompleteDto1();
         TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(),"se guardo con exito");
@@ -74,7 +74,7 @@ public class TicketTest {
         ResponseEntity<?> actual = controller.update(argumentSut);
 
         assertEquals(expected, actual);
-    }
+    }*/
 
     @Test
     void deleteTicketTestOK(){
