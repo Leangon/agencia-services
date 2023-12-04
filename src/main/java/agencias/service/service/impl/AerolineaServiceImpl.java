@@ -29,6 +29,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
         Aerolinea aerolineaClass = mapper.map(aerolinea, Aerolinea.class);
         /* hacer el save de instancia aerolineaClass*/
         Aerolinea aerolineaGuardada = repoLinea.save(aerolineaClass);
+
         /*Aca instancio un Dto responseDTO y con mapper otra vez convierto a la clase AerolineaResponseDTO*/
         AerolineaResponseDTO responseDTO = mapper.map(aerolineaGuardada, AerolineaResponseDTO.class);
 
@@ -73,7 +74,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
         repoLinea.deleteById(idAerolinea);/*delete de la aerolinea*/
         AerolineaResponseDTO lineaDto = new AerolineaResponseDTO();
         /* aca quiero mostrar los datos de la aerolinea que se borro pero solo pude mostrar la razonSocial*/
-        lineaDto.setMessage(nombreAerolineaEliminada + " Se elimino correctamente ");
+        lineaDto.setMessage("La aerolinea "+ nombreAerolineaEliminada + " Se elimino correctamente ");
         return lineaDto;
 
     }
@@ -90,28 +91,12 @@ public class AerolineaServiceImpl  implements AerolineaService {
 
 
 
-    /*@Override
-
-    public List<AerolineaResponseDTO> listarAerolinea() {
-
-        List<Aerolinea> listaAerolineas = repoLinea.findAll();
-        if (listaAerolineas.isEmpty()) {
-            throw new RuntimeException("La lista de aerolineas esta vacia");
-        }
-
-        List<AerolineaResponseDTO> lineaDtoList = new ArrayList<>();
-        listaAerolineas.stream().forEach(a -> lineaDtoList.add(mapper.map(a, AerolineaResponseDTO.class)));
-        /*aca tengo el problema que por cada uno me envia el message en null y no quiero que se muestre el message
-        return lineaDtoList;
-
-    }*/
-
     @Override
     public List<AerolineaResponseDTO> listarAerolinea() {
     List<Aerolinea> aerolineas = repoLinea.findAll();
-    /*aca quiero saber si no hay aerolineas para listar pero no me funciona bien
+
     if (aerolineas.isEmpty()){
-        throw new RuntimeException("No existen Aerolineas para listar");}*/
+        throw new AerolineaNotFoundException("No existen Aerolineas para listar");}
 
     ModelMapper modelMapper = new ModelMapper();
     List<AerolineaResponseDTO> responseDTOs = new ArrayList<>();
