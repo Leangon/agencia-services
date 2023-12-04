@@ -14,5 +14,4 @@ public class ReporteRequestDTO {
     private Integer cant_ventas;
     private List<PagoRequestDTO> listaPagos;
     private List<ReservaRequestDTO> listaReservas;
-    private List<ItinerarioRequestDto> listaItinerarios;
 }

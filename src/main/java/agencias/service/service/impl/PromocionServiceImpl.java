@@ -2,17 +2,13 @@ package agencias.service.service.impl;
 
 import agencias.service.models.dto.Request.PromocionCompleteDTO;
 import agencias.service.models.dto.Request.PromocionRequestDto;
-import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Response.PromocionResponseDto;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
-import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.models.entity.Promocion;
-import agencias.service.models.entity.Ticket;
 import agencias.service.repository.PromocionRepository;
 import agencias.service.service.PromocionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +27,7 @@ public class PromocionServiceImpl implements PromocionService {
         Promocion promocion = mapper.map(promocionDto, Promocion.class);
         Promocion guardado = repository.save(promocion);
         PromocionRequestDto response = mapper.map(guardado, PromocionRequestDto.class);
-        return new PromocionResponseDto(response, "El promoción fue guardado correctamente");
+        return new PromocionResponseDto(response, "La promoción fue guardado correctamente");
     }
 
     @Override
@@ -52,7 +48,7 @@ public class PromocionServiceImpl implements PromocionService {
                 .orElseThrow(() -> new RuntimeException("No existen promociones con este id"));
         ModelMapper mapper = new ModelMapper();
         PromocionRequestDto response = mapper.map(result, PromocionRequestDto.class);
-        return new PromocionResponseDto(response, "Se ha encontrado un ticket");
+        return new PromocionResponseDto(response, "Se ha encontrado una promoción");
     }
 
     @Override
@@ -73,6 +69,8 @@ public class PromocionServiceImpl implements PromocionService {
             PromocionRequestDto promo = mapper.map(p, PromocionRequestDto.class);
             response.setPromocionDto(promo);
             response.setMessage("Promoción modificada correctamente");
+        }else{
+            throw new RuntimeException("No existen promociones con este id");
         }
         return response;
     }
@@ -80,8 +78,8 @@ public class PromocionServiceImpl implements PromocionService {
     @Override
     public ResponseDeleteDto delete(Long id) {
         repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No existen tickets con este id"));
+                .orElseThrow(() -> new RuntimeException("No existen promociones con este id"));
         repository.deleteById(id);
-        return new ResponseDeleteDto("Promoción eliminado correctamente");
+        return new ResponseDeleteDto("Promoción eliminada correctamente");
     }
 }

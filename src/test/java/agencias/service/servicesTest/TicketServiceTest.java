@@ -141,7 +141,7 @@ public class TicketServiceTest {
 
     @Test
     @DisplayName(value = "Test lanzar EXCEPTION en eliminar por no encontrar ticket asociado")
-    void eliminarPagoPorIdTestEXCEPTION(){
+    void eliminarTicketPorIdTestEXCEPTION(){
         Long id = 1L;
         RuntimeException expected = new RuntimeException ("No existen tickets con este id");
         when(repository.findById(any())).thenReturn(Optional.empty());
