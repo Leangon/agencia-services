@@ -1,6 +1,5 @@
 package agencias.service.models.dto.Response;
 
-import agencias.service.models.dto.Request.PagoRequestDTO;
 import agencias.service.models.dto.Request.UsuarioRequestDTO;
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.enums.Clase;
@@ -20,7 +19,6 @@ public class ReservaResponseDTO {
     private LocalDate fechaReserva;
     private Double precio;
     private TipoPago tipoPago;
-    private PagoRequestDTO pago;
     private VueloRequestDTO vuelo;
     private UsuarioRequestDTO usuario;
 

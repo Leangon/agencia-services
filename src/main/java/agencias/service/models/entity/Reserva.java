@@ -31,11 +31,6 @@ public class Reserva {
     @Column(name = "fecha_reserva")
     private LocalDate fechaReserva;
 
-    @NotNull(message = "Debe tener un pago asociado")
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name="fk_pago", referencedColumnName = "IdPago")
-    private Pago pago;
-
     @NotNull(message = "Debe tener un vuelo asociado")
     @ManyToOne
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")

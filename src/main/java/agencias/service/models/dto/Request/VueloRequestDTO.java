@@ -1,11 +1,9 @@
 package agencias.service.models.dto.Request;
 
 import agencias.service.models.entity.Itinerario;
-import agencias.service.models.entity.Promocion;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
