@@ -7,8 +7,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioRequestDTO {
@@ -19,6 +18,5 @@ public class UsuarioRequestDTO {
     private Long telefono;
     private String email;
     private LocalDate fechaNacimiento;
-    private List<ReservaRequestDTO> listaReservas;
-    private PromocionRequestDto promocion;
+
 }

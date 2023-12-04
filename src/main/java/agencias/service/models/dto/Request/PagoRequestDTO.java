@@ -1,23 +1,19 @@
 package agencias.service.models.dto.Request;
 
-
-import agencias.service.models.dto.Response.ReservaResponseDTO;
-import agencias.service.models.entity.Reserva;
-import agencias.service.models.enums.TipoPago;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PagoRequestDTO {
     private Long idPago;
     private Integer num_transaccion;
-    private TipoPago tipoPago;
+    private Double monto;
     private LocalDate fecha_pago;
-    private List<ReservaRequestDTO> listaReservaDto;
-    private ReservaRequestDTO reservaDto;
+    private ReservaRequestDTO ReservaDto;
+    private ReporteRequestDTO reporteDto;
 }

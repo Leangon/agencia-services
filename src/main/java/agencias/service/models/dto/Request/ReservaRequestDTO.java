@@ -1,12 +1,12 @@
 package agencias.service.models.dto.Request;
 
 import agencias.service.models.enums.Clase;
+import agencias.service.models.enums.TipoPago;
 import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservaRequestDTO {
@@ -15,6 +15,7 @@ public class ReservaRequestDTO {
     private Clase clase;
     private LocalDate fechaReserva;
     private Double precio;
+    private TipoPago tipoPago;
     private PagoRequestDTO pago;
     private VueloRequestDTO vuelo;
     private UsuarioRequestDTO usuario;

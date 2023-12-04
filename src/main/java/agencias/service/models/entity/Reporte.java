@@ -25,12 +25,4 @@ public class Reporte {
     private String destinos_populares;
     private String tendencia_reservas;
 
-    @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL)
-    private List<Pago> listaPagos;
-
-    @OneToMany(mappedBy = "reporte")
-    private List<Reserva> listaReservas;
-
-    @OneToMany(mappedBy = "reporte")
-    private List<Itinerario> listaItinerarios;
 }

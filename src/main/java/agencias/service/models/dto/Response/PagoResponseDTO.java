@@ -1,11 +1,11 @@
 package agencias.service.models.dto.Response;
 
 import agencias.service.models.dto.Request.PagoRequestDTO;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PagoResponseDTO {
     private PagoRequestDTO pago;
     private String mensaje;
