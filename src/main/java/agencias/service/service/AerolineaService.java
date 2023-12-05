@@ -9,21 +9,16 @@ import java.util.List;
 public interface AerolineaService {
 
 
-        public AerolineaResponseDTO guardarAerolinea(AerolineaRequestDTO aerolinea );
+     public AerolineaResponseDTO guardarAerolinea(AerolineaRequestDTO aerolinea );
 
-    AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest);
+    public AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest);
 
-    ////editar2
-    AerolineaResponseDTO editarAerolinea2(Long id);
 
     public AerolineaResponseDTO borrarAerolinea(Long idAerolinea );
 
     AerolineaResponseDTO traerAerolineaPorId(Long idAerolinea);
 
     public List<AerolineaResponseDTO> listarAerolinea();
-
-
-
 
 }
 

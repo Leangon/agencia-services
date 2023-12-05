@@ -53,26 +53,25 @@ public class AerolineaServiceImpl  implements AerolineaService {
     public AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest) {
 
         // Verificar si la aerolínea existe en el repositorio
-        Aerolinea AerolineaGuardada = repoLinea.findById(id)
-                .orElseThrow(() -> {
-                    throw new AerolineaNotFoundException("No existe la Aerolinea que desea modificar");
-                });
+    Aerolinea AerolineaGuardada = repoLinea.findById(id)
+                                   .orElseThrow(() -> {
+                                      throw new AerolineaNotFoundException("No existe la Aerolinea que desea modificar");
+                                    });
 
-        // Actualizar los atributos de la aerolínea con los valores del AerolineaRequestDTO
+     // Actualizar los atributos de la aerolínea con los valores del AerolineaRequestDTO
 
-        AerolineaGuardada.setRazonSocial(aerolineaRequest.getRazonSocial());
-        AerolineaGuardada.setCuit(aerolineaRequest.getCuit());
+    AerolineaGuardada.setRazonSocial(aerolineaRequest.getRazonSocial());
+    AerolineaGuardada.setCuit(aerolineaRequest.getCuit());
 
-        // Guardar la aerolínea actualizada en el repositorio
+    // Guardar la aerolínea actualizada en el repositorio
 
-         repoLinea.save(AerolineaGuardada);
+    repoLinea.save(AerolineaGuardada);
 
-        // Crear y mapear la respuesta DTO
-        AerolineaResponseDTO responseDTO = mapper.map(AerolineaGuardada, AerolineaResponseDTO.class);
-        responseDTO.setMessage("La aerolinea " + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
-        return responseDTO;
+    // Crear y mapear la respuesta DTO
+     AerolineaResponseDTO responseDTO = mapper.map(AerolineaGuardada, AerolineaResponseDTO.class);
+     responseDTO.setMessage("La aerolinea " + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
+     return responseDTO;
     }
-
 
 
     @Override
@@ -121,14 +120,12 @@ public class AerolineaServiceImpl  implements AerolineaService {
     private boolean verificarExiste(Aerolinea aerolinea) {
         List<Aerolinea> listaEntidad = repoLinea.findAll();
         if(listaEntidad.isEmpty()){
-            return false;}
-
+            return false;
+        }
         List<Aerolinea> listaBusqueda=listaEntidad.stream()
                 .filter(aero ->aero.equalsAerolinea(aerolinea))
                 .toList();
         return !listaBusqueda.isEmpty();
-
-
     }
 }
 
