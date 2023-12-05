@@ -5,6 +5,7 @@ import agencias.service.models.dto.Request.AerolineaRequestDTO;
 import agencias.service.models.dto.Response.AerolineaResponseDTO;
 import agencias.service.models.entity.Aerolinea;
 import agencias.service.service.AerolineaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +31,17 @@ public class AerolineaController {
         return new ResponseEntity<> (aerolineaService.traerAerolineaPorId(id),HttpStatus.OK);
 }
 @PostMapping("/guardar")
-    public ResponseEntity<?> guardarAerolinea(@RequestBody AerolineaRequestDTO aerolinea){
+    public ResponseEntity<?> guardarAerolinea(@RequestBody @Valid AerolineaRequestDTO aerolinea){
          return new ResponseEntity<>(aerolineaService.guardarAerolinea(aerolinea),HttpStatus.OK) ;
 }
 
 @PutMapping("/editar/{id}")
     public ResponseEntity<?> editarAerolinea(@PathVariable Long id,@RequestBody AerolineaRequestDTO aerolineaRequest){
         return new ResponseEntity<>(aerolineaService.editarAerolinea(id,aerolineaRequest),HttpStatus.OK) ;
+    }
+    @PutMapping("/editar2/{id}")
+    public ResponseEntity<?> editarAerolinea2(@PathVariable Long id){
+        return new ResponseEntity<>(aerolineaService.editarAerolinea2(id),HttpStatus.OK) ;
     }
 @DeleteMapping("/borrar/{id}")
     public ResponseEntity<?> borrarAerolinea(@PathVariable Long id){

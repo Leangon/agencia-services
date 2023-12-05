@@ -1,5 +1,7 @@
 package agencias.service.service.impl;
 
+import agencias.service.exceptions.AerolineaDBException;
+import agencias.service.exceptions.AerolineaFoundException;
 import agencias.service.exceptions.AerolineaNotFoundException;
 import agencias.service.models.dto.Request.AerolineaRequestDTO;
 import agencias.service.models.dto.Response.AerolineaResponseDTO;
@@ -25,16 +27,23 @@ public class AerolineaServiceImpl  implements AerolineaService {
 
     @Override
     public AerolineaResponseDTO guardarAerolinea(AerolineaRequestDTO aerolinea) {
-        /*Aca con mapper convierto aerolinea en una clase y la guardo en aerolineaClass */
+        /* con mapper convierto aerolinea en una clase y la guardo en aerolineaClass */
         Aerolinea aerolineaClass = mapper.map(aerolinea, Aerolinea.class);
-        /* hacer el save de instancia aerolineaClass*/
-        Aerolinea aerolineaGuardada = repoLinea.save(aerolineaClass);
+        /* aca debo validar si la aerolinea ya existe en el repositorio antes de guardarla*/
+        if(verificarExiste(aerolineaClass)){
+            throw new AerolineaFoundException("La aerolinea que intenta guardar ya existe.");
+        }
 
-        /*Aca instancio un Dto responseDTO y con mapper otra vez convierto a la clase AerolineaResponseDTO*/
+        Aerolinea aerolineaGuardada = repoLinea.save(aerolineaClass);/*save en repositorio*/
+        //Verificar si se pudo guardar
+        if(aerolineaGuardada==null){
+            throw new AerolineaDBException("No se puedo guardar la aerolinea .");
+        }
+        /* instancio un responseDTO y con mapper convierto a aerolineaGuardada a la clase AerolineaResponseDTO*/
         AerolineaResponseDTO responseDTO = mapper.map(aerolineaGuardada, AerolineaResponseDTO.class);
 
         /* hago el set del message del DTO de respuesta*/
-        responseDTO.setMessage(aerolineaGuardada + " Se guardo correctamente");
+        responseDTO.setMessage("La aerolinea Id " + aerolineaGuardada.getIdAerolinea() + " Razon Social " + aerolineaGuardada.getRazonSocial() + " cuit " + aerolineaGuardada.getCuit() + " Se guardo correctamente.");
         return responseDTO;
 
 
@@ -43,25 +52,26 @@ public class AerolineaServiceImpl  implements AerolineaService {
     @Override
     public AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest) {
 
-    // Verificar si la aerolínea existe en el repositorio
-    Aerolinea aerolinea = repoLinea.findById(id)
-            .orElseThrow(() -> new AerolineaNotFoundException("No existe la aerolínea que desea editar"));
+        // Verificar si la aerolínea existe en el repositorio
+        Aerolinea AerolineaGuardada = repoLinea.findById(id)
+                .orElseThrow(() -> {
+                    throw new AerolineaNotFoundException("No existe la Aerolinea que desea modificar");
+                });
 
-    // Actualizar los atributos de la aerolínea con los valores del AerolineaRequestDTO
-    aerolinea.setRazonSocial(aerolineaRequest.getRazonSocial());
-    aerolinea.setCuit(aerolineaRequest.getCuit());
+        // Actualizar los atributos de la aerolínea con los valores del AerolineaRequestDTO
 
-    // Guardar la aerolínea actualizada en el repositorio
-    Aerolinea aerolineaGuardada = repoLinea.save(aerolinea);
+        AerolineaGuardada.setRazonSocial(aerolineaRequest.getRazonSocial());
+        AerolineaGuardada.setCuit(aerolineaRequest.getCuit());
 
-    // Crear y mapear la respuesta DTO
-    AerolineaResponseDTO responseDTO = mapper.map(aerolineaGuardada, AerolineaResponseDTO.class);
-    responseDTO.setMessage(aerolineaGuardada + " se modificó correctamente");
+        // Guardar la aerolínea actualizada en el repositorio
 
-    return responseDTO;
-}
+         repoLinea.save(AerolineaGuardada);
 
-
+        // Crear y mapear la respuesta DTO
+        AerolineaResponseDTO responseDTO = mapper.map(AerolineaGuardada, AerolineaResponseDTO.class);
+        responseDTO.setMessage("La aerolinea " + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
+        return responseDTO;
+    }
 
 
 
@@ -74,7 +84,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
         repoLinea.deleteById(idAerolinea);/*delete de la aerolinea*/
         AerolineaResponseDTO lineaDto = new AerolineaResponseDTO();
         /* aca quiero mostrar los datos de la aerolinea que se borro pero solo pude mostrar la razonSocial*/
-        lineaDto.setMessage("La aerolinea "+ nombreAerolineaEliminada + " Se elimino correctamente ");
+        lineaDto.setMessage("La aerolinea " + nombreAerolineaEliminada + " Se elimino correctamente ");
         return lineaDto;
 
     }
@@ -90,25 +100,36 @@ public class AerolineaServiceImpl  implements AerolineaService {
     }
 
 
-
     @Override
     public List<AerolineaResponseDTO> listarAerolinea() {
-    List<Aerolinea> aerolineas = repoLinea.findAll();
+        List<Aerolinea> aerolineas = repoLinea.findAll();
 
-    if (aerolineas.isEmpty()){
-        throw new AerolineaNotFoundException("No existen Aerolineas para listar");}
-
-    ModelMapper modelMapper = new ModelMapper();
-    List<AerolineaResponseDTO> responseDTOs = new ArrayList<>();
-
-    for (Aerolinea aerolinea : aerolineas) {
-        AerolineaResponseDTO responseDTO = modelMapper.map(aerolinea, AerolineaResponseDTO.class);
-        responseDTOs.add(responseDTO);
+        if (aerolineas.isEmpty()) {
+            throw new AerolineaNotFoundException("No existen Aerolineas para listar");
+        }
+        ModelMapper modelMapper = new ModelMapper();
+        List<AerolineaResponseDTO> responseDTOs = new ArrayList<>();
+        for (Aerolinea aerolinea : aerolineas) {
+            AerolineaResponseDTO responseDTO = modelMapper.map(aerolinea, AerolineaResponseDTO.class);
+            responseDTOs.add(responseDTO);
+        }
+        return responseDTOs;
     }
 
-    return responseDTOs;
-}
 
+    //Con este metodo obtengo una lista de aerolineas y comparo la que me llega con las del repositorio
+    private boolean verificarExiste(Aerolinea aerolinea) {
+        List<Aerolinea> listaEntidad = repoLinea.findAll();
+        if(listaEntidad.isEmpty()){
+            return false;}
+
+        List<Aerolinea> listaBusqueda=listaEntidad.stream()
+                .filter(aero ->aero.equalsAerolinea(aerolinea))
+                .toList();
+        return !listaBusqueda.isEmpty();
+
+
+    }
 }
 
 

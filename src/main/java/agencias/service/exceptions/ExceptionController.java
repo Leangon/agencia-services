@@ -15,4 +15,19 @@ public class ExceptionController {
     return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
     }
+    @ExceptionHandler(AerolineaFoundException.class)
+    public ResponseEntity<?> aerolineaFound(AerolineaFoundException ex){
+        ErrorAerolineaDTO error= new ErrorAerolineaDTO(400,ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler(AerolineaDBException.class)
+    public ResponseEntity<?> aerolineaDB(AerolineaDBException ex){
+        ErrorAerolineaDTO error= new ErrorAerolineaDTO(400,ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+    }
+
+
 }

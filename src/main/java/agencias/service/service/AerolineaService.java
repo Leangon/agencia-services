@@ -13,6 +13,9 @@ public interface AerolineaService {
 
     AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest);
 
+    ////editar2
+    AerolineaResponseDTO editarAerolinea2(Long id);
+
     public AerolineaResponseDTO borrarAerolinea(Long idAerolinea );
 
     AerolineaResponseDTO traerAerolineaPorId(Long idAerolinea);
