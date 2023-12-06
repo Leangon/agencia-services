@@ -84,7 +84,7 @@ public class AerolineaServiceTest {
 
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
         repository.deleteById(1L);
-        ResponseDeleteDto actual = service.borrarAerolinea(id);
+        ResponseDeleteDto actual = service.borrarAerolinea(argumentSut.getIdAerolinea());
 
         assertEquals(expected, actual);
     }

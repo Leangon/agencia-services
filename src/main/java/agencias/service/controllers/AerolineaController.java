@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("app/aerolinea")
+@RequestMapping("/app/aerolinea")
 public class AerolineaController {
     AerolineaService aerolineaService;
 
