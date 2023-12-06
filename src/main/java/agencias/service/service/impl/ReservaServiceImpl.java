@@ -22,34 +22,37 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public ReporteResponseDTO generarReporte(LocalDate date1, LocalDate date2) {
+    public ReporteResponseDTO generarReporte(LocalDate since, LocalDate to) {
+        //obtengo todas las reservas de la base de datos
         List<Reserva> resultRepo = reservaRepo.findAll ();
+        //obtengo el resultado del filtro
         List<Reserva>result = new ArrayList<> ();
-        for(Reserva res: resultRepo){
-            if(res.getFechaReserva ().isAfter ( date1 ) && res.getFechaReserva ().isBefore ( date2 )){
-                result.add(res);
-            }
-        }
 
-   if(result.isEmpty ()){
-            throw new ReservaNotFoundException ( "No existen reservas para el rango de fechas seleccionadas" );
-        }
-        ReporteResponseDTO reporte = new ReporteResponseDTO ();
 
-        int cantidadReservas = result.size ();
+
         Double ingresosTotales = 0.00;
-
-
+        //para generar el reporte
+        ReporteResponseDTO reporte = new ReporteResponseDTO ();
         //contar cuantas veces repite el destino
         Map<String,Integer> contadorDestinos = new HashMap<> ();
-
         String destino = null;
-        //tomo de la lista que se filtro la fecha los tickets para calcular los ingresos generados y destinos
+
+            for(Reserva res: resultRepo){
+                if(res.getFechaReserva ().isAfter ( since ) && res.getFechaReserva ().isBefore ( to )){
+                    result.add(res);
+                }
+            }
+
+            if(result.isEmpty ()){
+                throw new ReservaNotFoundException ( "No existen reservas para el rango de fechas seleccionadas" );
+            }
+
+        int cantidadReservas = result.size ();
         for(Reserva reserva: result){
-              destino = reserva.getVuelo ().getItinerario ().getCiudadDestino ();
-              contadorDestinos.put(destino, contadorDestinos.getOrDefault (destino,0 ) + 1);
+            destino = reserva.getVuelo ().getItinerario ().getCiudadDestino ();
+            contadorDestinos.put(destino, contadorDestinos.getOrDefault (destino,0 ) + 1);
             for (Ticket ticket : reserva.getTickets ( )) {
-               ingresosTotales +=  ticket.getPrecio ();
+                ingresosTotales +=  ticket.getPrecio ();
 
             }
 
@@ -63,6 +66,58 @@ public class ReservaServiceImpl implements ReservaService {
 
 
 
+
         return reporte;
+
+    }
+
+    @Override
+    public ReporteResponseDTO generarReporteUnaFecha(LocalDate fecha) {
+        //obtengo todas las reservas de la base de datos
+        List<Reserva> resultRepo = reservaRepo.findAll ();
+        //obtengo el resultado del filtro
+        List<Reserva>result = new ArrayList<> ();
+        //para generar el reporte
+        ReporteResponseDTO reporte = new ReporteResponseDTO ();
+
+
+        Double ingresosTotales = 0.00;
+
+        //contar cuantas veces repite el destino
+        Map<String,Integer> contadorDestinos = new HashMap<> ();
+        String destino = null;
+        //obtengo las reservas para una fecha determinada
+        for(Reserva res: resultRepo){
+            if(res.getFechaReserva ().equals ( fecha )){
+                result.add(res);
+
+            }
+        }
+        if(result.isEmpty ()){
+            throw new ReservaNotFoundException ( "No existen reservas para la fecha solicitada" );
+        }
+
+
+
+
+        //tomo de la lista que se filtro la fecha los tickets para calcular los ingresos generados y destinos
+        for(Reserva reserva: result){
+            destino = reserva.getVuelo ().getItinerario ().getCiudadDestino ();
+            contadorDestinos.put(destino, contadorDestinos.getOrDefault (destino,0 ) + 1);
+            for (Ticket ticket : reserva.getTickets ( )) {
+                ingresosTotales +=  ticket.getPrecio ();
+
+            }
+
+        }
+        int cantidadReservas = result.size ();
+
+        reporte.setNumeroVuelosVendidos ( cantidadReservas );
+        reporte.setIngresosGenerados ( ingresosTotales );
+        reporte.setDestinosPopulares ( contadorDestinos );
+
+
+        return reporte;
+
     }
 }
