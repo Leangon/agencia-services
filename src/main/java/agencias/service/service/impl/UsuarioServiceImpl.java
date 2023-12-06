@@ -40,8 +40,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             Usuario usuarioPersist = usuarioRepository.save(usuario);
             return mapToUsuarioResponseDto(usuarioPersist);
 
-        } catch (Exception e){
-            throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardad usuario" + e.getMessage());
+        } catch (CustomException e){
+            throw new CustomException(e.getStatus(), "Error al guardad usuario: " + e.getMessage());
         }
     }
 
