@@ -1,10 +1,9 @@
 package agencias.service.controllers;
 
-import agencias.service.models.dto.Response.ReporteResponseDTO;
 import agencias.service.service.ReservaService;
 import agencias.service.service.impl.ReservaServiceImpl;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/reserva")
 @Validated
 public class ReservaController {
     ReservaService reservaServ;
@@ -22,7 +21,7 @@ public class ReservaController {
         this.reservaServ = reservaServ;
     }
 
-//creacion de reportes cantidad de reservas entre fechas
+    //creación de reportes cantidad de reservas entre fechas
 
     @GetMapping("/reporte")
     public  ResponseEntity<?> generarReporte(
@@ -43,7 +42,12 @@ public class ReservaController {
         return new ResponseEntity<> ( reservaServ.generarReporteUnaFecha ( fecha ), HttpStatus.OK );
     }
 
-
+    // Lista de reservas por usuario
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> reservasByUser(
+            @PathVariable @Positive(message = "Debe ser un número positivo") Long id){
+        return new ResponseEntity<>(reservaServ.reservasByUsuario(id), HttpStatus.OK);
+    }
 
 
 }
