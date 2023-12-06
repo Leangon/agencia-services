@@ -3,6 +3,7 @@ package agencias.service.service.impl;
 import agencias.service.models.dto.Response.ReservasByUserResponseDTO;
 import agencias.service.models.entity.Reserva;
 import agencias.service.models.entity.Usuario;
+import agencias.service.models.entity.Vuelo;
 import agencias.service.repository.ReservaRepository;
 import agencias.service.repository.UsuarioRepository;
 import agencias.service.service.ReservaService;

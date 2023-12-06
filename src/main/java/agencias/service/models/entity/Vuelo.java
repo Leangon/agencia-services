@@ -2,19 +2,17 @@ package agencias.service.models.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.LinkedList;
 
 @Entity
 @Table(name = "vuelo")
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Vuelo {
 
     @Id
@@ -41,7 +39,7 @@ public class Vuelo {
     private Itinerario itinerario;
 
     @NotNull(message = "Debe tener una aerolínea asociada")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_aerolinea", referencedColumnName = "id_aerolinea")
     private Aerolinea aerolinea;
 }

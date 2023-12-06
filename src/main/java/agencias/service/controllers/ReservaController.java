@@ -22,7 +22,7 @@ public class ReservaController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<?> reservasByUser(
             @PathVariable @Positive(message = "Debe ser un número positivo") Long id){
         return new ResponseEntity<>(service.reservasByUsuario(id), HttpStatus.OK);

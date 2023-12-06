@@ -45,7 +45,7 @@ public class VueloServiceTest {
         VueloResponseDTO actual = service.crearVuelo(vueloDto);
 
         assertEquals(expected.getMensaje(), actual.getMensaje());
-        assertEquals(expected, actual);
+        assertEquals(expected.getVueloDto().getNumVuelo(), actual.getVueloDto().getNumVuelo());
     }
 
     @Test

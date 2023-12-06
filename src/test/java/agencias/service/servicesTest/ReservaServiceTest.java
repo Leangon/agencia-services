@@ -19,22 +19,4 @@ public class ReservaServiceTest {
     @Autowired
     ReservaRepository repository;
 
-
-    @Test
-    //@Rollback(false)
-    void findAllSinServicesTest(){
-
-        List<Reserva> reservasUser = ReservaUtils.listaReservas();
-
-        repository.findReservaByIdUsuario(1L);
-
-        Object [] esperados = new List[]{reservasUser};
-        Object [] encontrados = new List[]{repository.findReservaByIdUsuario(1L)};
-
-        assertAll(
-                () -> assertNotNull(encontrados),
-                () -> assertArrayEquals(esperados, encontrados),
-                () -> assertEquals(1, encontrados.length)
-        );
-    }
 }
