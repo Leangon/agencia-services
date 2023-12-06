@@ -27,6 +27,12 @@ public class ExceptionController {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ReservaNotFoundException.class)
+    public ResponseEntity<?> reservaNotFound(ReservaNotFoundException ex){
+        ErrorDTO error= new ErrorDTO(404,ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> fallaValidacion(MethodArgumentTypeMismatchException ex){
         ErrorDTO error = new ErrorDTO(400, ex.getMessage());

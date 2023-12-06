@@ -9,6 +9,5 @@ import java.util.List;
 public interface ReservaService {
     ReporteResponseDTO generarReporte(LocalDate date1, LocalDate date2);
     ReporteResponseDTO generarReporteUnaFecha(LocalDate fecha);
-
     ReservasByUserResponseDTO reservasByUsuario(Long id);
 }
