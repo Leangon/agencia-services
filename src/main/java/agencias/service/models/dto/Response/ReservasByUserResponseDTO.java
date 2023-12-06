@@ -1,14 +1,18 @@
 package agencias.service.models.dto.Response;
 
-import agencias.service.models.dto.Request.TicketRequestDTO;
+
+import agencias.service.models.entity.Reserva;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@Data
-public class TicketResponseDTO {
+import java.util.List;
 
-    private TicketRequestDTO ticket;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class ReservasByUserResponseDTO {
+
     private String message;
+    private List<Reserva> listaReservas;
 }

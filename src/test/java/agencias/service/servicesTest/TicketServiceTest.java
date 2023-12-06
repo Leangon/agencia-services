@@ -1,5 +1,6 @@
 package agencias.service.servicesTest;
 
+import agencias.service.exceptions.TicketGenericException;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
 import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
@@ -33,7 +34,7 @@ public class TicketServiceTest {
     @InjectMocks
     TicketServiceImpl service;
 
-/*    @Test
+    @Test
     @DisplayName(value = "Test OK para guardar ticket")
     void guardarTicketTestOK(){
         TicketRequestDTO ticketDto = TicketUtils.ticketDto1();
@@ -46,9 +47,9 @@ public class TicketServiceTest {
 
         assertEquals(expected.getMessage(), actual.getMessage());
         assertEquals(expected, actual);
-    }*/
+    }
 
-/*    @Test
+    @Test
     @DisplayName(value = "Test OK para find All ticket")
     void findAllTicketsTestOK(){
         List<Ticket> argumentSut = TicketUtils.listaTickets();
@@ -59,21 +60,21 @@ public class TicketServiceTest {
 
         assertEquals(expected.size(), actual.size());
         assertEquals(expected.get(0), actual.get(0));
-    }*/
+    }
 
     @Test
     @DisplayName(value = "Test lanzar EXCEPTION por no encontrar tickets")
     void findAllTicketsTestEXCEPTION(){
 
-        RuntimeException expected = new RuntimeException ("No se han encontrado tickets");
+        TicketGenericException expected = new TicketGenericException("No se han encontrado tickets");
         List<Ticket> tickets = new ArrayList<>();
         when(repository.findAll()).thenReturn(tickets);
 
-        RuntimeException actual = assertThrows(RuntimeException.class, () -> service.findAll());
+        TicketGenericException actual = assertThrows(TicketGenericException.class, () -> service.findAll());
         assertEquals(actual.getMessage(), expected.getMessage());
     }
 
- /*   @Test
+    @Test
     @DisplayName(value = "Test OK de buscar un ticket por id")
     void ticketPorIdTestOK(){
         Long id = 1L;
@@ -85,19 +86,19 @@ public class TicketServiceTest {
 
         assertEquals(expected, actual);
     }
-*/
+
     @Test
     @DisplayName(value = "Test lanzar EXCEPTION por no encontrar ticket asociado con el id")
     void TicketPorIdTestEXCEPTION(){
         Long id = 1L;
-        RuntimeException expected = new RuntimeException ("No existen tickets con este id");
+        TicketGenericException expected = new TicketGenericException ("No existen tickets con este id");
         when(repository.findById(any())).thenReturn(Optional.empty());
 
-        RuntimeException actual = assertThrows(RuntimeException.class, () -> service.findById(id));
+        TicketGenericException actual = assertThrows(TicketGenericException.class, () -> service.findById(id));
         assertEquals(actual.getMessage(), expected.getMessage());
     }
 
- /*   @Test
+    @Test
     @DisplayName(value = "Test OK para update ticket")
     void updateTicketTestOK(){
         Ticket argumentSut = TicketUtils.ticket1();
@@ -111,18 +112,18 @@ public class TicketServiceTest {
         TicketResponseDTO actual = service.update(completeDTO);
 
         assertEquals(expected, actual);
-    }*/
+    }
 
-  /*  @Test
+    @Test
     @DisplayName(value = "Test lanzar EXCEPTION en update por no encontrar ticket asociado")
     void UpdateTicketTestEXCEPTION(){
         TicketCompleteDTO completeDTO = TicketUtils.ticketCompleteDto1();
-        RuntimeException expected = new RuntimeException ("No existen tickets con este id");
+        TicketGenericException expected = new TicketGenericException ("No existen tickets con este id");
         when(repository.findById(any())).thenReturn(Optional.empty());
 
-        RuntimeException actual = assertThrows(RuntimeException.class, () -> service.update(completeDTO));
+        TicketGenericException actual = assertThrows(TicketGenericException.class, () -> service.update(completeDTO));
         assertEquals(actual.getMessage(), expected.getMessage());
-    }*/
+    }
 
 
     @Test
@@ -143,10 +144,10 @@ public class TicketServiceTest {
     @DisplayName(value = "Test lanzar EXCEPTION en eliminar por no encontrar ticket asociado")
     void eliminarTicketPorIdTestEXCEPTION(){
         Long id = 1L;
-        RuntimeException expected = new RuntimeException ("No existen tickets con este id");
+        TicketGenericException expected = new TicketGenericException ("No existen tickets con este id");
         when(repository.findById(any())).thenReturn(Optional.empty());
 
-        RuntimeException actual = assertThrows(RuntimeException.class, () -> service.delete(id));
+        RuntimeException actual = assertThrows(TicketGenericException.class, () -> service.delete(id));
         assertEquals(actual.getMessage(), expected.getMessage());
     }
 }

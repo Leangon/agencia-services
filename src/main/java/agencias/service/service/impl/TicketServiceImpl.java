@@ -1,5 +1,6 @@
 package agencias.service.service.impl;
 
+import agencias.service.exceptions.TicketGenericException;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
 import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
@@ -35,7 +36,7 @@ public class TicketServiceImpl implements TicketService {
     public List<TicketRequestDTO> findAll() {
         List<Ticket> lista = repository.findAll();
         if(lista.isEmpty()) {
-            throw new RuntimeException("No se han encontrado tickets");
+            throw new TicketGenericException("No se han encontrado tickets");
         }
         ModelMapper mapper = new ModelMapper();
         return lista.stream()
@@ -46,7 +47,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketResponseDTO findById(Long id) {
         Ticket result = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No existen tickets con este id"));
+                .orElseThrow(() -> new TicketGenericException("No existen tickets con este id"));
         ModelMapper mapper = new ModelMapper();
         TicketRequestDTO response = mapper.map(result, TicketRequestDTO.class);
         return new TicketResponseDTO(response, "Se ha encontrado un ticket");
@@ -57,7 +58,7 @@ public class TicketServiceImpl implements TicketService {
         ModelMapper mapper = new ModelMapper();
         Ticket ticket = mapper.map(ticketDto, Ticket.class);
         Ticket encontrado = repository.findById(ticket.getIdTicket())
-                .orElseThrow(() -> new RuntimeException("No existen tickets con este id"));
+                .orElseThrow(() -> new TicketGenericException("No existen tickets con este id"));
 
         encontrado.setClase(ticket.getClase());
         encontrado.setPrecio(ticket.getPrecio());
@@ -74,7 +75,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public ResponseDeleteDto delete(Long id) {
         repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No existen tickets con este id"));
+                .orElseThrow(() -> new TicketGenericException("No existen tickets con este id"));
         repository.deleteById(id);
         return new ResponseDeleteDto("Ticket eliminado correctamente");
     }

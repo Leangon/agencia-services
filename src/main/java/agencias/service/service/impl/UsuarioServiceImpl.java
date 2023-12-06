@@ -19,8 +19,11 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    @Autowired
     UsuarioRepository usuarioRepository;
+
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @Override
     public UsuarioResponseDTO createUsuario(UsuarioRequestDTO usuarioRequestDTO) throws CustomException {

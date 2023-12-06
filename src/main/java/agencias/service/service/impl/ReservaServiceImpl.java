@@ -2,23 +2,28 @@ package agencias.service.service.impl;
 
 import agencias.service.exceptions.ReservaNotFoundException;
 import agencias.service.models.dto.Response.ReporteResponseDTO;
+import agencias.service.models.dto.Response.ReservasByUserResponseDTO;
 import agencias.service.models.entity.Reserva;
 import agencias.service.models.entity.Ticket;
+import agencias.service.models.entity.Usuario;
 import agencias.service.repository.ReservaRepository;
+import agencias.service.repository.UsuarioRepository;
 import agencias.service.service.ReservaService;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Stream;
+
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
 
     ReservaRepository reservaRepo;
 
-    public ReservaServiceImpl(ReservaRepository reservaRepo) {
+    UsuarioRepository usuarioRepository;
+
+    public ReservaServiceImpl(ReservaRepository reservaRepo, UsuarioRepository userRepo) {
         this.reservaRepo = reservaRepo;
+        this.usuarioRepository = userRepo;
     }
 
     @Override
@@ -27,8 +32,6 @@ public class ReservaServiceImpl implements ReservaService {
         List<Reserva> resultRepo = reservaRepo.findAll ();
         //obtengo el resultado del filtro
         List<Reserva>result = new ArrayList<> ();
-
-
 
         Double ingresosTotales = 0.00;
         //para generar el reporte
@@ -53,20 +56,12 @@ public class ReservaServiceImpl implements ReservaService {
             contadorDestinos.put(destino, contadorDestinos.getOrDefault (destino,0 ) + 1);
             for (Ticket ticket : reserva.getTickets ( )) {
                 ingresosTotales +=  ticket.getPrecio ();
-
             }
-
         }
 
         reporte.setNumeroVuelosVendidos ( cantidadReservas );
         reporte.setIngresosGenerados ( ingresosTotales );
         reporte.setDestinosPopulares ( contadorDestinos );
-
-
-
-
-
-
         return reporte;
 
     }
@@ -97,27 +92,28 @@ public class ReservaServiceImpl implements ReservaService {
             throw new ReservaNotFoundException ( "No existen reservas para la fecha solicitada" );
         }
 
-
-
-
         //tomo de la lista que se filtro la fecha los tickets para calcular los ingresos generados y destinos
         for(Reserva reserva: result){
             destino = reserva.getVuelo ().getItinerario ().getCiudadDestino ();
             contadorDestinos.put(destino, contadorDestinos.getOrDefault (destino,0 ) + 1);
             for (Ticket ticket : reserva.getTickets ( )) {
                 ingresosTotales +=  ticket.getPrecio ();
-
             }
-
         }
         int cantidadReservas = result.size ();
 
         reporte.setNumeroVuelosVendidos ( cantidadReservas );
         reporte.setIngresosGenerados ( ingresosTotales );
         reporte.setDestinosPopulares ( contadorDestinos );
-
-
         return reporte;
+    }
 
+    @Override
+    public ReservasByUserResponseDTO reservasByUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("No existen usuarios con ese id"));
+        List<Reserva> reservas = reservaRepo.findReservaByIdUsuario(id);
+        return new ReservasByUserResponseDTO("Reservas efectuadas por " +
+                usuario.getNombre() + usuario.getApellido() + ": ", reservas);
     }
 }

@@ -1,5 +1,6 @@
 package agencias.service.service.impl;
 
+import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.VueloResponseDTO;
@@ -8,27 +9,26 @@ import agencias.service.repository.VueloRepository;
 import agencias.service.service.VueloService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class VueloServiceImpl implements VueloService {
 
-    private final VueloRepository vueloRepository;
+    VueloRepository vueloRepository;
 
     public VueloServiceImpl(VueloRepository vueloRepository){
         this.vueloRepository = vueloRepository;
     }
 
     @Override
-    public List<VueloResponseDTO> mostrarVuelos() {
+    public List<VueloRequestDTO> mostrarVuelos() {
         List<Vuelo> listaVuelos = vueloRepository.findAll();
 
         ModelMapper modelMapper = new ModelMapper();
-        List<VueloResponseDTO> vuelosDtoList = new ArrayList<>();
+        List<VueloRequestDTO> vuelosDtoList = new ArrayList<>();
 
-        listaVuelos.forEach(vuelo -> vuelosDtoList.add(modelMapper.map(vuelo, VueloResponseDTO.class)));
+        listaVuelos.forEach(vuelo -> vuelosDtoList.add(modelMapper.map(vuelo, VueloRequestDTO.class)));
 
         return vuelosDtoList;
     }
@@ -40,52 +40,51 @@ public class VueloServiceImpl implements VueloService {
         Vuelo nuevoVuelo = modelMapper.map(vueloRequestDTO, Vuelo.class);
         Vuelo vueloPersist = vueloRepository.save(nuevoVuelo);
 
-        VueloResponseDTO vueloDto = new VueloResponseDTO();
-        vueloDto.setMensaje("Vuelo Guardado Correctamente!");
-
-        return vueloDto;
+        VueloRequestDTO dto = modelMapper.map(vueloPersist, VueloRequestDTO.class);
+        return new VueloResponseDTO(dto, "Vuelo Guardado Correctamente!");
     }
 
     @Override
     public VueloResponseDTO vueloPorId(Long idVuelo) {
         ModelMapper modelMapper = new ModelMapper();
 
-        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow( () -> new RuntimeException("No existe vuelo con ese id!"));
+        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow( () -> new VueloGenericException("No existe vuelo con ese id!"));
 
+        VueloRequestDTO response = modelMapper.map(vuelo, VueloRequestDTO.class);
         VueloResponseDTO vueloResponseDTO = new VueloResponseDTO();
         vueloResponseDTO.setMensaje("Vuelo encontrado!");
+        vueloResponseDTO.setVueloDto(response);
 
         return vueloResponseDTO;
     }
 
     @Override
-    public ResponseDeleteDto eliminarVueloPorId(Long idVuelo) {
-        Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow(() -> new RuntimeException("No encontramos el vuelo a eliminar!"));
-
-        vueloRepository.deleteById(idVuelo);
-
-        return new ResponseDeleteDto("Vuelo eliminado correctamente!");
-    }
-
-    @Override
     public VueloResponseDTO editarVuelo(Long idVuelo, VueloRequestDTO vueloRequestDTO) {
-        Vuelo vueloExistente = vueloRepository.findById(idVuelo).orElseThrow(() -> new RuntimeException("No se encontró el vuelo a modificar"));
+        Vuelo vueloExistente = vueloRepository.findById(idVuelo).orElseThrow(() -> new VueloGenericException("No se encontró el vuelo a modificar"));
 
         ModelMapper modelMapper = new ModelMapper();
 
         Vuelo vueloEditado = modelMapper.map(vueloRequestDTO, Vuelo.class);
-        Vuelo vueloPersis = modelMapper.map(vueloRepository.findById(idVuelo), Vuelo.class);
+        //Vuelo vueloPersis = modelMapper.map(vueloRepository.findById(idVuelo), Vuelo.class);
 
-        vueloPersis.setNumVuelo(vueloEditado.getNumVuelo());
-        vueloPersis.setCantAsientos(vueloEditado.getCantAsientos());
-        vueloPersis.setDisponibilidad(vueloEditado.isDisponibilidad());
-        vueloPersis.setFecha(vueloEditado.getFecha());
-        vueloPersis.setAerolinea(vueloEditado.getAerolinea());
-        vueloPersis.setItinerario(vueloEditado.getItinerario());
+        vueloExistente.setNumVuelo(vueloEditado.getNumVuelo());
+        vueloExistente.setCantAsientos(vueloEditado.getCantAsientos());
+        vueloExistente.setDisponibilidad(vueloEditado.isDisponibilidad());
+        vueloExistente.setFecha(vueloEditado.getFecha());
+        vueloExistente.setAerolinea(vueloEditado.getAerolinea());
+        vueloExistente.setItinerario(vueloEditado.getItinerario());
 
-        vueloRepository.save(vueloPersis);
-
-        return null;
-
+        Vuelo v =vueloRepository.save(vueloExistente);
+        VueloRequestDTO response = modelMapper.map(v, VueloRequestDTO.class);
+        return new VueloResponseDTO(response, "Vuelo modificado correctamente.");
     }
+
+    @Override
+    public ResponseDeleteDto eliminarVueloPorId(Long idVuelo) {
+        vueloRepository.findById(idVuelo).orElseThrow(() -> new VueloGenericException("No encontramos el vuelo a eliminar!"));
+        vueloRepository.deleteById(idVuelo);
+        return new ResponseDeleteDto("Vuelo eliminado correctamente!");
+    }
+
+
 }

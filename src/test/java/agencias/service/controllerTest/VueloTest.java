@@ -16,9 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -30,7 +33,7 @@ public class VueloTest {
     @InjectMocks
     VueloController controller;
 
- /*   @Test
+    @Test
     @DisplayName("Guardar Vuelo Camino Feliz")
     void guardarVueloTestOk(){
         VueloRequestDTO argumentSut = VueloUtils.vueloDTO();
@@ -41,9 +44,9 @@ public class VueloTest {
         ResponseEntity<?> actual = controller.guardarVuelo(argumentSut);
 
         assertEquals(expected, actual);
-    }*/
+    }
 
-/*    @Test
+    @Test
     @DisplayName("Buscar Vuelo por Id Camino Feliz")
     void vueloPorIdTestOk(){
         Long id = 2L;
@@ -54,7 +57,21 @@ public class VueloTest {
         ResponseEntity<?> actual = controller.traerVuelo(id);
 
         assertEquals(expected, actual);
-    }*/
+    }
+
+    @Test
+    @DisplayName("Modificar Vuelo por Id Camino Feliz")
+    void ModificarVueloTestOk(){
+        Long id = 1L;
+        VueloRequestDTO argumentSut = VueloUtils.vueloDTO();
+        VueloResponseDTO response = new VueloResponseDTO(VueloUtils.vueloModificadoDTO(), "Vuelo encontrado!");
+        ResponseEntity<?> expected = new ResponseEntity<>(response, HttpStatus.OK);
+
+        when(service.editarVuelo(id, argumentSut)).thenReturn(response);
+        ResponseEntity<?> actual = controller.modificarVuelo(id, argumentSut);
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     @DisplayName("Eliminar Vuelo Camino Feliz")
@@ -72,7 +89,7 @@ public class VueloTest {
     @Test
     @DisplayName("Listar Vuelos Camino Feliz")
     void listarVuelosTestOk(){
-        List<VueloResponseDTO> listaVuelos = VueloUtils.listarVuelosDTO();
+        List<VueloRequestDTO> listaVuelos = VueloUtils.listaVuelosDto();
         ResponseEntity<?> expected = new ResponseEntity<>(listaVuelos, HttpStatus.OK);
 
         when(service.mostrarVuelos()).thenReturn(listaVuelos);

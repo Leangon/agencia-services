@@ -14,7 +14,7 @@ public class VueloUtils {
         VueloRequestDTO vuelo = new VueloRequestDTO();
         vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(134);
-        vuelo.setCantPasajeros(87);
+        vuelo.setCantAsientos(87);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.of(2023,12,25));
         vuelo.setAerolinea(null);
@@ -26,13 +26,43 @@ public class VueloUtils {
     public static VueloRequestDTO vueloDTO2(){
         VueloRequestDTO vuelo = new VueloRequestDTO();
         vuelo.setNumVuelo(654);
-        vuelo.setCantPasajeros(264);
+        vuelo.setCantAsientos(264);
         vuelo.setDisponibilidad(false);
         vuelo.setFecha(LocalDate.of(2023,1,25));
         vuelo.setAerolinea(null);
         vuelo.setItinerario(null);
 
         return vuelo;
+    }
+
+    public static Vuelo vueloModificado(){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(158);
+        vuelo.setCantAsientos(17);
+        vuelo.setDisponibilidad(true);
+        vuelo.setFecha(LocalDate.of(2023,12,19));
+        vuelo.setAerolinea(null);
+        vuelo.setItinerario(null);
+
+        return vuelo;
+    }
+
+    public static VueloRequestDTO vueloModificadoDTO(){
+        VueloRequestDTO vuelo = new VueloRequestDTO();
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(158);
+        vuelo.setCantAsientos(17);
+        vuelo.setDisponibilidad(true);
+        vuelo.setFecha(LocalDate.of(2023,12,19));
+        vuelo.setAerolinea(null);
+        vuelo.setItinerario(null);
+
+        return vuelo;
+    }
+
+    public static List <VueloRequestDTO> listaVuelosDto(){
+        return List.of(vueloDTO(),vueloDTO2());
     }
 
     public static List<VueloResponseDTO> listarVuelosDTO(){
