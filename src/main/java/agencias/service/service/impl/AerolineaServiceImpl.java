@@ -27,23 +27,17 @@ public class AerolineaServiceImpl  implements AerolineaService {
 
     @Override
     public AerolineaResponseDTO guardarAerolinea(AerolineaRequestDTO aerolinea) {
-        /* con mapper convierto aerolinea en una clase y la guardo en aerolineaClass */
         Aerolinea aerolineaClass = mapper.map(aerolinea, Aerolinea.class);
-        /* aca debo validar si la aerolinea ya existe en el repositorio antes de guardarla*/
         if(verificarExiste(aerolineaClass)){
             throw new AerolineaFoundException("La aerolinea que intenta guardar ya existe.");
         }
-
-        Aerolinea aerolineaGuardada = repoLinea.save(aerolineaClass);/*save en repositorio*/
-        //Verificar si se pudo guardar
-        if(aerolineaGuardada==null){
+        Aerolinea aerolineaGuardada = repoLinea.save(aerolineaClass);
+        if(aerolineaGuardada == null){
             throw new AerolineaDBException("No se puedo guardar la aerolinea .");
         }
-        /* instancio un responseDTO y con mapper convierto a aerolineaGuardada a la clase AerolineaResponseDTO*/
+        /* convierto a aerolineaGuardada a la clase AerolineaResponseDTO*/
         AerolineaResponseDTO responseDTO = mapper.map(aerolineaGuardada, AerolineaResponseDTO.class);
-
-        /* hago el set del message del DTO de respuesta*/
-        responseDTO.setMessage("La aerolinea Id " + aerolineaGuardada.getIdAerolinea() + " Razon Social " + aerolineaGuardada.getRazonSocial() + " cuit " + aerolineaGuardada.getCuit() + " Se guardo correctamente.");
+        responseDTO.setMessage("La aerolinea "+aerolineaGuardada.getRazonSocial()+" se guardo correctamente");
         return responseDTO;
 
 
@@ -51,26 +45,20 @@ public class AerolineaServiceImpl  implements AerolineaService {
 
     @Override
     public AerolineaResponseDTO editarAerolinea(Long id, AerolineaRequestDTO aerolineaRequest) {
-
-        // Verificar si la aerolínea existe en el repositorio
+   // Verificar si la aerolínea existe en el repositorio
     Aerolinea AerolineaGuardada = repoLinea.findById(id)
                                    .orElseThrow(() -> {
                                       throw new AerolineaNotFoundException("No existe la Aerolinea que desea modificar");
                                     });
-
      // Actualizar los atributos de la aerolínea con los valores del AerolineaRequestDTO
-
     AerolineaGuardada.setRazonSocial(aerolineaRequest.getRazonSocial());
     AerolineaGuardada.setCuit(aerolineaRequest.getCuit());
-
     // Guardar la aerolínea actualizada en el repositorio
-
     repoLinea.save(AerolineaGuardada);
-
     // Crear y mapear la respuesta DTO
-     AerolineaResponseDTO responseDTO = mapper.map(AerolineaGuardada, AerolineaResponseDTO.class);
-     responseDTO.setMessage("La aerolinea " + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
-     return responseDTO;
+    AerolineaResponseDTO responseDTO = mapper.map(AerolineaGuardada, AerolineaResponseDTO.class);
+    responseDTO.setMessage("La aerolinea:" + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
+    return responseDTO;
     }
 
 
@@ -80,10 +68,10 @@ public class AerolineaServiceImpl  implements AerolineaService {
             throw new AerolineaNotFoundException("No existe la Aerolinea que desea eliminar");
         });
         String nombreAerolineaEliminada = aerolinea.getRazonSocial(); // Obtener el nombre de la aerolínea eliminada
-        repoLinea.deleteById(idAerolinea);/*delete de la aerolinea*/
+        repoLinea.deleteById(idAerolinea);
         AerolineaResponseDTO lineaDto = new AerolineaResponseDTO();
         /* aca quiero mostrar los datos de la aerolinea que se borro pero solo pude mostrar la razonSocial*/
-        lineaDto.setMessage("La aerolinea " + nombreAerolineaEliminada + " Se elimino correctamente ");
+        lineaDto.setMessage("La aerolinea:" + nombreAerolineaEliminada + " se eliminó correctamente ");
         return lineaDto;
 
     }

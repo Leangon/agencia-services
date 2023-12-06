@@ -9,12 +9,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("app")
+@Validated
 public class AerolineaController {
         private final AerolineaService aerolineaService;
 
@@ -27,8 +29,9 @@ public class AerolineaController {
          return new ResponseEntity<> ( aerolineaService.listarAerolinea(), HttpStatus.OK );
     }
 
-@GetMapping("/obtenerporid/{id}")
-    public ResponseEntity<?> traerAerolineaPorId(@PathVariable @Positive Long id){
+@GetMapping("/obtenerporid/{id:[0-9]+}")
+//"/obtenerporid/{id:[0-9]+}"
+    public ResponseEntity<?> traerAerolineaPorId(@PathVariable @Positive(message = "Id debe ser positivo") Long id){
         return new ResponseEntity<> (aerolineaService.traerAerolineaPorId(id),HttpStatus.OK);
 }
 @PostMapping("/guardar")
@@ -36,13 +39,13 @@ public class AerolineaController {
          return new ResponseEntity<>(aerolineaService.guardarAerolinea(aerolinea),HttpStatus.OK) ;
 }
 
-@PutMapping("/editar/{id}")
-    public ResponseEntity<?> editarAerolinea(@PathVariable @Positive Long id,@RequestBody @Valid AerolineaRequestDTO aerolineaRequest){
+@PutMapping("/editar/{id:[0-9]+}")
+    public ResponseEntity<?> editarAerolinea(@PathVariable  @Positive(message = "Id debe ser positivo") Long id,@RequestBody @Valid AerolineaRequestDTO aerolineaRequest){
         return new ResponseEntity<>(aerolineaService.editarAerolinea(id,aerolineaRequest),HttpStatus.OK) ;
     }
 
-@DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrarAerolinea(@PathVariable @Positive Long id){
+@DeleteMapping("/borrar/{id:[0-9]+}")
+    public ResponseEntity<?> borrarAerolinea(@PathVariable @Positive(message = "Id debe ser positivo") Long id){
             return new ResponseEntity<>(aerolineaService.borrarAerolinea(id),HttpStatus.OK);
 }
 

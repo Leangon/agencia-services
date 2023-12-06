@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 
@@ -39,6 +40,13 @@ public class ExceptionController {
         ex.getFieldErrors().forEach(field -> errores.put(field.getField(),field.getDefaultMessage()));
 
         return new ResponseEntity<>(new ErrorAerolineaDTOHash(400,errores), HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)//handler para capturar la validacion de id en uri
+    public ResponseEntity<?> fallaPathVariable(MethodArgumentTypeMismatchException ex){
+        ErrorAerolineaDTO error= new ErrorAerolineaDTO(400,ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 
     }
 
