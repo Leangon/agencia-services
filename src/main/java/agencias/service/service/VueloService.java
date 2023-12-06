@@ -6,7 +6,7 @@ import agencias.service.models.dto.Response.VueloResponseDTO;
 
 import java.util.List;
 public interface VueloService {
-    List<VueloResponseDTO> mostrarVuelos();
+    List<VueloRequestDTO> mostrarVuelos();
 
     VueloResponseDTO crearVuelo(VueloRequestDTO vueloRequestDTO);
 

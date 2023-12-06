@@ -4,18 +4,15 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "vuelo")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vuelo {
@@ -25,7 +22,7 @@ public class Vuelo {
     @Column(name = "id_vuelo")
     private Long idVuelo;
 
-    @NotBlank(message = "No puede quedar vacío el numero de vuelo")
+    @Positive(message = "Debe ser un número positivo")
     @Column(name = "num_vuelo", unique = true)
     private int numVuelo;
 
@@ -33,11 +30,10 @@ public class Vuelo {
     @Column(name = "cant_pasajeros")
     private int cantAsientos;
 
-    @NotBlank(message = "El vuelo debe indicar si tiene disponibilidad de pasajeros o no")
     @Column(name = "disponibilidad")
     private boolean disponibilidad;
 
-    @NotBlank(message = "El vuelo debe de tener una fecha")
+    @NotNull(message = "El vuelo debe de tener una fecha")
     @Column(name = "fecha")
     private LocalDate fecha;
 

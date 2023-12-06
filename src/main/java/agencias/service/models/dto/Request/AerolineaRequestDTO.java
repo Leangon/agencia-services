@@ -14,8 +14,4 @@ public class AerolineaRequestDTO {
     private String razonSocial;
 
     private String cuit;
-
-    /*private PromocionRequestDto promocion;
-
-    private List<VueloRequestDTO> listaVuelos;*/
 }

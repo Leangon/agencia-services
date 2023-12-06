@@ -1,17 +1,18 @@
 package agencias.service.models.dto.Response;
 
-import agencias.service.models.dto.Request.AerolineaRequestDTO;
-import agencias.service.models.dto.Request.VueloRequestDTO;
+
+import agencias.service.models.entity.Reserva;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AerolineaResponseDTO {
+public class ReservasByUserResponseDTO {
 
-    private AerolineaRequestDTO aereolinea;
     private String message;
+    private List<Reserva> listaReservas;
 }

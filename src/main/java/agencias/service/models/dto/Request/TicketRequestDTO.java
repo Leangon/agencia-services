@@ -2,6 +2,8 @@ package agencias.service.models.dto.Request;
 
 import agencias.service.models.entity.Pasajero;
 import agencias.service.models.enums.Clase;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
