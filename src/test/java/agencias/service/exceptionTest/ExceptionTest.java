@@ -1,9 +1,6 @@
 package agencias.service.exceptionTest;
 
-import agencias.service.exceptions.AerolineaNotFoundException;
-import agencias.service.exceptions.ExceptionController;
-import agencias.service.exceptions.TicketGenericException;
-import agencias.service.exceptions.VueloGenericException;
+import agencias.service.exceptions.*;
 import agencias.service.models.dto.Response.ErrorDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,6 +48,18 @@ public class ExceptionTest {
         ResponseEntity<?> expected = new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
         ResponseEntity<?> actual = controller.ticketGenericException(argumentSut);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Test de la excepción personalizada ReservaNotFoundException")
+    void reservaNotFoundException(){
+        ReservaNotFoundException argumentSut = new ReservaNotFoundException("Excepción lanzada");
+        ErrorDTO error = new ErrorDTO(404, "Excepción lanzada");
+        ResponseEntity<?> expected = new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+
+        ResponseEntity<?> actual = controller.reservaNotFound(argumentSut);
 
         assertEquals(expected, actual);
     }
