@@ -21,7 +21,7 @@ public class VueloController {
         this.vueloService = vueloService;
     }
 
-    @GetMapping
+    @GetMapping("/listarVuelos")
     public ResponseEntity<?> listarVuelos(){
         return new ResponseEntity<>(vueloService.mostrarVuelos(), HttpStatus.OK);
     }
