@@ -31,14 +31,8 @@ public class Aerolinea {
     @Size(min=11, message="El cuit debe tener 11 caracteres")
     @Column(name = "cuit")
     private String cuit;
-/*
-    @OneToOne(mappedBy = "aerolinea")
-    private Promocion promocion;
 
-    @NotEmpty(message = "Debe tener vuelos asociados")
-    @OneToMany(mappedBy = "aerolinea")
-    private List<Vuelo> listaVuelos;
-*/
+
 
 
     public boolean equalsAerolinea(Object o) {
@@ -60,4 +54,5 @@ public class Aerolinea {
     public int hashCode() {
         return Objects.hash(idAerolinea, razonSocial, cuit);
     }
+
 }

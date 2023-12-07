@@ -31,7 +31,7 @@ public class Vuelo {
 
     @Min(0)
     @Column(name = "cant_pasajeros")
-    private int cantPasajeros;
+    private int cantAsientos;
 
     @NotBlank(message = "El vuelo debe indicar si tiene disponibilidad de pasajeros o no")
     @Column(name = "disponibilidad")
@@ -41,30 +41,11 @@ public class Vuelo {
     @Column(name = "fecha")
     private LocalDate fecha;
 
-    @NotBlank(message = "El vuelo debe de tener una hora de salida")
-    @Column(name = "hora_salida")
-    private String horaSalida;
-
-    @NotBlank(message = "El vuelo debe de tener una hora de llegada")
-    @Column(name = "hora_llegada")
-    private String horaLLegada;
-
-    @OneToMany(mappedBy = "vuelo")
-    private List<Reserva> listaReservas;
-
-    @OneToMany(mappedBy = "vuelo")
-    private List<Promocion> listaPromociones;
-
-    @OneToMany(mappedBy = "vuelo")
-    private List<Ticket> listaTickets;
+    @Embedded
+    private Itinerario itinerario;
 
     @NotNull(message = "Debe tener una aerolínea asociada")
     @ManyToOne
     @JoinColumn(name = "fk_aerolinea", referencedColumnName = "id_aerolinea")
     private Aerolinea aerolinea;
-
-    @NotNull(message = "Debe tener un itinerario asociada")
-    @ManyToOne
-    @JoinColumn(name = "fk_itinerario", referencedColumnName = "id_itinerario")
-    private Itinerario itinerario;
 }

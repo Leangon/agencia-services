@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("app")
+@RequestMapping("/app/aerolinea")
 @Validated
 public class AerolineaController {
         private final AerolineaService aerolineaService;
@@ -29,7 +29,7 @@ public class AerolineaController {
          return new ResponseEntity<> ( aerolineaService.listarAerolinea(), HttpStatus.OK );
     }
 
-@GetMapping("/obtenerporid/{id:[0-9]+}")
+@GetMapping("/obtenerporid/{id}")
 //"/obtenerporid/{id:[0-9]+}"
     public ResponseEntity<?> traerAerolineaPorId(@PathVariable @Positive(message = "Id debe ser positivo") Long id){
         return new ResponseEntity<> (aerolineaService.traerAerolineaPorId(id),HttpStatus.OK);
@@ -39,12 +39,12 @@ public class AerolineaController {
          return new ResponseEntity<>(aerolineaService.guardarAerolinea(aerolinea),HttpStatus.OK) ;
 }
 
-@PutMapping("/editar/{id:[0-9]+}")
+@PutMapping("/editar/{id}")
     public ResponseEntity<?> editarAerolinea(@PathVariable  @Positive(message = "Id debe ser positivo") Long id,@RequestBody @Valid AerolineaRequestDTO aerolineaRequest){
         return new ResponseEntity<>(aerolineaService.editarAerolinea(id,aerolineaRequest),HttpStatus.OK) ;
     }
 
-@DeleteMapping("/borrar/{id:[0-9]+}")
+@DeleteMapping("/borrar/{id}")
     public ResponseEntity<?> borrarAerolinea(@PathVariable @Positive(message = "Id debe ser positivo") Long id){
             return new ResponseEntity<>(aerolineaService.borrarAerolinea(id),HttpStatus.OK);
 }

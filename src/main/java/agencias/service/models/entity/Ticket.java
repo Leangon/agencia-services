@@ -24,6 +24,10 @@ public class Ticket {
     @Column(name = "num_asiento")
     private int numAsiento;
 
+    @Positive(message = "Debe ser un numero positivo")
+    @Column(name = "precio")
+    private double precio;
+
     @NotNull(message = "Debe incluir una clase")
     @Enumerated(EnumType.STRING)
     @Column(name = "clase")
