@@ -1,16 +1,15 @@
 package agencias.service.models.dto.Response;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Getter
-@Setter
-@ToString
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ReporteResponseDTO {
 
 

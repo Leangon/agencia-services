@@ -111,7 +111,7 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public ReservasByUserResponseDTO reservasByUsuario(Long id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("No existen usuarios con ese id"));
+                new ReservaNotFoundException("No existen usuarios con ese id"));
         List<Reserva> reservas = reservaRepo.findReservaByIdUsuario(id);
         return new ReservasByUserResponseDTO("Reservas efectuadas por " +
                 usuario.getNombre() + usuario.getApellido() + ": ", reservas);
