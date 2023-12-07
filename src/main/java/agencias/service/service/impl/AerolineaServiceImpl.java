@@ -57,7 +57,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
     repoLinea.save(AerolineaGuardada);
     // Crear y mapear la respuesta DTO
     AerolineaResponseDTO responseDTO = mapper.map(AerolineaGuardada, AerolineaResponseDTO.class);
-    responseDTO.setMessage("La aerolinea:" + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
+    responseDTO.setMessage("La aerolinea " + AerolineaGuardada.getIdAerolinea() + " se modificó correctamente.");
     return responseDTO;
     }
 
@@ -71,7 +71,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
         repoLinea.deleteById(idAerolinea);
         AerolineaResponseDTO lineaDto = new AerolineaResponseDTO();
         /* aca quiero mostrar los datos de la aerolinea que se borro pero solo pude mostrar la razonSocial*/
-        lineaDto.setMessage("La aerolinea:" + nombreAerolineaEliminada + " se eliminó correctamente ");
+        lineaDto.setMessage("La aerolinea " + nombreAerolineaEliminada + " se eliminó correctamente ");
         return lineaDto;
 
     }

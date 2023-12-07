@@ -4,7 +4,6 @@ import agencias.service.models.enums.Clase;
 import agencias.service.models.enums.TipoPago;
 import jakarta.validation.constraints.*;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Data

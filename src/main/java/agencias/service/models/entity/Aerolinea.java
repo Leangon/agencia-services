@@ -35,6 +35,7 @@ public class Aerolinea {
 
 
 
+
     public boolean equalsAerolinea(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -54,5 +55,6 @@ public class Aerolinea {
     public int hashCode() {
         return Objects.hash(idAerolinea, razonSocial, cuit);
     }
+
 
 }

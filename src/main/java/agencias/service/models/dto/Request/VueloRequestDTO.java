@@ -1,7 +1,9 @@
 package agencias.service.models.dto.Request;
 
 import agencias.service.models.entity.Itinerario;
+
 import jakarta.validation.constraints.*;
+
 import lombok.*;
 
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ public class VueloRequestDTO {
     @NotBlank(message="El número de vuelo es obligatorio")
     @NotEmpty(message="El número de vuelo es obligatorio")
     @Positive(message="El número de vuelo no puede ser un negativo")
+
     private int numVuelo;
     @NotBlank(message="La cantidad de pasajeros es obligatoria")
     @NotEmpty(message="La cantidad de pasajeros es obligatoria)")

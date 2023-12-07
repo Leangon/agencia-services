@@ -14,8 +14,9 @@ public class TicketRequestDTO {
     @NotEmpty(message="Debe tener un número de asiento")
     @NotBlank(message="Debe tener un número de asiento")
     @Min(value = 1, message = "El número de asiento debe ser mayor o igual a 1")
-    @Max(value = 300, message = "El número de asiento debe ser menor o igual a 300")
+    @Max(value = 200, message = "El número de asiento debe ser menor o igual a 200")
     private int numAsiento;
+
     @NotEmpty(message ="Debe tener un precio")
     @NotBlank(message="Debe tener un precio")
     @Positive(message="El precio debe ser un número positivo")

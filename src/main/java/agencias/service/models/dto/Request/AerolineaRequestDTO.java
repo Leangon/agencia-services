@@ -1,6 +1,4 @@
 package agencias.service.models.dto.Request;
-
-
 import agencias.service.models.entity.Vuelo;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
