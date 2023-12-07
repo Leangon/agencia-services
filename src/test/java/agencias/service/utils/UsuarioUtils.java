@@ -8,6 +8,7 @@ public class UsuarioUtils {
 
     public static Usuario usuario1(){
         Usuario usuario = new Usuario();
+        usuario.setIdUsuario(1L);
         usuario.setNombre("Juan");
         usuario.setApellido("Perez");
         usuario.setDni(31540692L);
