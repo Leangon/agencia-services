@@ -83,8 +83,8 @@ public class ReservaServiceTest {
         Usuario usuario = UsuarioUtils.usuario1();
         List<Reserva> lista = ReservaUtils.listaReservas();
         ReservasByUserResponseDTO expected = new ReservasByUserResponseDTO(
-                "Reservas efectuadas por " + usuario.getNombre() + usuario.getApellido() + ": ",
-        ReservaUtils.listaReservas());
+                "Reservas efectuadas por " + usuario.getNombre() + " " + usuario.getApellido() + ": ",
+        ReservaUtils.listaReservasByDto());
 
         when(userRepository.findById(any())).thenReturn(Optional.of(usuario));
         when(repository.findReservaByIdUsuario(any())).thenReturn(lista);
