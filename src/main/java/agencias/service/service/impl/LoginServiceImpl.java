@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
         Map<String, Object> extraClaims = new HashMap<>();
 
         // Obtengo el nombre real de Usuario
-        extraClaims.put("name", user.getNombre() + user.getApellido());
+        extraClaims.put("name", user.getNombre() + " " + user.getApellido());
         // Obtengo la lista de roles asignados al usuario
         extraClaims.put("roles", user.getRoles().stream()
                 .map(rol -> rol.getName().name()).toList());

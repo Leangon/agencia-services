@@ -17,5 +17,7 @@ public class UsuarioRequestDTO {
     private Long telefono;
     private String email;
     private LocalDate fechaNacimiento;
+    private String username;
+    private String password;
     private List<ReservaRequestDTO> listaReservas;
 }

@@ -16,7 +16,7 @@ public class TicketUtils {
         TicketRequestDTO ticketDto = new TicketRequestDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Latam S.A");
         VueloRequestDTO vuelo = new VueloRequestDTO();
         vuelo.setNumVuelo(1124);
@@ -37,7 +37,7 @@ public class TicketUtils {
         TicketRequestDTO ticket = new TicketRequestDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "Paris", "Francia", "8AM", "19PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Iberia SA");
         VueloRequestDTO vuelo = new VueloRequestDTO();
         vuelo.setNumVuelo(1543);
@@ -120,7 +120,7 @@ public class TicketUtils {
         TicketRequestDTO ticket = new TicketRequestDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Avianca S.A");
         VueloRequestDTO vuelo = new VueloRequestDTO();
         vuelo.setNumVuelo(1125);
@@ -141,7 +141,7 @@ public class TicketUtils {
         TicketCompleteDTO ticketDto = new TicketCompleteDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Latam S.A");
         ticketDto.setIdTicket(1L);
         ticketDto.setClase(Clase.BUSINESS);

@@ -1,10 +1,14 @@
 package agencias.service.service.impl;
 
+import agencias.service.exceptions.AerolineaNotFoundException;
 import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.VueloRequestDTO;
+import agencias.service.models.dto.Response.AerolineaResponseDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.VueloResponseDTO;
+import agencias.service.models.entity.Aerolinea;
 import agencias.service.models.entity.Vuelo;
+import agencias.service.repository.AerolineaRepository;
 import agencias.service.repository.VueloRepository;
 import agencias.service.service.VueloService;
 import org.modelmapper.ModelMapper;
@@ -17,8 +21,11 @@ public class VueloServiceImpl implements VueloService {
 
     VueloRepository vueloRepository;
 
-    public VueloServiceImpl(VueloRepository vueloRepository){
+    AerolineaRepository aerolineaRepository;
+
+    public VueloServiceImpl(VueloRepository vueloRepository, AerolineaRepository aereo){
         this.vueloRepository = vueloRepository;
+        this.aerolineaRepository = aereo;
     }
 
     @Override
@@ -38,6 +45,10 @@ public class VueloServiceImpl implements VueloService {
         ModelMapper modelMapper = new ModelMapper();
 
         Vuelo nuevoVuelo = modelMapper.map(vueloRequestDTO, Vuelo.class);
+        Aerolinea aerolinea = aerolineaRepository.findById(nuevoVuelo.getAerolinea().getIdAerolinea())
+                .orElseThrow(() -> new AerolineaNotFoundException("No existen aerolíneas con ese id"));
+
+        nuevoVuelo.setAerolinea(aerolinea);
         Vuelo vueloPersist = vueloRepository.save(nuevoVuelo);
 
         VueloRequestDTO dto = modelMapper.map(vueloPersist, VueloRequestDTO.class);
@@ -65,7 +76,6 @@ public class VueloServiceImpl implements VueloService {
         ModelMapper modelMapper = new ModelMapper();
 
         Vuelo vueloEditado = modelMapper.map(vueloRequestDTO, Vuelo.class);
-        //Vuelo vueloPersis = modelMapper.map(vueloRepository.findById(idVuelo), Vuelo.class);
 
         vueloExistente.setNumVuelo(vueloEditado.getNumVuelo());
         vueloExistente.setCantAsientos(vueloEditado.getCantAsientos());

@@ -21,12 +21,11 @@ public class Aerolinea {
     @Column(name="id_aerolinea")
     private Long idAerolinea;
 
-    @NotEmpty(message = "Razon social no puede estar vacio")
-    @Size(min = 4, max = 12, message = "Razon social debe tener entre 5 y 30 caracteres")
+    @Size(min = 5, max = 30, message = "Razón social debe tener entre 5 y 30 caracteres")
     @Column(name = "razon_social")
     private String razonSocial;
 
-    @NotEmpty(message="El cuit no puede estar vacio")
+    @Size(max = 11, message = "El cuit debe tener 11 caracteres")
     @Column(name = "cuit")
     private String cuit;
 

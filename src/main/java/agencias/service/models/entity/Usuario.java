@@ -62,7 +62,7 @@ public class Usuario implements UserDetails {
     private String password;
 
     @NotEmpty(message = "El usuario debe tener asignado algún rol")
-    @ManyToMany(targetEntity = Rol.class, cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Rol.class, cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "fk_user"),
             inverseJoinColumns = @JoinColumn(name = "fk_rol"))
     private Set<Rol> roles;

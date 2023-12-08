@@ -27,11 +27,19 @@ public class ExceptionController {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(RolGenericException.class)
+    public ResponseEntity<?> rolGenericException(RolGenericException ex){
+        ErrorDTO error= new ErrorDTO(404,ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> fallaValidacion(MethodArgumentTypeMismatchException ex){
         ErrorDTO error = new ErrorDTO(400, ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+
 
 }
 

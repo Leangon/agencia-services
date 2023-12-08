@@ -2,11 +2,15 @@ package agencias.service.servicesTest;
 
 import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.VueloRequestDTO;
+import agencias.service.models.dto.Response.AerolineaResponseDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.VueloResponseDTO;
+import agencias.service.models.entity.Aerolinea;
 import agencias.service.models.entity.Vuelo;
+import agencias.service.repository.AerolineaRepository;
 import agencias.service.repository.VueloRepository;
 import agencias.service.service.impl.VueloServiceImpl;
+import agencias.service.utils.AerolineaUtils;
 import agencias.service.utils.VueloUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +35,9 @@ public class VueloServiceTest {
     @Mock
     VueloRepository repository;
 
+    @Mock
+    AerolineaRepository aerolineaRepository;
+
     @InjectMocks
     VueloServiceImpl service;
 
@@ -41,6 +48,7 @@ public class VueloServiceTest {
         Vuelo argumentSut = VueloUtils.vuelo1();
         VueloResponseDTO expected = new VueloResponseDTO(VueloUtils.vueloDTO(), "Vuelo Guardado Correctamente!");
 
+        when(aerolineaRepository.findById(any())).thenReturn(Optional.of(AerolineaUtils.aereo1()));
         when(repository.save(any())).thenReturn(argumentSut);
         VueloResponseDTO actual = service.crearVuelo(vueloDto);
 

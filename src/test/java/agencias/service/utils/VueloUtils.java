@@ -2,6 +2,7 @@ package agencias.service.utils;
 
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
+import agencias.service.models.entity.Aerolinea;
 import agencias.service.models.entity.Vuelo;
 
 import java.time.LocalDate;
@@ -12,12 +13,14 @@ public class VueloUtils {
 
     public static VueloRequestDTO vueloDTO(){
         VueloRequestDTO vuelo = new VueloRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
+        aerolinea.setIdAerolinea(1L);
         vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(134);
         vuelo.setCantAsientos(87);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.of(2023,12,25));
-        vuelo.setAerolinea(null);
+        vuelo.setAerolinea(aerolinea);
         vuelo.setItinerario(null);
 
         return vuelo;
@@ -78,12 +81,14 @@ public class VueloUtils {
 
     public static Vuelo vuelo1(){
         Vuelo vuelo = new Vuelo();
+        Aerolinea aerolinea = new Aerolinea();
+        aerolinea.setIdAerolinea(1L);
         vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(134);
         vuelo.setCantAsientos(87);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.of(2023,12,25));
-        vuelo.setAerolinea(null);
+        vuelo.setAerolinea(aerolinea);
         vuelo.setItinerario(null);
         return vuelo;
     }
