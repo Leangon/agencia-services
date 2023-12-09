@@ -40,7 +40,8 @@ public class AerolineaServiceTest {
         Long id = 1L;
         Aerolinea argumentSut = AerolineaUtils.aereo1();
         Aerolinea modificado = AerolineaUtils.aereoModificado1();
-        AerolineaResponseDTO expected = new AerolineaResponseDTO(AerolineaUtils.aereoModificadoDto1(), " se modificó correctamente");
+        AerolineaResponseDTO expected = new AerolineaResponseDTO(AerolineaUtils.aereoModificadoDto1().getRazonSocial(),
+                AerolineaUtils.aereoModificadoDto1().getCuit(), " se modificó correctamente");
 
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
         when(repository.save(any())).thenReturn(modificado);
@@ -65,7 +66,8 @@ public class AerolineaServiceTest {
     void aerolineaSaveTestOK(){
         AerolineaRequestDTO dto = AerolineaUtils.aereoDto1();
         Aerolinea argumentSut = AerolineaUtils.aereo1();
-        AerolineaResponseDTO expected = new AerolineaResponseDTO(dto, " Se guardo correctamente");
+        AerolineaResponseDTO expected = new AerolineaResponseDTO(dto.getRazonSocial(), dto.getCuit(),
+                " Se guardo correctamente");
 
         when(repository.save(any())).thenReturn(argumentSut);
 
@@ -105,7 +107,8 @@ public class AerolineaServiceTest {
     void aerolineaPorIdTestOK(){
         Long id = 1L;
         Aerolinea argumentSut = AerolineaUtils.aereo1();
-        AerolineaResponseDTO expected = new AerolineaResponseDTO(AerolineaUtils.aereoDto1(), "Se encontró la Aerolínea buscada");
+        AerolineaResponseDTO expected = new AerolineaResponseDTO(AerolineaUtils.aereoDto1().getRazonSocial(),
+                AerolineaUtils.aereoDto1().getCuit(), "Se encontró la Aerolínea buscada");
 
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
         AerolineaResponseDTO actual = service.traerAerolineaPorId(id);

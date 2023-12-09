@@ -35,11 +35,9 @@ public class AerolineaServiceImpl  implements AerolineaService {
         Aerolinea aerolineaClass = mapper.map(aerolinea, Aerolinea.class);
         /* hacer el save de instancia aerolineaClass*/
         Aerolinea aerolineaGuardada = repoLinea.save(aerolineaClass);
-        /*Aca instancio un Dto responseDTO y con mapper otra vez convierto a la clase AerolineaResponseDTO*/
-        AerolineaRequestDTO responseDTO = mapper.map(aerolineaGuardada, AerolineaRequestDTO.class);
-
         /* retorno el DTO de respuesta y el mensaje correspondiente*/
-        return new AerolineaResponseDTO(responseDTO, " Se guardo correctamente");
+        return new AerolineaResponseDTO(aerolineaGuardada.getRazonSocial(),
+                aerolineaGuardada.getCuit(), " Se guardo correctamente");
     }
 
     @Override
@@ -54,8 +52,7 @@ public class AerolineaServiceImpl  implements AerolineaService {
         aereoExistente.setCuit(aereoEditado.getCuit());
 
         Aerolinea a = repoLinea.save(aereoExistente);
-        AerolineaRequestDTO response = modelMapper.map(a, AerolineaRequestDTO.class);
-        return new AerolineaResponseDTO(response, " se modificó correctamente");
+        return new AerolineaResponseDTO(a.getRazonSocial(), a.getCuit(), " se modificó correctamente");
     }
     @Override
     public ResponseDeleteDto borrarAerolinea(Long idAerolinea) {
@@ -73,8 +70,8 @@ public class AerolineaServiceImpl  implements AerolineaService {
         Aerolinea aerolinea = repoLinea.findById(idAerolinea)
                 .orElseThrow(() -> new AerolineaNotFoundException("No existe la Aerolínea que desea buscar"));
 
-        AerolineaRequestDTO lineaDto = mapper.map(aerolinea, AerolineaRequestDTO.class);
-        return new AerolineaResponseDTO(lineaDto, "Se encontró la Aerolínea buscada");
+        return new AerolineaResponseDTO(aerolinea.getRazonSocial(),
+                aerolinea.getCuit(), "Se encontró la Aerolínea buscada");
     }
 
     @Override

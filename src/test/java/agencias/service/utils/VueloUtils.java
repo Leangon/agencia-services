@@ -17,7 +17,6 @@ public class VueloUtils {
         VueloRequestDTO vuelo = new VueloRequestDTO();
         Aerolinea aerolinea = new Aerolinea();
         aerolinea.setIdAerolinea(1L);
-        vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(134);
         vuelo.setCantAsientos(87);
         vuelo.setDisponibilidad(true);

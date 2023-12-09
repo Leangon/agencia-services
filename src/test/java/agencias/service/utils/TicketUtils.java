@@ -146,7 +146,7 @@ public class TicketUtils {
         ticketDto.setPrecio(85000.0);
         ticketDto.setNumAsiento(125);
         ticketDto.setPasajero(new Pasajero("juan Perez", "35120475", 39));
-        ticketDto.setVuelo(new VueloRequestDTO(1L, 1124, 250, true,
+        ticketDto.setVuelo(new VueloRequestDTO(1, 1124, 250, true,
                 LocalDate.now(), itinerario, 1L));
         return ticketDto;
     }
