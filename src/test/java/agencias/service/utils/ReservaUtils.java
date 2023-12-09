@@ -1,9 +1,10 @@
 package agencias.service.utils;
 
-import agencias.service.models.entity.Reserva;
-import agencias.service.models.entity.Ticket;
-import agencias.service.models.entity.Usuario;
-import agencias.service.models.entity.Vuelo;
+import agencias.service.models.dto.Request.ReservaRequestDTO;
+import agencias.service.models.dto.Request.ReservasByUserRequestDTO;
+import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.VueloRequestDTO;
+import agencias.service.models.entity.*;
 import agencias.service.models.enums.Clase;
 import agencias.service.models.enums.TipoPago;
 
@@ -16,6 +17,10 @@ public class ReservaUtils {
         Vuelo vuelo = new Vuelo();
         vuelo.setNumVuelo(123);
         vuelo.setFecha(LocalDate.parse("2023-12-21"));
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadOrigen("Montevideo");
+        itinerario.setCiudadDestino("Londres");
+        vuelo.setItinerario(itinerario);
         Ticket ticket = new Ticket();
         ticket.setNumAsiento(65);
         ticket.setClase(Clase.ECONOMIC);
@@ -32,9 +37,35 @@ public class ReservaUtils {
         Vuelo vuelo = new Vuelo();
         vuelo.setNumVuelo(5236);
         vuelo.setFecha(LocalDate.parse("2024-03-09"));
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadOrigen("Madrid");
+        itinerario.setCiudadDestino("Paris");
+        vuelo.setItinerario(itinerario);
         Ticket ticket = new Ticket();
         ticket.setNumAsiento(128);
         ticket.setClase(Clase.BUSINESS);
+        ticket.setPrecio(1000);
+        List<Ticket> tickets = List.of(ticket);
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(2L);
+        usuario.setNombre("Ana");
+        usuario.setApellido("Romero");
+        return new Reserva(1L, TipoPago.TARJETA_CREDITO, LocalDate.of(2023, 10, 12), vuelo,
+                tickets, usuario);
+    }
+
+    public static Reserva reserva3(){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setNumVuelo(1235);
+        vuelo.setFecha(LocalDate.parse("2023-06-27"));
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadOrigen("Buenos aires");
+        itinerario.setCiudadDestino("Rio Janeiro");
+        vuelo.setItinerario(itinerario);
+        Ticket ticket = new Ticket();
+        ticket.setNumAsiento(101);
+        ticket.setClase(Clase.BUSINESS);
+        ticket.setPrecio(1000);
         List<Ticket> tickets = List.of(ticket);
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(2L);
@@ -44,23 +75,53 @@ public class ReservaUtils {
                 tickets, usuario);
     }
 
-    public static Reserva reserva3(){
+    public static ReservasByUserRequestDTO reservaByDto2(){
         Vuelo vuelo = new Vuelo();
-        vuelo.setNumVuelo(1235);
-        vuelo.setFecha(LocalDate.parse("2023-06-27"));
-        Ticket ticket = new Ticket();
-        ticket.setNumAsiento(101);
+        vuelo.setNumVuelo(5236);
+        vuelo.setFecha(LocalDate.parse("2024-03-09"));
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadOrigen("Madrid");
+        itinerario.setCiudadDestino("Paris");
+        vuelo.setItinerario(itinerario);
+        TicketRequestDTO ticket = new TicketRequestDTO();
+        ticket.setNumAsiento(128);
         ticket.setClase(Clase.BUSINESS);
-        List<Ticket> tickets = List.of(ticket);
+        ticket.setPrecio(1000);
+        List<TicketRequestDTO> tickets = List.of(ticket);
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(2L);
         usuario.setNombre("Ana");
         usuario.setApellido("Romero");
-        return new Reserva(1L, TipoPago.TARJETA_CREDITO, LocalDate.now(), vuelo,
-                tickets, usuario);
+        return new ReservasByUserRequestDTO(LocalDate.of(2023, 10, 12),usuario, TipoPago.TARJETA_CREDITO,
+                vuelo, tickets);
+    }
+
+    public static ReservasByUserRequestDTO reservaByDto3(){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setNumVuelo(1235);
+        vuelo.setFecha(LocalDate.parse("2023-06-27"));
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadOrigen("Buenos aires");
+        itinerario.setCiudadDestino("Rio Janeiro");
+        vuelo.setItinerario(itinerario);
+        TicketRequestDTO ticket = new TicketRequestDTO();
+        ticket.setNumAsiento(101);
+        ticket.setClase(Clase.BUSINESS);
+        ticket.setPrecio(1000);
+        List<TicketRequestDTO> tickets = List.of(ticket);
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(2L);
+        usuario.setNombre("Ana");
+        usuario.setApellido("Romero");
+        return new ReservasByUserRequestDTO(LocalDate.now(), usuario, TipoPago.TARJETA_CREDITO,  vuelo,
+                tickets);
     }
     
     public static List<Reserva> listaReservas(){
        return List.of(reserva2(), reserva3());
+    }
+
+    public static List<ReservasByUserRequestDTO> listaReservasByDto(){
+        return List.of(reservaByDto2(),reservaByDto3());
     }
 }
