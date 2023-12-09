@@ -1,5 +1,6 @@
 package agencias.service.controllers;
 
+import agencias.service.exceptions.CustomException;
 import agencias.service.models.dto.Request.UsuarioRequestDTO;
 import agencias.service.service.UsuarioService;
 import ch.qos.logback.core.net.server.Client;
@@ -19,8 +20,13 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/usuario")
-    public ResponseEntity<?> altaUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO){
-        return new ResponseEntity<>(usuarioService.createUsuario(usuarioRequestDTO), HttpStatus.OK);
+    public ResponseEntity<?> altaUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) throws CustomException{
+        try {
+            return new ResponseEntity<>(usuarioService.createUsuario(usuarioRequestDTO), HttpStatus.CREATED);
+        } catch (CustomException e){
+            return new ResponseEntity<>(e.getMessage(), e.getStatus());
+        }
+
     }
 
 }
