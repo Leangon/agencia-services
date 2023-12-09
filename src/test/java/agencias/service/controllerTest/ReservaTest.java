@@ -73,8 +73,7 @@ public class ReservaTest {
         Usuario usuario = UsuarioUtils.usuario1();
         ReservasByUserResponseDTO respuesta = new ReservasByUserResponseDTO(
                 "Reservas efectuadas por " + usuario.getNombre() + usuario.getApellido() + ": ",
-                ReservaUtils.listaReservas()
-        );
+                ReservaUtils.listaReservasByDto());
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.reservasByUsuario(usuario.getIdUsuario())).thenReturn(respuesta);
