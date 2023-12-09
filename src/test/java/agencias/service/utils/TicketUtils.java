@@ -22,7 +22,7 @@ public class TicketUtils {
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.now());
         vuelo.setItinerario(itinerario);
-        vuelo.setAerolinea(aerolinea);
+        vuelo.setIdAerolinea(null);
         ticketDto.setClase(Clase.BUSINESS);
         ticketDto.setPrecio(85000.0);
         ticketDto.setNumAsiento(125);
@@ -43,7 +43,7 @@ public class TicketUtils {
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.now());
         vuelo.setItinerario(itinerario);
-        vuelo.setAerolinea(aerolinea);
+        vuelo.setIdAerolinea(1L);
         ticket.setClase(Clase.ECONOMIC);
         ticket.setPrecio(110000.0);
         ticket.setNumAsiento(57);
@@ -126,7 +126,7 @@ public class TicketUtils {
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.now());
         vuelo.setItinerario(itinerario);
-        vuelo.setAerolinea(aerolinea);
+        vuelo.setIdAerolinea(null);
         ticket.setClase(Clase.ECONOMIC);
         ticket.setPrecio(76000.0);
         ticket.setNumAsiento(111);
@@ -147,7 +147,7 @@ public class TicketUtils {
         ticketDto.setNumAsiento(125);
         ticketDto.setPasajero(new Pasajero("juan Perez", "35120475", 39));
         ticketDto.setVuelo(new VueloRequestDTO(1L, 1124, 250, true,
-                LocalDate.now(), itinerario, aerolinea));
+                LocalDate.now(), itinerario, 1L));
         return ticketDto;
     }
     public static List<Ticket> listaTickets(){

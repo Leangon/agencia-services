@@ -17,5 +17,5 @@ public class VueloRequestDTO {
     private boolean disponibilidad;
     private LocalDate fecha;
     private Itinerario Itinerario;
-    private Aerolinea aerolinea;
+    private Long idAerolinea;
 }

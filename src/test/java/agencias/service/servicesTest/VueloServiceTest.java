@@ -4,6 +4,7 @@ import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.AerolineaResponseDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
+import agencias.service.models.dto.Response.VueloDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
 import agencias.service.models.entity.Aerolinea;
 import agencias.service.models.entity.Vuelo;
@@ -46,7 +47,7 @@ public class VueloServiceTest {
     void guardarVueloTestOk(){
         VueloRequestDTO vueloDto = VueloUtils.vueloDTO();
         Vuelo argumentSut = VueloUtils.vuelo1();
-        VueloResponseDTO expected = new VueloResponseDTO(VueloUtils.vueloDTO(), "Vuelo Guardado Correctamente!");
+        VueloResponseDTO expected = new VueloResponseDTO(VueloUtils.vueloRespuestaDTO(), "Vuelo Guardado Correctamente!");
 
         when(aerolineaRepository.findById(any())).thenReturn(Optional.of(AerolineaUtils.aereo1()));
         when(repository.save(any())).thenReturn(argumentSut);
@@ -60,10 +61,10 @@ public class VueloServiceTest {
     @DisplayName("Test listar vuelos camino feliz")
     void listarVuelosTestOk(){
         List<Vuelo> argumentSut = VueloUtils.ListaVuelos();
-        List<VueloRequestDTO> expected = VueloUtils.listaVuelosDto();
+        List<VueloDTO> expected = VueloUtils.listaRespuestaDTO();
 
         when(repository.findAll()).thenReturn(argumentSut);
-        List<VueloRequestDTO> actual = service.mostrarVuelos();
+        List<VueloDTO> actual = service.mostrarVuelos();
 
         assertEquals(expected.size(), actual.size());
         assertEquals(expected.get(0), actual.get(0));
@@ -74,7 +75,7 @@ public class VueloServiceTest {
     void listarVuelosByIdTestOk(){
         Long id = 1L;
         Vuelo argumentSut = VueloUtils.vuelo1();
-        VueloResponseDTO expected = new VueloResponseDTO(VueloUtils.vueloDTO(), "Vuelo encontrado!");
+        VueloResponseDTO expected = new VueloResponseDTO(VueloUtils.vueloRespuestaDTO(), "Vuelo encontrado!");
 
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
 

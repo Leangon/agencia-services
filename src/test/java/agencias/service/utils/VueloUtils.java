@@ -1,6 +1,8 @@
 package agencias.service.utils;
 
+import agencias.service.models.dto.Request.AerolineaRequestDTO;
 import agencias.service.models.dto.Request.VueloRequestDTO;
+import agencias.service.models.dto.Response.VueloDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
 import agencias.service.models.entity.Aerolinea;
 import agencias.service.models.entity.Vuelo;
@@ -20,7 +22,7 @@ public class VueloUtils {
         vuelo.setCantAsientos(87);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.of(2023,12,25));
-        vuelo.setAerolinea(aerolinea);
+        vuelo.setIdAerolinea(1L);
         vuelo.setItinerario(null);
 
         return vuelo;
@@ -28,11 +30,27 @@ public class VueloUtils {
 
     public static VueloRequestDTO vueloDTO2(){
         VueloRequestDTO vuelo = new VueloRequestDTO();
+        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        aerolinea.setRazonSocial("Latam");
         vuelo.setNumVuelo(654);
         vuelo.setCantAsientos(264);
         vuelo.setDisponibilidad(false);
         vuelo.setFecha(LocalDate.of(2023,1,25));
-        vuelo.setAerolinea(null);
+        vuelo.setIdAerolinea(2L);
+        vuelo.setItinerario(null);
+
+        return vuelo;
+    }
+
+    public static VueloDTO vueloRespuestaDTO2(){
+        VueloDTO vuelo = new VueloDTO();
+        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        aerolinea.setRazonSocial("Latam");
+        vuelo.setNumVuelo(654);
+        vuelo.setCantAsientos(264);
+        vuelo.setDisponibilidad(false);
+        vuelo.setFecha(LocalDate.of(2023,1,25));
+        vuelo.setAerolinea(aerolinea);
         vuelo.setItinerario(null);
 
         return vuelo;
@@ -51,14 +69,29 @@ public class VueloUtils {
         return vuelo;
     }
 
-    public static VueloRequestDTO vueloModificadoDTO(){
-        VueloRequestDTO vuelo = new VueloRequestDTO();
+    public static VueloDTO vueloModificadoDTO(){
+        VueloDTO vuelo = new VueloDTO();
         vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(158);
         vuelo.setCantAsientos(17);
         vuelo.setDisponibilidad(true);
         vuelo.setFecha(LocalDate.of(2023,12,19));
         vuelo.setAerolinea(null);
+        vuelo.setItinerario(null);
+
+        return vuelo;
+    }
+
+    public static VueloDTO vueloRespuestaDTO(){
+        VueloDTO vuelo = new VueloDTO();
+        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        aerolinea.setRazonSocial("Latam");
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(134);
+        vuelo.setCantAsientos(87);
+        vuelo.setDisponibilidad(true);
+        vuelo.setFecha(LocalDate.of(2023,12,25));
+        vuelo.setAerolinea(aerolinea);
         vuelo.setItinerario(null);
 
         return vuelo;
@@ -82,7 +115,7 @@ public class VueloUtils {
     public static Vuelo vuelo1(){
         Vuelo vuelo = new Vuelo();
         Aerolinea aerolinea = new Aerolinea();
-        aerolinea.setIdAerolinea(1L);
+        aerolinea.setRazonSocial("Latam");
         vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(134);
         vuelo.setCantAsientos(87);
@@ -107,6 +140,10 @@ public class VueloUtils {
 
     public static List<Vuelo> ListaVuelos(){
         return List.of(vuelo1(), vuelo2());
+    }
+
+    public static List<VueloDTO> listaRespuestaDTO(){
+        return  List.of(vueloRespuestaDTO(), vueloRespuestaDTO2());
     }
 
 }

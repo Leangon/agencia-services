@@ -5,6 +5,7 @@ import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.AerolineaResponseDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
+import agencias.service.models.dto.Response.VueloDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
 import agencias.service.models.entity.Aerolinea;
 import agencias.service.models.entity.Vuelo;
@@ -29,13 +30,13 @@ public class VueloServiceImpl implements VueloService {
     }
 
     @Override
-    public List<VueloRequestDTO> mostrarVuelos() {
+    public List<VueloDTO> mostrarVuelos() {
         List<Vuelo> listaVuelos = vueloRepository.findAll();
 
         ModelMapper modelMapper = new ModelMapper();
-        List<VueloRequestDTO> vuelosDtoList = new ArrayList<>();
+        List<VueloDTO> vuelosDtoList = new ArrayList<>();
 
-        listaVuelos.forEach(vuelo -> vuelosDtoList.add(modelMapper.map(vuelo, VueloRequestDTO.class)));
+        listaVuelos.forEach(vuelo -> vuelosDtoList.add(modelMapper.map(vuelo, VueloDTO.class)));
 
         return vuelosDtoList;
     }
@@ -45,13 +46,13 @@ public class VueloServiceImpl implements VueloService {
         ModelMapper modelMapper = new ModelMapper();
 
         Vuelo nuevoVuelo = modelMapper.map(vueloRequestDTO, Vuelo.class);
-        Aerolinea aerolinea = aerolineaRepository.findById(nuevoVuelo.getAerolinea().getIdAerolinea())
+        Aerolinea aerolinea = aerolineaRepository.findById(vueloRequestDTO.getIdAerolinea())
                 .orElseThrow(() -> new AerolineaNotFoundException("No existen aerolíneas con ese id"));
 
         nuevoVuelo.setAerolinea(aerolinea);
         Vuelo vueloPersist = vueloRepository.save(nuevoVuelo);
 
-        VueloRequestDTO dto = modelMapper.map(vueloPersist, VueloRequestDTO.class);
+        VueloDTO dto = modelMapper.map(vueloPersist, VueloDTO.class);
         return new VueloResponseDTO(dto, "Vuelo Guardado Correctamente!");
     }
 
@@ -61,7 +62,7 @@ public class VueloServiceImpl implements VueloService {
 
         Vuelo vuelo = vueloRepository.findById(idVuelo).orElseThrow( () -> new VueloGenericException("No existe vuelo con ese id!"));
 
-        VueloRequestDTO response = modelMapper.map(vuelo, VueloRequestDTO.class);
+        VueloDTO response = modelMapper.map(vuelo, VueloDTO.class);
         VueloResponseDTO vueloResponseDTO = new VueloResponseDTO();
         vueloResponseDTO.setMensaje("Vuelo encontrado!");
         vueloResponseDTO.setVueloDto(response);
@@ -85,7 +86,7 @@ public class VueloServiceImpl implements VueloService {
         vueloExistente.setItinerario(vueloEditado.getItinerario());
 
         Vuelo v =vueloRepository.save(vueloExistente);
-        VueloRequestDTO response = modelMapper.map(v, VueloRequestDTO.class);
+        VueloDTO response = modelMapper.map(v, VueloDTO.class);
         return new VueloResponseDTO(response, "Vuelo modificado correctamente.");
     }
 

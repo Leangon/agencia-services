@@ -10,8 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 public class VueloResponseDTO {
 
-    private VueloRequestDTO vueloDto;
+    private VueloDTO vueloDto;
     private String mensaje;
-
-
 }

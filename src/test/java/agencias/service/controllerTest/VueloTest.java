@@ -3,6 +3,7 @@ package agencias.service.controllerTest;
 import agencias.service.controllers.VueloController;
 import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
+import agencias.service.models.dto.Response.VueloDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
 import agencias.service.service.VueloService;
 import agencias.service.utils.VueloUtils;
@@ -37,7 +38,7 @@ public class VueloTest {
     @DisplayName("Guardar Vuelo Camino Feliz")
     void guardarVueloTestOk(){
         VueloRequestDTO argumentSut = VueloUtils.vueloDTO();
-        VueloResponseDTO response = new VueloResponseDTO(VueloUtils.vueloDTO(), "Vuelo Guardado Correctamente!");
+        VueloResponseDTO response = new VueloResponseDTO(VueloUtils.vueloRespuestaDTO(), "Vuelo Guardado Correctamente!");
         ResponseEntity<?> expected = new ResponseEntity<>(response, HttpStatus.OK);
 
         when(service.crearVuelo(argumentSut)).thenReturn(response);
@@ -50,7 +51,7 @@ public class VueloTest {
     @DisplayName("Buscar Vuelo por Id Camino Feliz")
     void vueloPorIdTestOk(){
         Long id = 2L;
-        VueloResponseDTO response = new VueloResponseDTO(VueloUtils.vueloDTO2(), "Vuelo encontrado!");
+        VueloResponseDTO response = new VueloResponseDTO(VueloUtils.vueloRespuestaDTO2(), "Vuelo encontrado!");
         ResponseEntity<?> expected = new ResponseEntity<>(response, HttpStatus.OK);
 
         when(service.vueloPorId(id)).thenReturn(response);
@@ -89,7 +90,7 @@ public class VueloTest {
     @Test
     @DisplayName("Listar Vuelos Camino Feliz")
     void listarVuelosTestOk(){
-        List<VueloRequestDTO> listaVuelos = VueloUtils.listaVuelosDto();
+        List<VueloDTO> listaVuelos = VueloUtils.listaRespuestaDTO();
         ResponseEntity<?> expected = new ResponseEntity<>(listaVuelos, HttpStatus.OK);
 
         when(service.mostrarVuelos()).thenReturn(listaVuelos);
