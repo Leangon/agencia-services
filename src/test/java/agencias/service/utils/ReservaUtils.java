@@ -1,9 +1,7 @@
 package agencias.service.utils;
 
-import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.dto.Request.ReservasByUserRequestDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
-import agencias.service.models.dto.Request.VueloRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.entity.*;
 import agencias.service.models.enums.Clase;
 import agencias.service.models.enums.TipoPago;
@@ -83,11 +81,11 @@ public class ReservaUtils {
         itinerario.setCiudadOrigen("Madrid");
         itinerario.setCiudadDestino("Paris");
         vuelo.setItinerario(itinerario);
-        TicketRequestDTO ticket = new TicketRequestDTO();
+        TicketDTO ticket = new TicketDTO();
         ticket.setNumAsiento(128);
         ticket.setClase(Clase.BUSINESS);
         ticket.setPrecio(1000);
-        List<TicketRequestDTO> tickets = List.of(ticket);
+        List<TicketDTO> tickets = List.of(ticket);
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(2L);
         usuario.setNombre("Ana");
@@ -104,11 +102,11 @@ public class ReservaUtils {
         itinerario.setCiudadOrigen("Buenos aires");
         itinerario.setCiudadDestino("Rio Janeiro");
         vuelo.setItinerario(itinerario);
-        TicketRequestDTO ticket = new TicketRequestDTO();
+        TicketDTO ticket = new TicketDTO();
         ticket.setNumAsiento(101);
         ticket.setClase(Clase.BUSINESS);
         ticket.setPrecio(1000);
-        List<TicketRequestDTO> tickets = List.of(ticket);
+        List<TicketDTO> tickets = List.of(ticket);
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(2L);
         usuario.setNombre("Ana");

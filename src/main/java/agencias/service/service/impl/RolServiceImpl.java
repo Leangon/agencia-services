@@ -1,8 +1,11 @@
 package agencias.service.service.impl;
 import agencias.service.exceptions.RolGenericException;
-import agencias.service.models.dto.Request.RolRequestDTO;
+import agencias.service.exceptions.TicketGenericException;
+import agencias.service.models.dto.Request.RolDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.RolResponseDTO;
 import agencias.service.models.entity.Rol;
+import agencias.service.models.entity.Ticket;
 import agencias.service.models.entity.Usuario;
 import agencias.service.repository.RolRepository;
 import agencias.service.repository.UsuarioRepository;
@@ -25,7 +28,7 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public RolResponseDTO save(RolRequestDTO rolDto) {
+    public RolResponseDTO save(RolDTO rolDto) {
 
         List<Rol> roles = repository.findAll();
         ModelMapper mapper = new ModelMapper();
@@ -45,7 +48,7 @@ public class RolServiceImpl implements RolService {
     public RolResponseDTO asignarRol(Long idRol, Long idUsuario) {
         Usuario usuario = usRepository.findById(idUsuario).orElseThrow(
                 () -> new RuntimeException("No existen usuarios con este id"));
-        Rol rol = repository.findById(idUsuario).orElseThrow(
+        Rol rol = repository.findById(idRol).orElseThrow(
                 () -> new RolGenericException("No existen roles con este id"));
         Set<Rol> nuevosRoles = usuario.getRoles();
         for (Rol r : nuevosRoles) {
@@ -57,5 +60,17 @@ public class RolServiceImpl implements RolService {
         usuario.setRoles(nuevosRoles);
         usRepository.save(usuario);
         return new RolResponseDTO("Rol asignado con éxito");
+    }
+
+    @Override
+    public List<RolDTO> findAll() {
+        List<Rol> lista = repository.findAll();
+        if(lista.isEmpty()) {
+            throw new RolGenericException("No se han encontrado roles");
+        }
+        ModelMapper mapper = new ModelMapper();
+        return lista.stream()
+                .map(r -> mapper.map(r, RolDTO.class))
+                .toList();
     }
 }

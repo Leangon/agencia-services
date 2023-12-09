@@ -2,7 +2,8 @@ package agencias.service.servicesTest;
 
 import agencias.service.exceptions.RolGenericException;
 import agencias.service.exceptions.TicketGenericException;
-import agencias.service.models.dto.Request.RolRequestDTO;
+import agencias.service.models.dto.Request.RolDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.RolResponseDTO;
 import agencias.service.models.entity.Rol;
 import agencias.service.models.entity.Ticket;
@@ -11,6 +12,7 @@ import agencias.service.repository.RolRepository;
 import agencias.service.repository.UsuarioRepository;
 import agencias.service.service.impl.RolServiceImpl;
 import agencias.service.utils.RolUtils;
+import agencias.service.utils.TicketUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,7 +44,7 @@ public class RolServiceTest {
     @Test
     @DisplayName(value = "Test OK para crear un rol")
     void crearRolTestOK(){
-        RolRequestDTO argumentSut = RolUtils.rolDto();
+        RolDTO argumentSut = RolUtils.rolDto();
         List<Rol> list = RolUtils.listaRoles();
         RolResponseDTO expected = new RolResponseDTO("Rol guardado con éxito");
 
@@ -99,6 +101,31 @@ public class RolServiceTest {
         when(userRepository.findById(any())).thenReturn(Optional.empty());
 
         RuntimeException actual = assertThrows(RuntimeException.class, () -> service.asignarRol(id1, id2));
+        assertEquals(actual.getMessage(), expected.getMessage());
+    }
+
+    @Test
+    @DisplayName(value = "Test OK para find All roles")
+    void findAllRolesTestOK(){
+        List<Rol> argumentSut = RolUtils.listaRoles();
+        List<RolDTO> expected = RolUtils.listDtoRoles();
+
+        when(repository.findAll()).thenReturn(argumentSut);
+        List<RolDTO> actual = service.findAll();
+
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected.get(0), actual.get(0));
+    }
+
+    @Test
+    @DisplayName(value = "Test lanzar EXCEPTION por no encontrar roles")
+    void findAllRolesTestEXCEPTION(){
+
+        RolGenericException expected = new RolGenericException("No se han encontrado roles");
+        List<Rol> roles = new ArrayList<>();
+        when(repository.findAll()).thenReturn(roles);
+
+        RolGenericException actual = assertThrows(RolGenericException.class, () -> service.findAll());
         assertEquals(actual.getMessage(), expected.getMessage());
     }
 }

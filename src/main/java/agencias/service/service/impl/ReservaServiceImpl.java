@@ -1,9 +1,8 @@
 package agencias.service.service.impl;
 
 import agencias.service.exceptions.ReservaNotFoundException;
-import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.dto.Request.ReservasByUserRequestDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.ReporteResponseDTO;
 import agencias.service.models.dto.Response.ReservasByUserResponseDTO;
 import agencias.service.models.entity.Reserva;
@@ -121,7 +120,7 @@ public class ReservaServiceImpl implements ReservaService {
 
         List<ReservasByUserRequestDTO> listaReservas = reservas.stream().map(r -> new ReservasByUserRequestDTO(
                 r.getFechaReserva(), r.getUsuario(), r.getTipoPago(),
-                r.getVuelo(),  r.getTickets().stream().map(t -> mapper.map(t, TicketRequestDTO.class)).toList())).toList();
+                r.getVuelo(),  r.getTickets().stream().map(t -> mapper.map(t, TicketDTO.class)).toList())).toList();
         return new ReservasByUserResponseDTO("Reservas efectuadas por " +
                 usuario.getNombre() + " " + usuario.getApellido() + ": ", listaReservas);
     }

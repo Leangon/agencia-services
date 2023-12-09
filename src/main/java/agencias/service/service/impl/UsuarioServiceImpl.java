@@ -43,7 +43,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             Optional<Usuario> usuarioOptional = usuarioRepository.findByDni(usuarioRequestDTO.getDni());
             if (usuarioOptional.isPresent()){
-                throw new CustomException (HttpStatus.OK, "El Usuario con DNI: " + usuarioRequestDTO.getDni() + " ya existe");
+                throw new CustomException (HttpStatus.OK, " El Usuario con DNI: " + usuarioRequestDTO.getDni() + " ya existe");
             }
             Usuario usuario = new Usuario();
             usuario.setNombre(usuarioRequestDTO.getNombre());

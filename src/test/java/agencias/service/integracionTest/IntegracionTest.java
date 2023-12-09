@@ -1,6 +1,7 @@
 package agencias.service.integracionTest;
 
 import agencias.service.models.dto.Request.LoginDto;
+import agencias.service.models.dto.Request.UsuarioRequestDTO;
 import agencias.service.models.entity.Rol;
 import agencias.service.models.entity.Usuario;
 import agencias.service.models.enums.ERol;
@@ -16,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -74,4 +77,52 @@ public class IntegracionTest {
                 .andExpect(status().isOk())
                 .andReturn();
     }
+
+   /* @Test
+    void usuarioGuardarOKTest() throws Exception{
+
+        Rol rol = new Rol(1L, ERol.ADMIN);
+        Set<Rol> roles = new HashSet<>();
+        roles.add(rol);
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre("Juan");
+        usuario.setApellido("Perez");
+        usuario.setUsername("prueba");
+        usuario.setPassword("123");
+        usuario.setRoles(roles);
+
+        UsuarioRequestDTO dto = new UsuarioRequestDTO();
+        dto.setNombre("Jorge");
+        dto.setApellido("Lorenzo");
+        dto.setDni(27950105L);
+        dto.setFechaNacimiento(LocalDate.of(1978, 10, 9));
+        dto.setEmail("jlorenzo@gmail.com");
+        dto.setTelefono(114985233L);
+        dto.setUsername("lorenzo");
+        dto.setPassword("123");
+
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("name", usuario.getNombre());
+        extraClaims.put("roles", usuario.getRoles().stream()
+                .map(r -> r.getName().name()).toList());
+        String token = jwtService.generate(usuario,extraClaims);
+
+        ObjectMapper obMapper = new ObjectMapper();
+        obMapper.registerModule(new JavaTimeModule());
+        ObjectWriter mapper = obMapper
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+
+        String payload = mapper.writeValueAsString(dto);
+
+        mockMvc.perform(post( "/api/usuario")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload)
+                        .header("Authorization", "Bearer " + token))
+                .andDo(print()) // imprime por consola el request y él response
+                .andExpect(status().isOk())
+                .andReturn();
+    }*/
+
 }

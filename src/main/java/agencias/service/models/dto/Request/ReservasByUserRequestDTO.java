@@ -19,5 +19,5 @@ public class ReservasByUserRequestDTO {
     private Usuario usuario;
     private TipoPago tipoPago;
     private Vuelo vuelo;
-    List<TicketRequestDTO> tickets;
+    List<TicketDTO> tickets;
 }

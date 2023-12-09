@@ -2,7 +2,7 @@ package agencias.service.servicesTest;
 
 import agencias.service.exceptions.TicketGenericException;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.models.entity.Ticket;
@@ -37,7 +37,7 @@ public class TicketServiceTest {
     @Test
     @DisplayName(value = "Test OK para guardar ticket")
     void guardarTicketTestOK(){
-        TicketRequestDTO ticketDto = TicketUtils.ticketDto1();
+        TicketDTO ticketDto = TicketUtils.ticketDto1();
         Ticket argumentSut = TicketUtils.ticket1();
         TicketResponseDTO expected = new TicketResponseDTO(TicketUtils.ticketDto1(),
                 "El ticket fue guardado correctamente");
@@ -53,10 +53,10 @@ public class TicketServiceTest {
     @DisplayName(value = "Test OK para find All ticket")
     void findAllTicketsTestOK(){
         List<Ticket> argumentSut = TicketUtils.listaTickets();
-        List<TicketRequestDTO> expected = TicketUtils.listaTicketsDto();
+        List<TicketDTO> expected = TicketUtils.listaTicketsDto();
 
         when(repository.findAll()).thenReturn(argumentSut);
-        List<TicketRequestDTO> actual = service.findAll();
+        List<TicketDTO> actual = service.findAll();
 
         assertEquals(expected.size(), actual.size());
         assertEquals(expected.get(0), actual.get(0));

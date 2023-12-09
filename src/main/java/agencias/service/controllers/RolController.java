@@ -1,6 +1,6 @@
 package agencias.service.controllers;
 
-import agencias.service.models.dto.Request.RolRequestDTO;
+import agencias.service.models.dto.Request.RolDTO;
 import agencias.service.service.RolService;
 import agencias.service.service.impl.RolServiceImpl;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public class RolController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody RolRequestDTO rolDto){
+    public ResponseEntity<?> save(@Valid @RequestBody RolDTO rolDto){
         return new ResponseEntity<>(service.save(rolDto), HttpStatus.CREATED);
     }
 
@@ -30,5 +30,10 @@ public class RolController {
     public ResponseEntity<?> asignarRol(@PathVariable @Positive Long idRol,
                                         @PathVariable @Positive Long idUsuario){
         return new ResponseEntity<>(service.asignarRol(idRol, idUsuario), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findAll() {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 }

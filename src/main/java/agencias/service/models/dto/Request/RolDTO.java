@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RolRequestDTO {
+public class RolDTO {
 
     private ERol name;
 }

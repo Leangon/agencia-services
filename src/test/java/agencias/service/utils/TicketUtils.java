@@ -1,10 +1,8 @@
 package agencias.service.utils;
 
-import agencias.service.models.dto.Request.AerolineaRequestDTO;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Request.VueloRequestDTO;
-import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.models.entity.*;
 import agencias.service.models.enums.Clase;
 import java.time.LocalDate;
@@ -12,8 +10,8 @@ import java.util.List;
 
 public class TicketUtils {
 
-        public static TicketRequestDTO ticketDto1() {
-        TicketRequestDTO ticketDto = new TicketRequestDTO();
+        public static TicketDTO ticketDto1() {
+        TicketDTO ticketDto = new TicketDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
         Aerolinea aerolinea = new Aerolinea();
@@ -33,8 +31,8 @@ public class TicketUtils {
         return ticketDto;
     }
 
-    public static TicketRequestDTO ticketDto2() {
-        TicketRequestDTO ticket = new TicketRequestDTO();
+    public static TicketDTO ticketDto2() {
+        TicketDTO ticket = new TicketDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "Paris", "Francia", "8AM", "19PM");
         Aerolinea aerolinea = new Aerolinea();
@@ -116,8 +114,8 @@ public class TicketUtils {
         return ticket;
     }
 
-    public static TicketRequestDTO ticketDto1modificado() {
-        TicketRequestDTO ticket = new TicketRequestDTO();
+    public static TicketDTO ticketDto1modificado() {
+        TicketDTO ticket = new TicketDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
         Aerolinea aerolinea = new Aerolinea();
@@ -156,7 +154,7 @@ public class TicketUtils {
        return List.of(ticket1(), ticket2());
     }
 
-    public static List<TicketRequestDTO> listaTicketsDto(){
+    public static List<TicketDTO> listaTicketsDto(){
         return List.of(ticketDto1(), ticketDto2());
     }
 

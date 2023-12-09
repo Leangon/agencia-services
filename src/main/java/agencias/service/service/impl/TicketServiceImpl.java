@@ -2,7 +2,7 @@ package agencias.service.service.impl;
 
 import agencias.service.exceptions.TicketGenericException;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.models.entity.Ticket;
@@ -12,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -24,23 +23,23 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketResponseDTO save(TicketRequestDTO ticketDto) {
+    public TicketResponseDTO save(TicketDTO ticketDto) {
         ModelMapper mapper = new ModelMapper();
         Ticket ticket = mapper.map(ticketDto, Ticket.class);
         Ticket guardado = repository.save(ticket);
-        TicketRequestDTO response = mapper.map(guardado, TicketRequestDTO.class);
+        TicketDTO response = mapper.map(guardado, TicketDTO.class);
         return new TicketResponseDTO(response, "El ticket fue guardado correctamente");
     }
 
     @Override
-    public List<TicketRequestDTO> findAll() {
+    public List<TicketDTO> findAll() {
         List<Ticket> lista = repository.findAll();
         if(lista.isEmpty()) {
             throw new TicketGenericException("No se han encontrado tickets");
         }
         ModelMapper mapper = new ModelMapper();
         return lista.stream()
-                .map(t -> mapper.map(t, TicketRequestDTO.class))
+                .map(t -> mapper.map(t, TicketDTO.class))
                 .toList();
     }
 
@@ -49,7 +48,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket result = repository.findById(id)
                 .orElseThrow(() -> new TicketGenericException("No existen tickets con este id"));
         ModelMapper mapper = new ModelMapper();
-        TicketRequestDTO response = mapper.map(result, TicketRequestDTO.class);
+        TicketDTO response = mapper.map(result, TicketDTO.class);
         return new TicketResponseDTO(response, "Se ha encontrado un ticket");
     }
 
@@ -68,7 +67,7 @@ public class TicketServiceImpl implements TicketService {
         encontrado.setVuelo(ticket.getVuelo());
 
         Ticket t = repository.save(encontrado);
-        TicketRequestDTO r = mapper.map(t, TicketRequestDTO.class);
+        TicketDTO r = mapper.map(t, TicketDTO.class);
         return new TicketResponseDTO(r, "Ticket modificado correctamente");
     }
 
