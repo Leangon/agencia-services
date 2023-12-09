@@ -1,11 +1,12 @@
 package agencias.service.exceptions;
-
 import agencias.service.models.dto.Response.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 @ControllerAdvice
 public class ExceptionController {
 
@@ -34,7 +35,7 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<?> fallaValidacion(MethodArgumentTypeMismatchException ex){
+    public ResponseEntity<?> fallaValidacion(MethodArgumentTypeMismatchException ex) {
         ErrorDTO error = new ErrorDTO(400, ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
