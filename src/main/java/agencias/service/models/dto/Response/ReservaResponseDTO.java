@@ -13,12 +13,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReservaResponseDTO {
 
-    private Long nroAsiento;
-    private Clase clase;
-    private LocalDate fechaReserva;
-    private Double precio;
+    private String message;
+    private String vueloItinerario;
+    private Double total;
     private TipoPago tipoPago;
-    private VueloRequestDTO vuelo;
-    private UsuarioRequestDTO usuario;
+    private LocalDate fechaReserva;
 
 }

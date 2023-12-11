@@ -4,34 +4,37 @@ import agencias.service.models.enums.Clase;
 import agencias.service.models.enums.TipoPago;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservaRequestDTO {
 
-    @NotEmpty(message="Debe tener un número de asiento")
-    @NotBlank(message="Debe tener un número de asiento")
-    @Min(value = 1, message = "El número de asiento debe ser mayor o igual a 1")
-    @Max(value = 200, message = "El número de asiento debe ser menor o igual a 200")
-    private Long nroAsiento;
+    @NotNull(message = "Debe tener un número de asiento")
+    @Range(min = 1, max = 200, message = "El número de asiento debe estar entre 1 y 200")
+    private int nroAsiento;
 
+    @NotNull(message = "Debe indicarse la clase")
     private Clase clase;
-    @NotBlank(message="Debe tener una fecha")
-    @NotEmpty(message="Debe tener una fecha")
+
+    @NotNull(message="Debe tener una fecha")
     @FutureOrPresent(message="La fecha debe ser la actual o una fecha futura")
     private LocalDate fechaReserva;
 
-    @NotEmpty(message ="Debe tener un precio")
-    @NotBlank(message="Debe tener un precio")
+    @NotNull(message ="Debe tener un precio")
     @Positive(message="El precio debe ser un número positivo")
-    @DecimalMin(value = "0.0", inclusive = true, message = "El precio debe ser mayor o igual a 0.0")
     private Double precio;
 
+    @NotNull(message ="Debe tener un tipo de pago asociado")
     private TipoPago tipoPago;
 
-    private VueloRequestDTO vuelo;
+    private Long idVuelo;
 
-    private UsuarioRequestDTO usuario;
+    private Long idUsuario;
+
+    private List<TicketRequestDTO> tickets;
 }

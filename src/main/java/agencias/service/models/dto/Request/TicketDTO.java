@@ -13,6 +13,5 @@ public class TicketDTO {
     private double precio;
     private Clase clase;
     private Pasajero pasajero;
-    private VueloRequestDTO vuelo;
-    private ReservaRequestDTO reserva;
+    private Long IdVuelo;
 }

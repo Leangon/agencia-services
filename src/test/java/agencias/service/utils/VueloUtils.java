@@ -5,6 +5,7 @@ import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.dto.Response.VueloDTO;
 import agencias.service.models.dto.Response.VueloResponseDTO;
 import agencias.service.models.entity.Aerolinea;
+import agencias.service.models.entity.Itinerario;
 import agencias.service.models.entity.Vuelo;
 
 import java.time.LocalDate;
@@ -134,6 +135,23 @@ public class VueloUtils {
         vuelo.setFecha(LocalDate.of(2023,12,25));
         vuelo.setAerolinea(null);
         vuelo.setItinerario(null);
+        return vuelo;
+    }
+
+    public static Vuelo vuelo3(){
+        Vuelo vuelo = new Vuelo();
+        Aerolinea aerolinea = new Aerolinea();
+        aerolinea.setRazonSocial("Latam");
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadDestino("Londres");
+        itinerario.setCiudadOrigen("Montevideo");
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(134);
+        vuelo.setCantAsientos(87);
+        vuelo.setDisponibilidad(true);
+        vuelo.setFecha(LocalDate.of(2023,12,25));
+        vuelo.setAerolinea(aerolinea);
+        vuelo.setItinerario(itinerario);
         return vuelo;
     }
 

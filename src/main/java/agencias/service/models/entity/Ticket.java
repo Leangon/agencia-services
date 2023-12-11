@@ -1,6 +1,8 @@
 package agencias.service.models.entity;
 
 import agencias.service.models.enums.Clase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -36,11 +38,12 @@ public class Ticket {
     @Embedded
     private Pasajero pasajero;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
-    private Vuelo vuelo;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "fk_reserva", referencedColumnName = "id_reserva")
     private Reserva reserva;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
+    private Vuelo vuelo;
 }

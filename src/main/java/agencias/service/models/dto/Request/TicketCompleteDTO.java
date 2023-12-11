@@ -27,8 +27,7 @@ import lombok.NoArgsConstructor;
         private double precio;
         private Clase clase;
         private Pasajero pasajero;
-        private VueloRequestDTO vuelo;
-        private ReservaRequestDTO reserva;
+        private Long idVuelo;
     }
 
 

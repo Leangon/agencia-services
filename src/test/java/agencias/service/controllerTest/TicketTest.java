@@ -32,7 +32,7 @@ public class TicketTest {
     @Test
     void guardarTicketTestOK(){
         TicketDTO argumentSut = TicketUtils.ticketDto1();
-        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(),"se guardo con exito");
+        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketRequestDto1(),"se guardo con exito");
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.save(argumentSut)).thenReturn(respuesta);
@@ -44,7 +44,7 @@ public class TicketTest {
    @Test
     void TicketPorIdTestOK(){
         Long id = 2L;
-        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(), "se guardo con exito");
+        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketRequestDto1(), "se guardo con exito");
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.findById(id)).thenReturn(respuesta);
@@ -67,7 +67,7 @@ public class TicketTest {
     @Test
     void updateTicketTestOK(){
         TicketCompleteDTO argumentSut = TicketUtils.ticketCompleteDto1();
-        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(),"se guardo con exito");
+        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketRequestDto1(),"se guardo con exito");
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.update(argumentSut)).thenReturn(respuesta);
