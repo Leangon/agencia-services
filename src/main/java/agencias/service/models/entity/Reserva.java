@@ -1,6 +1,7 @@
 package agencias.service.models.entity;
 
 import agencias.service.models.enums.TipoPago;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -31,16 +32,19 @@ public class Reserva {
     private LocalDate fechaReserva;
 
     @NotNull(message = "Debe tener un vuelo asociado")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
     private Vuelo vuelo;
 
     @NotEmpty(message = "Debe tener tickets asociados")
-    @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "reserva", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Ticket> tickets;
 
+    private Double total;
+
     @NotNull(message = "Debe tener un usuario asociado")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
 

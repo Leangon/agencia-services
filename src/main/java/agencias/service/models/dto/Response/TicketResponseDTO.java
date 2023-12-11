@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class TicketResponseDTO {
 
     private TicketRequestDTO ticket;
+
     private String message;
 }

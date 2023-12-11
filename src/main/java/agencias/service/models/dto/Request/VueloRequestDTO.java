@@ -23,11 +23,10 @@ public class VueloRequestDTO {
     @Max(value =200, message="La cantidad de pasajeros no debe ser mayor a 200")
     private int cantPasajeros;
 
-
     @NotEmpty(message="El vuelo debe indicar si tiene disponibilida de asientos")
     private boolean disponibilidad;
 
-    @NotBlank(message="Debe tener una fecha")
+    @NotNull(message="Debe tener una fecha")
     @FutureOrPresent(message="La fecha debe ser actual o fecha futura")
     private LocalDate fecha;
 

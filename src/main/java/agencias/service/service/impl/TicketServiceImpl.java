@@ -65,7 +65,6 @@ public class TicketServiceImpl implements TicketService {
         encontrado.setNumAsiento(ticket.getNumAsiento());
         encontrado.setReserva(ticket.getReserva());
         encontrado.setPasajero(ticket.getPasajero());
-        encontrado.setVuelo(ticket.getVuelo());
 
         Ticket t = repository.save(encontrado);
         TicketRequestDTO r = mapper.map(t, TicketRequestDTO.class);

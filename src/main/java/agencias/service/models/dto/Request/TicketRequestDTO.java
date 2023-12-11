@@ -6,26 +6,24 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 @NoArgsConstructor
 @Data
 public class TicketRequestDTO {
 
-    @NotEmpty(message="Debe tener un número de asiento")
-    @Min(value = 1, message = "El número de asiento debe ser mayor o igual a 1")
-    @Max(value = 200, message = "El número de asiento debe ser menor o igual a 200")
+    @NotNull(message = "Debe tener un número de asiento")
+    @Range(min = 1, max = 200, message = "El número de asiento debe estar entre 1 y 200")
     private int numAsiento;
 
-    @NotEmpty(message ="Debe tener un precio")
+    @NotNull(message ="Debe tener un precio")
     @Positive(message="El precio debe ser un número positivo")
-    @DecimalMin(value = "0.0", inclusive = true, message = "El precio debe ser mayor o igual 0.0")
-    private double precio;
+    private Double precio;
 
     private Clase clase;
 
     private Pasajero pasajero;
 
-    private VueloRequestDTO vuelo;
+    private Long idVuelo;
 
-    private ReservaRequestDTO reserva;
 }
