@@ -16,8 +16,9 @@ public class ReservaRequestDTO {
 
     @NotNull(message = "Debe tener un número de asiento")
     @Range(min = 1, max = 200, message = "El número de asiento debe estar entre 1 y 200")
-    private Long nroAsiento;
+    private int nroAsiento;
 
+    @NotNull(message = "Debe indicarse la clase")
     private Clase clase;
 
     @NotNull(message="Debe tener una fecha")
@@ -28,6 +29,7 @@ public class ReservaRequestDTO {
     @Positive(message="El precio debe ser un número positivo")
     private Double precio;
 
+    @NotNull(message ="Debe tener un tipo de pago asociado")
     private TipoPago tipoPago;
 
     private Long idVuelo;

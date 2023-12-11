@@ -1,7 +1,7 @@
 package agencias.service.controllers;
 
 import agencias.service.models.dto.Request.TicketCompleteDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.service.TicketService;
 import agencias.service.service.impl.TicketServiceImpl;
 import jakarta.validation.Valid;
@@ -23,7 +23,7 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<?>save(@Valid @RequestBody TicketRequestDTO ticketDto){
+    public ResponseEntity<?>save(@Valid @RequestBody TicketDTO ticketDto){
         return new ResponseEntity<>(service.save(ticketDto), HttpStatus.OK);
     }
 

@@ -33,4 +33,9 @@ public class UsuarioRequestDTO {
     @PastOrPresent(message="Debe ser una fecha válida")
     private LocalDate fechaNacimiento;
 
+    @NotBlank(message="Username es requerido")
+    private String username;
+
+    @NotNull(message = "Password es requerido")
+    private String password;
 }

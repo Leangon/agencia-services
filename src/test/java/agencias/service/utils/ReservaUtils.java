@@ -2,8 +2,8 @@ package agencias.service.utils;
 
 import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.dto.Request.ReservasByUserRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Request.TicketRequestDTO;
-import agencias.service.models.dto.Request.VueloRequestDTO;
 import agencias.service.models.entity.*;
 import agencias.service.models.enums.Clase;
 import agencias.service.models.enums.TipoPago;
@@ -30,7 +30,7 @@ public class ReservaUtils {
         usuario.setNombre("Juan");
         usuario.setApellido("Silva");
         return new Reserva(1L, TipoPago.PAGO_ONLINE, LocalDate.now(), vuelo,
-                tickets, usuario);
+                tickets, 90000D, usuario);
     }
 
     public static Reserva reserva2(){
@@ -51,7 +51,7 @@ public class ReservaUtils {
         usuario.setNombre("Ana");
         usuario.setApellido("Romero");
         return new Reserva(1L, TipoPago.TARJETA_CREDITO, LocalDate.of(2023, 10, 12), vuelo,
-                tickets, usuario);
+                tickets, 153000D, usuario);
     }
 
     public static Reserva reserva3(){
@@ -64,6 +64,7 @@ public class ReservaUtils {
         vuelo.setItinerario(itinerario);
         Ticket ticket = new Ticket();
         ticket.setNumAsiento(101);
+        ticket.setPrecio(9000D);
         ticket.setClase(Clase.BUSINESS);
         ticket.setPrecio(1000);
         List<Ticket> tickets = List.of(ticket);
@@ -72,7 +73,29 @@ public class ReservaUtils {
         usuario.setNombre("Ana");
         usuario.setApellido("Romero");
         return new Reserva(1L, TipoPago.TARJETA_CREDITO, LocalDate.now(), vuelo,
-                tickets, usuario);
+                tickets, 115500D, usuario);
+    }
+
+    public static ReservaRequestDTO reservaDto1(){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setIdVuelo(1L);
+        vuelo.setNumVuelo(123);
+        vuelo.setFecha(LocalDate.parse("2023-12-21"));
+        Itinerario itinerario = new Itinerario();
+        itinerario.setCiudadOrigen("Montevideo");
+        itinerario.setCiudadDestino("Londres");
+        vuelo.setItinerario(itinerario);
+        TicketRequestDTO ticket = new TicketRequestDTO();
+        ticket.setNumAsiento(65);
+        ticket.setPrecio(90000D);
+        ticket.setClase(Clase.ECONOMIC);
+        List<TicketRequestDTO> tickets = List.of(ticket);
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(1L);
+        usuario.setNombre("Juan");
+        usuario.setApellido("Silva");
+        return new ReservaRequestDTO(ticket.getNumAsiento(), ticket.getClase(), LocalDate.now(), ticket.getPrecio(),
+                TipoPago.PAGO_ONLINE, vuelo.getIdVuelo(), usuario.getIdUsuario() ,tickets);
     }
 
     public static ReservasByUserRequestDTO reservaByDto2(){
@@ -83,11 +106,11 @@ public class ReservaUtils {
         itinerario.setCiudadOrigen("Madrid");
         itinerario.setCiudadDestino("Paris");
         vuelo.setItinerario(itinerario);
-        TicketRequestDTO ticket = new TicketRequestDTO();
+        TicketDTO ticket = new TicketDTO();
         ticket.setNumAsiento(128);
         ticket.setClase(Clase.BUSINESS);
         ticket.setPrecio(1000);
-        List<TicketRequestDTO> tickets = List.of(ticket);
+        List<TicketDTO> tickets = List.of(ticket);
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(2L);
         usuario.setNombre("Ana");
@@ -104,11 +127,11 @@ public class ReservaUtils {
         itinerario.setCiudadOrigen("Buenos aires");
         itinerario.setCiudadDestino("Rio Janeiro");
         vuelo.setItinerario(itinerario);
-        TicketRequestDTO ticket = new TicketRequestDTO();
+        TicketDTO ticket = new TicketDTO();
         ticket.setNumAsiento(101);
         ticket.setClase(Clase.BUSINESS);
         ticket.setPrecio(1000);
-        List<TicketRequestDTO> tickets = List.of(ticket);
+        List<TicketDTO> tickets = List.of(ticket);
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(2L);
         usuario.setNombre("Ana");

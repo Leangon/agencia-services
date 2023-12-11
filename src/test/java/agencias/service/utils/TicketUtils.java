@@ -1,10 +1,9 @@
 package agencias.service.utils;
 
-import agencias.service.models.dto.Request.AerolineaRequestDTO;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Request.VueloRequestDTO;
-import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.models.entity.*;
 import agencias.service.models.enums.Clase;
 import java.time.LocalDate;
@@ -12,45 +11,59 @@ import java.util.List;
 
 public class TicketUtils {
 
-        public static TicketRequestDTO ticketDto1() {
-        TicketRequestDTO ticketDto = new TicketRequestDTO();
+        public static TicketDTO ticketDto1() {
+        TicketDTO ticketDto = new TicketDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Latam S.A");
-        VueloRequestDTO vuelo = new VueloRequestDTO();
-        vuelo.setNumVuelo(1124);
-        vuelo.setCantAsientos(250);
-        vuelo.setDisponibilidad(true);
-        vuelo.setFecha(LocalDate.now());
-        vuelo.setItinerario(itinerario);
-        vuelo.setAerolinea(aerolinea);
         ticketDto.setClase(Clase.BUSINESS);
         ticketDto.setPrecio(85000.0);
         ticketDto.setNumAsiento(125);
         ticketDto.setPasajero(new Pasajero("juan Perez", "35120475", 39));
-        ticketDto.setVuelo(vuelo);
+        ticketDto.setIdVuelo(1L);
         return ticketDto;
     }
 
-    public static TicketRequestDTO ticketDto2() {
-        TicketRequestDTO ticket = new TicketRequestDTO();
+    public static TicketDTO ticketDto2() {
+        TicketDTO ticket = new TicketDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "Paris", "Francia", "8AM", "19PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Iberia SA");
-        VueloRequestDTO vuelo = new VueloRequestDTO();
-        vuelo.setNumVuelo(1543);
-        vuelo.setCantAsientos(300);
-        vuelo.setDisponibilidad(true);
-        vuelo.setFecha(LocalDate.now());
-        vuelo.setItinerario(itinerario);
-        vuelo.setAerolinea(aerolinea);
         ticket.setClase(Clase.ECONOMIC);
         ticket.setPrecio(110000.0);
         ticket.setNumAsiento(57);
         ticket.setPasajero(new Pasajero("Carla Sanchez", "34102369", 37));
-        ticket.setVuelo(vuelo);
+        ticket.setIdVuelo(1L);
+        return ticket;
+    }
+
+    public static TicketRequestDTO ticketRequestDto1() {
+        TicketRequestDTO ticketDto = new TicketRequestDTO();
+        Itinerario itinerario = new Itinerario("buenos aires", "argentina"
+                , "madrid", "españa", "10AM", "20PM");
+        Aerolinea aerolinea = new Aerolinea();
+        aerolinea.setRazonSocial("Latam S.A");
+        ticketDto.setClase(Clase.BUSINESS);
+        ticketDto.setPrecio(85000.0);
+        ticketDto.setNumAsiento(125);
+        ticketDto.setPasajero(new Pasajero("juan Perez", "35120475", 39));
+        ticketDto.setIdVuelo(1L);
+        return ticketDto;
+    }
+
+    public static TicketRequestDTO ticketRequestDto2() {
+        TicketRequestDTO ticket = new TicketRequestDTO();
+        Itinerario itinerario = new Itinerario("buenos aires", "argentina"
+                , "Paris", "Francia", "8AM", "19PM");
+        Aerolinea aerolinea = new Aerolinea();
+        aerolinea.setRazonSocial("Iberia SA");
+        ticket.setClase(Clase.ECONOMIC);
+        ticket.setPrecio(110000.0);
+        ticket.setNumAsiento(57);
+        ticket.setPasajero(new Pasajero("Carla Sanchez", "34102369", 37));
+        ticket.setIdVuelo(1L);
         return ticket;
     }
 
@@ -61,6 +74,7 @@ public class TicketUtils {
         Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Latam S.A");
         Vuelo vuelo = new Vuelo();
+        vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(1124);
         vuelo.setCantAsientos(250);
         vuelo.setDisponibilidad(true);
@@ -102,6 +116,7 @@ public class TicketUtils {
         Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Avianca S.A");
         Vuelo vuelo = new Vuelo();
+        vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(1125);
         vuelo.setCantAsientos(259);
         vuelo.setDisponibilidad(true);
@@ -120,20 +135,13 @@ public class TicketUtils {
         TicketRequestDTO ticket = new TicketRequestDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Avianca S.A");
-        VueloRequestDTO vuelo = new VueloRequestDTO();
-        vuelo.setNumVuelo(1125);
-        vuelo.setCantAsientos(259);
-        vuelo.setDisponibilidad(true);
-        vuelo.setFecha(LocalDate.now());
-        vuelo.setItinerario(itinerario);
-        vuelo.setAerolinea(aerolinea);
         ticket.setClase(Clase.ECONOMIC);
         ticket.setPrecio(76000.0);
         ticket.setNumAsiento(111);
         ticket.setPasajero(new Pasajero("Carlos Perez", "35120475", 40));
-        ticket.setVuelo(vuelo);
+        ticket.setIdVuelo(1L);
         return ticket;
     }
 
@@ -141,22 +149,21 @@ public class TicketUtils {
         TicketCompleteDTO ticketDto = new TicketCompleteDTO();
         Itinerario itinerario = new Itinerario("buenos aires", "argentina"
                 , "madrid", "españa", "10AM", "20PM");
-        AerolineaRequestDTO aerolinea = new AerolineaRequestDTO();
+        Aerolinea aerolinea = new Aerolinea();
         aerolinea.setRazonSocial("Latam S.A");
         ticketDto.setIdTicket(1L);
         ticketDto.setClase(Clase.BUSINESS);
         ticketDto.setPrecio(85000.0);
         ticketDto.setNumAsiento(125);
         ticketDto.setPasajero(new Pasajero("juan Perez", "35120475", 39));
-        ticketDto.setVuelo(new VueloRequestDTO(1L, 1124, 250, true,
-                LocalDate.now(), itinerario, aerolinea));
+        ticketDto.setIdVuelo(1L);
         return ticketDto;
     }
     public static List<Ticket> listaTickets(){
        return List.of(ticket1(), ticket2());
     }
 
-    public static List<TicketRequestDTO> listaTicketsDto(){
+    public static List<TicketDTO> listaTicketsDto(){
         return List.of(ticketDto1(), ticketDto2());
     }
 

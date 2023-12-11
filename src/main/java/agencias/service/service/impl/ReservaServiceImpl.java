@@ -4,6 +4,7 @@ import agencias.service.exceptions.CustomException;
 import agencias.service.exceptions.ReservaNotFoundException;
 import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.dto.Request.ReservasByUserRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Response.ReporteResponseDTO;
 import agencias.service.models.dto.Response.ReservaResponseDTO;
@@ -17,10 +18,8 @@ import agencias.service.repository.UsuarioRepository;
 import agencias.service.repository.VueloRepository;
 import agencias.service.service.ReservaService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -132,7 +131,7 @@ public class ReservaServiceImpl implements ReservaService {
 
         List<ReservasByUserRequestDTO> listaReservas = reservas.stream().map(r -> new ReservasByUserRequestDTO(
                 r.getFechaReserva(), r.getUsuario(), r.getTipoPago(),
-                r.getVuelo(), r.getTickets().stream().map(t -> mapper.map(t, TicketRequestDTO.class)).toList())).toList();
+                r.getVuelo(), r.getTickets().stream().map(t -> mapper.map(t, TicketDTO.class)).toList())).toList();
         return new ReservasByUserResponseDTO("Reservas efectuadas por " +
                 usuario.getNombre() + " " + usuario.getApellido() + ": ", listaReservas);
     }
@@ -144,11 +143,11 @@ public class ReservaServiceImpl implements ReservaService {
             Optional<Usuario> usuarioOptional = usuarioRepository.findById(reservaRequestDTO.getIdUsuario());
 
             if (vueloOptional.isEmpty()){
-                throw new CustomException(HttpStatus.OK, "No existe el vuelo que intenta reservar");
+                throw new CustomException(HttpStatus.NOT_FOUND, "No existe el vuelo que intenta reservar");
             }
 
             if (usuarioOptional.isEmpty()){
-                throw new CustomException(HttpStatus.OK, "No existe el usuario con el que intenta reservar");
+                throw new CustomException(HttpStatus.NOT_FOUND, "No existe el usuario con el que intenta reservar");
             }
 
             Reserva reserva = new Reserva();

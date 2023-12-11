@@ -1,14 +1,18 @@
 package agencias.service.servicesTest;
 
 import agencias.service.exceptions.TicketGenericException;
+import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.models.entity.Ticket;
+import agencias.service.models.entity.Vuelo;
 import agencias.service.repository.TicketRepository;
+import agencias.service.repository.VueloRepository;
 import agencias.service.service.impl.TicketServiceImpl;
 import agencias.service.utils.TicketUtils;
+import agencias.service.utils.VueloUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,17 +35,22 @@ public class TicketServiceTest {
     @Mock
     TicketRepository repository;
 
+    @Mock
+    VueloRepository vueloRepository;
+
     @InjectMocks
     TicketServiceImpl service;
 
     @Test
     @DisplayName(value = "Test OK para guardar ticket")
     void guardarTicketTestOK(){
-        TicketRequestDTO ticketDto = TicketUtils.ticketDto1();
+        TicketDTO ticketDto = TicketUtils.ticketDto1();
         Ticket argumentSut = TicketUtils.ticket1();
-        TicketResponseDTO expected = new TicketResponseDTO(TicketUtils.ticketDto1(),
+        Vuelo vueloASrgument = VueloUtils.vuelo1();
+        TicketResponseDTO expected = new TicketResponseDTO(TicketUtils.ticketRequestDto1(),
                 "El ticket fue guardado correctamente");
 
+        when(vueloRepository.findById(any())).thenReturn(Optional.of(vueloASrgument));
         when(repository.save(any())).thenReturn(argumentSut);
         TicketResponseDTO actual = service.save(ticketDto);
 
@@ -53,10 +62,10 @@ public class TicketServiceTest {
     @DisplayName(value = "Test OK para find All ticket")
     void findAllTicketsTestOK(){
         List<Ticket> argumentSut = TicketUtils.listaTickets();
-        List<TicketRequestDTO> expected = TicketUtils.listaTicketsDto();
+        List<TicketDTO> expected = TicketUtils.listaTicketsDto();
 
         when(repository.findAll()).thenReturn(argumentSut);
-        List<TicketRequestDTO> actual = service.findAll();
+        List<TicketDTO> actual = service.findAll();
 
         assertEquals(expected.size(), actual.size());
         assertEquals(expected.get(0), actual.get(0));
@@ -79,7 +88,7 @@ public class TicketServiceTest {
     void ticketPorIdTestOK(){
         Long id = 1L;
         Ticket argumentSut = TicketUtils.ticket1();
-        TicketResponseDTO expected = new TicketResponseDTO(TicketUtils.ticketDto1(), "Se ha encontrado un ticket");
+        TicketResponseDTO expected = new TicketResponseDTO(TicketUtils.ticketRequestDto1(), "Se ha encontrado un ticket");
 
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
         TicketResponseDTO actual = service.findById(id);
@@ -103,9 +112,11 @@ public class TicketServiceTest {
     void updateTicketTestOK(){
         Ticket argumentSut = TicketUtils.ticket1();
         Ticket modificado = TicketUtils.ticket1modificado();
+        Vuelo vuelosArgument = VueloUtils.vuelo1();
         TicketCompleteDTO completeDTO = TicketUtils.ticketCompleteDto1();
         TicketResponseDTO expected = new TicketResponseDTO(TicketUtils.ticketDto1modificado(), "Ticket modificado correctamente");
 
+        when(vueloRepository.findById(any())).thenReturn(Optional.of(vuelosArgument));
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
         when(repository.save(any())).thenReturn(modificado);
 
@@ -115,10 +126,23 @@ public class TicketServiceTest {
     }
 
     @Test
-    @DisplayName(value = "Test lanzar EXCEPTION en update por no encontrar ticket asociado")
+    @DisplayName(value = "Test lanzar EXCEPTION en update por no encontrar vuelo asociado")
     void UpdateTicketTestEXCEPTION(){
         TicketCompleteDTO completeDTO = TicketUtils.ticketCompleteDto1();
+        VueloGenericException expected = new VueloGenericException ("No se han encontrado vuelos con este id");
+        when(vueloRepository.findById(any())).thenReturn(Optional.empty());
+
+        VueloGenericException actual = assertThrows(VueloGenericException.class, () -> service.update(completeDTO));
+        assertEquals(expected.getMessage(), actual.getMessage());
+    }
+
+    @Test
+    @DisplayName(value = "Test lanzar EXCEPTION en update por no encontrar ticket asociado")
+    void UpdateTicketTestEXCEPTION2(){
+        TicketCompleteDTO completeDTO = TicketUtils.ticketCompleteDto1();
+        Vuelo argumentSut = VueloUtils.vuelo1();
         TicketGenericException expected = new TicketGenericException ("No existen tickets con este id");
+        when(vueloRepository.findById(any())).thenReturn(Optional.of(argumentSut));
         when(repository.findById(any())).thenReturn(Optional.empty());
 
         TicketGenericException actual = assertThrows(TicketGenericException.class, () -> service.update(completeDTO));

@@ -45,7 +45,8 @@ public class AerolineaTest {
     @DisplayName("Buscar aerolínea por Id Camino Feliz")
     void vueloPorIdTestOk(){
         Long id = 2L;
-        AerolineaResponseDTO response = new AerolineaResponseDTO(AerolineaUtils.aereoDto1(), "Aerolinea encontrada!");
+        AerolineaResponseDTO response = new AerolineaResponseDTO(AerolineaUtils.aereoDto1().getRazonSocial(),
+                AerolineaUtils.aereoDto1().getCuit(),"Aerolinea encontrada!");
         ResponseEntity<?> expected = new ResponseEntity<>(response, HttpStatus.OK);
 
         when(service.traerAerolineaPorId(id)).thenReturn(response);
@@ -58,7 +59,8 @@ public class AerolineaTest {
     @DisplayName("Guardar aerolínea Camino Feliz")
     void guardarVueloTestOk(){
         AerolineaRequestDTO argumentSut = AerolineaUtils.aereoDto1();
-        AerolineaResponseDTO response = new AerolineaResponseDTO(AerolineaUtils.aereoDto1(), "Aerolinea Guardada Correctamente!");
+        AerolineaResponseDTO response = new AerolineaResponseDTO(AerolineaUtils.aereoDto1().getRazonSocial(),
+                AerolineaUtils.aereoDto1().getCuit(), "Aerolinea Guardada Correctamente!");
         ResponseEntity<?> expected = new ResponseEntity<>(response, HttpStatus.OK);
 
         when(service.guardarAerolinea(argumentSut)).thenReturn(response);
@@ -72,7 +74,8 @@ public class AerolineaTest {
     void ModificarAerolineaTestOk(){
         Long id = 1L;
         AerolineaRequestDTO argumentSut = AerolineaUtils.aereoDto1();
-        AerolineaResponseDTO response = new AerolineaResponseDTO(AerolineaUtils.aereoDto1(), "Aerolínea encontrada!");
+        AerolineaResponseDTO response = new AerolineaResponseDTO(AerolineaUtils.aereoDto1().getRazonSocial(),
+                AerolineaUtils.aereoDto1().getCuit(), "Aerolínea encontrada!");
         ResponseEntity<?> expected = new ResponseEntity<>(response, HttpStatus.OK);
 
         when(service.editarAerolinea(id, argumentSut)).thenReturn(response);

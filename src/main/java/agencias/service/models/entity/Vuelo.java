@@ -39,7 +39,7 @@ public class Vuelo {
     private Itinerario itinerario;
 
     @NotNull(message = "Debe tener una aerolínea asociada")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "fk_aerolinea", referencedColumnName = "id_aerolinea")
     private Aerolinea aerolinea;
 }

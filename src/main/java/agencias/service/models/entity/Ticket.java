@@ -42,4 +42,8 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "fk_reserva", referencedColumnName = "id_reserva")
     private Reserva reserva;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
+    private Vuelo vuelo;
 }

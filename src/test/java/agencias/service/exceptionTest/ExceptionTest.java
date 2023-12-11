@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -53,13 +55,25 @@ public class ExceptionTest {
     }
 
     @Test
-    @DisplayName("Test de la excepción personalizada ReservaNotFoundException")
-    void reservaNotFoundException(){
-        ReservaNotFoundException argumentSut = new ReservaNotFoundException("Excepción lanzada");
+    @DisplayName("Test de la excepción personalizada RolGenericException")
+    void rolException(){
+        RolGenericException argumentSut = new RolGenericException("Excepción lanzada");
         ErrorDTO error = new ErrorDTO(404, "Excepción lanzada");
         ResponseEntity<?> expected = new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
-        ResponseEntity<?> actual = controller.reservaNotFound(argumentSut);
+        ResponseEntity<?> actual = controller.rolGenericException(argumentSut);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Test de la excepción personalizada CustomException")
+    void customException(){
+        CustomException argumentSut = new CustomException(HttpStatus.NOT_FOUND, "Excepción lanzada");
+        ErrorDTO error = new ErrorDTO(404, "Excepción lanzada");
+        ResponseEntity<?> expected = new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+
+        ResponseEntity<?> actual = controller.customException(argumentSut);
 
         assertEquals(expected, actual);
     }

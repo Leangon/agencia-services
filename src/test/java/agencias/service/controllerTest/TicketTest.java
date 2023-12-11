@@ -2,12 +2,11 @@ package agencias.service.controllerTest;
 
 import agencias.service.controllers.TicketController;
 import agencias.service.models.dto.Request.TicketCompleteDTO;
-import agencias.service.models.dto.Request.TicketRequestDTO;
+import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.ResponseDeleteDto;
 import agencias.service.models.dto.Response.TicketResponseDTO;
 import agencias.service.service.TicketService;
 import agencias.service.utils.TicketUtils;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,8 +31,8 @@ public class TicketTest {
 
     @Test
     void guardarTicketTestOK(){
-        TicketRequestDTO argumentSut = TicketUtils.ticketDto1();
-        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(),"se guardo con exito");
+        TicketDTO argumentSut = TicketUtils.ticketDto1();
+        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketRequestDto1(),"se guardo con exito");
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.save(argumentSut)).thenReturn(respuesta);
@@ -45,7 +44,7 @@ public class TicketTest {
    @Test
     void TicketPorIdTestOK(){
         Long id = 2L;
-        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(), "se guardo con exito");
+        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketRequestDto1(), "se guardo con exito");
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.findById(id)).thenReturn(respuesta);
@@ -56,7 +55,7 @@ public class TicketTest {
 
    @Test
     void findAllTicketTestOK(){
-        List<TicketRequestDTO> respuesta = TicketUtils.listaTicketsDto();
+        List<TicketDTO> respuesta = TicketUtils.listaTicketsDto();
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.findAll()).thenReturn(respuesta);
@@ -68,7 +67,7 @@ public class TicketTest {
     @Test
     void updateTicketTestOK(){
         TicketCompleteDTO argumentSut = TicketUtils.ticketCompleteDto1();
-        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketDto1(),"se guardo con exito");
+        TicketResponseDTO respuesta = new TicketResponseDTO(TicketUtils.ticketRequestDto1(),"se guardo con exito");
         ResponseEntity<?> expected = new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         when(service.update(argumentSut)).thenReturn(respuesta);

@@ -32,5 +32,5 @@ public class VueloRequestDTO {
 
     private Itinerario Itinerario;
 
-    private AerolineaRequestDTO aerolinea;
+    private Long idAerolinea;
 }
