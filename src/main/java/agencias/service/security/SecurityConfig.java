@@ -33,6 +33,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                         auth.requestMatchers("/error").permitAll();
                         auth.requestMatchers("/api/login").permitAll();
+                        auth.requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-resources/**",
+                                "/v3/api-docs/**",
+                                "/configuration/**").permitAll();
                         auth.requestMatchers("/api/vuelo/listarVuelos").hasAnyRole("USER", "ADMIN");
                         auth.requestMatchers("/api/usuario").hasAnyRole("USER", "ADMIN");
                         auth.requestMatchers("/api/reserva/alta").hasAnyRole("USER", "ADMIN");
