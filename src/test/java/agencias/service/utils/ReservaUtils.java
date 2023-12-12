@@ -17,7 +17,7 @@ public class ReservaUtils {
     public static Reserva reserva1(){
         Vuelo vuelo = new Vuelo();
         vuelo.setNumVuelo(123);
-        vuelo.setFecha(LocalDate.parse("2023-12-21"));
+        vuelo.setFecha(LocalDate.parse("2024-12-21"));
         Itinerario itinerario = new Itinerario();
         itinerario.setCiudadOrigen("Montevideo");
         itinerario.setCiudadDestino("Londres");
@@ -89,7 +89,7 @@ public class ReservaUtils {
         Vuelo vuelo = new Vuelo();
         vuelo.setIdVuelo(1L);
         vuelo.setNumVuelo(123);
-        vuelo.setFecha(LocalDate.parse("2023-12-21"));
+        vuelo.setFecha(LocalDate.parse("2024-12-21"));
         Itinerario itinerario = new Itinerario();
         itinerario.setCiudadOrigen("Montevideo");
         itinerario.setCiudadDestino("Londres");
@@ -103,7 +103,7 @@ public class ReservaUtils {
         usuario.setIdUsuario(1L);
         usuario.setNombre("Juan");
         usuario.setApellido("Silva");
-        return new ReservaRequestDTO(LocalDate.of(2023, 12, 11), ticket.getPrecio(),
+        return new ReservaRequestDTO(LocalDate.now(), ticket.getPrecio(),
                 TipoPago.PAGO_ONLINE, vuelo.getIdVuelo(), usuario.getIdUsuario() ,tickets);
     }
 
