@@ -77,10 +77,11 @@ public class ReservaServiceTest {
 
     @Test
     void reservaGenerarReportePorFechaTest(){
-        LocalDate date = LocalDate.of(2023, 10, 12);
-        int vuelosVendidos = 1;
-        Double ingresosGenerados = 1000D;
+        LocalDate date = LocalDate.of(2023, 12, 11);
+        int vuelosVendidos = 2;
+        Double ingresosGenerados = 2000D;
         Map<String, Integer> destinosPopulares = new HashMap<>();
+        destinosPopulares.put("Rio Janeiro", 1);
         destinosPopulares.put("Paris", 1);
         List<Reserva> listaReservas = ReservaUtils.listaReservas();
         ReporteResponseDTO expected = new ReporteResponseDTO(vuelosVendidos, ingresosGenerados, destinosPopulares);
@@ -156,9 +157,9 @@ public class ReservaServiceTest {
     void UpdateTicketTestEXCEPTION2(){
         ReservaRequestDTO entrada = ReservaUtils.reservaDto1();
         Vuelo vuelo = VueloUtils.vuelo3();
-        CustomException expected = new CustomException(HttpStatus.NOT_FOUND, "No existe el vuelo que intenta reservar");
+        CustomException expected = new CustomException(HttpStatus.NOT_FOUND, "No existe el usuario con el que intenta reservar");
         when(vueloRepository.findById(any())).thenReturn(Optional.of(vuelo));
-        when(vueloRepository.findById(any())).thenReturn(Optional.empty());
+        when(userRepository.findById(any())).thenReturn(Optional.empty());
 
         CustomException actual = assertThrows(CustomException.class, () -> service.crearReserva(entrada));
         assertEquals(expected.getMessage(), actual.getMessage());

@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @Table(name = "ticket")
 public class Ticket {
@@ -46,4 +46,16 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
     private Vuelo vuelo;
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "idTicket=" + idTicket +
+                ", numAsiento=" + numAsiento +
+                ", precio=" + precio +
+                ", clase=" + clase +
+                ", pasajero=" + pasajero +
+                ", vuelo=" + vuelo +
+                '}';
+    }
 }

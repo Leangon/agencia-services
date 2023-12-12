@@ -12,7 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "reservas")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reserva {
@@ -33,6 +34,7 @@ public class Reserva {
 
     @NotNull(message = "Debe tener un vuelo asociado")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
     private Vuelo vuelo;
 
@@ -41,6 +43,7 @@ public class Reserva {
     @OneToMany(mappedBy = "reserva", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Ticket> tickets;
 
+    @NotNull(message = "Debe incluirse el monto de la reserva")
     private Double total;
 
     @NotNull(message = "Debe tener un usuario asociado")
