@@ -1,7 +1,8 @@
 package agencias.service.models.dto.Request;
 
-import agencias.service.models.entity.Usuario;
-import agencias.service.models.entity.Vuelo;
+import agencias.service.models.dto.Response.TicketByUserResponseDTO;
+import agencias.service.models.entity.Aerolinea;
+import agencias.service.models.entity.Itinerario;
 import agencias.service.models.enums.TipoPago;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +17,16 @@ import java.util.List;
 public class ReservasByUserRequestDTO {
 
     private LocalDate fechaReserva;
-    private Usuario usuario;
+    private String nombre;
+    private String apellido;
+    private Long dni;
+    private Long telefono;
+    private String email;
+    private LocalDate fechaNacimiento;
     private TipoPago tipoPago;
-    private Vuelo vuelo;
-    List<TicketDTO> tickets;
+    private int numVuelo;
+    private LocalDate fecha;
+    private Itinerario itinerario;
+    private Aerolinea aerolinea;
+    private List<TicketByUserResponseDTO> tickets;
 }

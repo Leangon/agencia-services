@@ -35,6 +35,7 @@ public class SecurityConfig {
                         auth.requestMatchers("/api/login").permitAll();
                         auth.requestMatchers("/api/vuelo/listarVuelos").hasAnyRole("USER", "ADMIN");
                         auth.requestMatchers("/api/usuario").hasAnyRole("USER", "ADMIN");
+                        auth.requestMatchers("/api/reserva/alta").hasAnyRole("USER", "ADMIN");
                         auth.requestMatchers("/api/reserva/user/{id}").hasRole("AGENTE_VENTAS");
                         auth.anyRequest().hasRole("ADMIN");
                     })

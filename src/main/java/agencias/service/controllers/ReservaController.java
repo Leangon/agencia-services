@@ -4,6 +4,7 @@ import agencias.service.exceptions.CustomException;
 import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.service.ReservaService;
 import agencias.service.service.impl.ReservaServiceImpl;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -53,13 +54,11 @@ public class ReservaController {
     }
 
     @PostMapping("/alta")
-    public ResponseEntity<?> crearReserva(ReservaRequestDTO reservaRequestDTO){
+    public ResponseEntity<?> crearReserva(@Valid @RequestBody ReservaRequestDTO reservaRequestDTO){
         try {
             return new ResponseEntity<>(reservaServ.crearReserva(reservaRequestDTO), HttpStatus.CREATED);
         } catch (CustomException e){
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }
     }
-
-
 }

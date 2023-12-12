@@ -9,6 +9,7 @@ import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Response.ReporteResponseDTO;
 import agencias.service.models.dto.Response.ReservaResponseDTO;
 import agencias.service.models.dto.Response.ReservasByUserResponseDTO;
+import agencias.service.models.dto.Response.TicketByUserResponseDTO;
 import agencias.service.models.entity.Reserva;
 import agencias.service.models.entity.Ticket;
 import agencias.service.models.entity.Usuario;
@@ -126,18 +127,25 @@ public class ReservaServiceImpl implements ReservaService {
     public ReservasByUserResponseDTO reservasByUsuario(Long id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() ->
                 new ReservaNotFoundException("No existen usuarios con ese id"));
-        ModelMapper mapper = new ModelMapper();
+        ModelMapper mapper =  new ModelMapper();
         List<Reserva> reservas = reservaRepo.findReservaByIdUsuario(id);
 
-        List<ReservasByUserRequestDTO> listaReservas = reservas.stream().map(r -> new ReservasByUserRequestDTO(
-                r.getFechaReserva(), r.getUsuario(), r.getTipoPago(),
-                r.getVuelo(), r.getTickets().stream().map(t -> mapper.map(t, TicketDTO.class)).toList())).toList();
+        List<ReservasByUserRequestDTO> listaReservas = getReservasByUserRequestDTO(reservas, mapper);
         return new ReservasByUserResponseDTO("Reservas efectuadas por " +
                 usuario.getNombre() + " " + usuario.getApellido() + ": ", listaReservas);
     }
 
+    public List<ReservasByUserRequestDTO> getReservasByUserRequestDTO(List<Reserva> reservas, ModelMapper mapper) {
+        return reservas.stream().map(r -> new ReservasByUserRequestDTO(
+                r.getFechaReserva(), r.getUsuario().getNombre(), r.getUsuario().getApellido(), r.getUsuario().getDni(),
+                r.getUsuario().getTelefono(), r.getUsuario().getEmail(),r.getUsuario().getFechaNacimiento(), r.getTipoPago(),
+                r.getVuelo().getNumVuelo(), r.getVuelo().getFecha(), r.getVuelo().getItinerario(), r.getVuelo().getAerolinea(),
+                r.getTickets().stream().map(t -> mapper.map(t, TicketByUserResponseDTO.class)).toList())).toList();
+    }
+
     @Override
     public ReservaResponseDTO crearReserva(ReservaRequestDTO reservaRequestDTO) {
+
         try {
             Optional<Vuelo> vueloOptional = vueloRepository.findById(reservaRequestDTO.getIdVuelo());
             Optional<Usuario> usuarioOptional = usuarioRepository.findById(reservaRequestDTO.getIdUsuario());
