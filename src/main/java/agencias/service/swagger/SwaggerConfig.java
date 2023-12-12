@@ -19,7 +19,7 @@ public class SwaggerConfig {
                 .components(new Components().addSecuritySchemes
                         ("Bearer Authentication", createAPIKeyScheme()))
                 .info(new Info()
-                        .title("Medical admin service API")
+                        .title("Agencia service API")
                         .version("0.1.0")
                         .description("API documentation")
                         .termsOfService("http://swagger-io/terms/")
