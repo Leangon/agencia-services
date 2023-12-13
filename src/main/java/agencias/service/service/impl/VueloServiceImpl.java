@@ -84,7 +84,8 @@ public class VueloServiceImpl implements VueloService {
     @Override
     public VueloResponseDTO editarVuelo(Long idVuelo, VueloRequestDTO vueloRequestDTO) {
         Vuelo vueloExistente = vueloRepository.findById(idVuelo).orElseThrow(() -> new VueloGenericException("No se encontró el vuelo a modificar"));
-
+        Aerolinea aerolinea = aerolineaRepository.findById(vueloRequestDTO.getIdAerolinea())
+                .orElseThrow(() -> new AerolineaNotFoundException("No existen aerolíneas con ese id"));
         ModelMapper modelMapper = new ModelMapper();
 
         Vuelo vueloEditado = modelMapper.map(vueloRequestDTO, Vuelo.class);
@@ -93,9 +94,10 @@ public class VueloServiceImpl implements VueloService {
         vueloExistente.setCantAsientos(vueloEditado.getCantAsientos());
         vueloExistente.setDisponibilidad(vueloEditado.isDisponibilidad());
         vueloExistente.setFecha(vueloEditado.getFecha());
-        vueloExistente.setAerolinea(vueloEditado.getAerolinea());
+        vueloExistente.setAerolinea(aerolinea);
         vueloExistente.setItinerario(vueloEditado.getItinerario());
 
+        System.out.println(vueloExistente);
         Vuelo v =vueloRepository.save(vueloExistente);
         VueloDTO response = modelMapper.map(v, VueloDTO.class);
         return new VueloResponseDTO(response, "Vuelo modificado correctamente.");
