@@ -49,7 +49,6 @@ public class TicketUtils {
         ticketDto.setPrecio(85000.0);
         ticketDto.setNumAsiento(125);
         ticketDto.setPasajero(new Pasajero("juan Perez", "35120475", 39));
-        ticketDto.setIdVuelo(1L);
         return ticketDto;
     }
 
@@ -63,7 +62,6 @@ public class TicketUtils {
         ticket.setPrecio(110000.0);
         ticket.setNumAsiento(57);
         ticket.setPasajero(new Pasajero("Carla Sanchez", "34102369", 37));
-        ticket.setIdVuelo(1L);
         return ticket;
     }
 
@@ -141,7 +139,6 @@ public class TicketUtils {
         ticket.setPrecio(76000.0);
         ticket.setNumAsiento(111);
         ticket.setPasajero(new Pasajero("Carlos Perez", "35120475", 40));
-        ticket.setIdVuelo(1L);
         return ticket;
     }
 

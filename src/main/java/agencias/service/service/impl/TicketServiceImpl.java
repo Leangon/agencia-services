@@ -94,6 +94,6 @@ public class TicketServiceImpl implements TicketService {
 
     public TicketRequestDTO response(Ticket ticket){
        return new TicketRequestDTO(ticket.getNumAsiento(), ticket.getPrecio(), ticket.getClase(),
-                ticket.getPasajero(), ticket.getVuelo().getIdVuelo());
+                ticket.getPasajero());
     }
  }
