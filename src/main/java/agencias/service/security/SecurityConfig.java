@@ -34,6 +34,7 @@ public class SecurityConfig {
                         auth.requestMatchers("/error").permitAll();
                         auth.requestMatchers("/api/login").permitAll();
                         auth.requestMatchers(
+                                "/api/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",

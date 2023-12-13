@@ -28,6 +28,4 @@ public class TicketRequestDTO {
     @NotNull(message = "Debe tner un pasajero")
     private Pasajero pasajero;
 
-    private Long idVuelo;
-
 }
