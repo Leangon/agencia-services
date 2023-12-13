@@ -104,6 +104,7 @@ public class VueloServiceTest {
         Vuelo modificado = VueloUtils.vueloModificado();
         VueloResponseDTO expected = new VueloResponseDTO(VueloUtils.vueloModificadoDTO(), "Vuelo modificado correctamente.");
 
+        when(aerolineaRepository.findById(any())).thenReturn(Optional.of(AerolineaUtils.aereo1()));
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
         when(repository.save(any())).thenReturn(modificado);
 
