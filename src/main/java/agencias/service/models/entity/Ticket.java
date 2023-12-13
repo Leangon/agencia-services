@@ -43,9 +43,9 @@ public class Ticket {
     @JoinColumn(name = "fk_reserva", referencedColumnName = "id_reserva")
     private Reserva reserva;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "fk_vuelo", referencedColumnName = "id_vuelo")
-    private Vuelo vuelo;
+    private Vuelo vuelo;*/
 
     @Override
     public String toString() {
@@ -55,7 +55,6 @@ public class Ticket {
                 ", precio=" + precio +
                 ", clase=" + clase +
                 ", pasajero=" + pasajero +
-                ", vuelo=" + vuelo +
                 '}';
     }
 }

@@ -1,11 +1,8 @@
 package agencias.service.service.impl;
 import agencias.service.exceptions.RolGenericException;
-import agencias.service.exceptions.TicketGenericException;
 import agencias.service.models.dto.Request.RolDTO;
-import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Response.RolResponseDTO;
 import agencias.service.models.entity.Rol;
-import agencias.service.models.entity.Ticket;
 import agencias.service.models.entity.Usuario;
 import agencias.service.repository.RolRepository;
 import agencias.service.repository.UsuarioRepository;
