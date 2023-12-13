@@ -186,7 +186,7 @@ public class ReservaServiceImpl implements ReservaService {
 
             reservaRepo.save(reserva);
 
-            return new ReservaResponseDTO("Su reserva ha sido exitosa",
+            return new ReservaResponseDTO("Su reserva ha sido exitosa" + (diasHastaVuelo >=7 ? "Precio con descuento" : ""),
                     "Vuelo con salida de " + vueloOptional.get().getItinerario().getCiudadOrigen() + " con destino a "
                             + vueloOptional.get().getItinerario().getCiudadDestino(),
                     reserva.getTotal(),

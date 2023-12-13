@@ -17,10 +17,6 @@ public class ReservaRequestDTO {
     @FutureOrPresent(message="La fecha debe ser la actual o una fecha futura")
     private LocalDate fechaReserva;
 
-    @NotNull(message ="Debe tener un precio")
-    @Positive(message="El precio debe ser un número positivo")
-    private Double precio;
-
     @NotNull(message ="Debe tener un tipo de pago asociado")
     private TipoPago tipoPago;
 

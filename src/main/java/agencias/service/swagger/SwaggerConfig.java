@@ -13,7 +13,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Medical admin service API")
+                        .title("Agencia de vuelos service API")
                         .version("0.1.0")
                         .description("API documentation")
                         .termsOfService("http://swagger-io/terms/")

@@ -103,7 +103,7 @@ public class ReservaUtils {
         usuario.setIdUsuario(1L);
         usuario.setNombre("Juan");
         usuario.setApellido("Silva");
-        return new ReservaRequestDTO(LocalDate.now(), ticket.getPrecio(),
+        return new ReservaRequestDTO(LocalDate.now(),
                 TipoPago.PAGO_ONLINE, vuelo.getIdVuelo(), usuario.getIdUsuario() ,tickets);
     }
 
