@@ -68,26 +68,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioResponseDTO getUsuarioById(Long id) throws CustomException {
-        return null;
-    }
-
-    @Override
-    public Mensaje deleteUsuarioById(Long id) throws CustomException {
-        return null;
-    }
-
-    @Override
-    public UsuarioResponseDTO updateUsuario(UsuarioRequestDTO usuarioRequestDTO) throws CustomException {
-        return null;
-    }
-
-    @Override
-    public List<UsuarioResponseDTO> usuarioList() {
-        return null;
-    }
-
-    @Override
     public UsuarioResponseDTO mapToUsuarioResponseDto(Usuario usuario) {
         UsuarioResponseDTO usuarioResponseDTO = new UsuarioResponseDTO();
 
