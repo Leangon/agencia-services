@@ -50,7 +50,6 @@ public class VueloServiceImpl implements VueloService {
                 .orElseThrow(() -> new AerolineaNotFoundException("No existen aerolíneas con ese id"));
 
         nuevoVuelo.setAerolinea(aerolinea);
-        System.out.println(nuevoVuelo);
         Vuelo vueloPersist = vueloRepository.save(nuevoVuelo);
 
         VueloDTO dto = modelMapper.map(vueloPersist, VueloDTO.class);
