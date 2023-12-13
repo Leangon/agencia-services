@@ -45,15 +45,26 @@ public class VueloServiceImpl implements VueloService {
     public VueloResponseDTO crearVuelo(VueloRequestDTO vueloRequestDTO) {
         ModelMapper modelMapper = new ModelMapper();
 
-        Vuelo nuevoVuelo = modelMapper.map(vueloRequestDTO, Vuelo.class);
+        Vuelo nuevoVuelo = vueloMapeado(vueloRequestDTO);
         Aerolinea aerolinea = aerolineaRepository.findById(vueloRequestDTO.getIdAerolinea())
                 .orElseThrow(() -> new AerolineaNotFoundException("No existen aerolíneas con ese id"));
 
         nuevoVuelo.setAerolinea(aerolinea);
+        System.out.println(nuevoVuelo);
         Vuelo vueloPersist = vueloRepository.save(nuevoVuelo);
 
         VueloDTO dto = modelMapper.map(vueloPersist, VueloDTO.class);
         return new VueloResponseDTO(dto, "Vuelo Guardado Correctamente!");
+    }
+
+    public Vuelo vueloMapeado(VueloRequestDTO vueloDto){
+        Vuelo vuelo = new Vuelo();
+        vuelo.setNumVuelo(vueloDto.getNumVuelo());
+        vuelo.setFecha(vueloDto.getFecha());
+        vuelo.setItinerario(vueloDto.getItinerario());
+        vuelo.setCantAsientos(vueloDto.getCantAsientos());
+        vuelo.setDisponibilidad(vueloDto.isDisponibilidad());
+        return vuelo;
     }
 
     @Override
