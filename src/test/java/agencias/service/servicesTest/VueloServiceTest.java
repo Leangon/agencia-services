@@ -106,6 +106,7 @@ public class VueloServiceTest {
 
         when(aerolineaRepository.findById(any())).thenReturn(Optional.of(AerolineaUtils.aereo1()));
         when(repository.findById(any())).thenReturn(Optional.of(argumentSut));
+        when(aerolineaRepository.findById(any())).thenReturn(Optional.of(AerolineaUtils.aereo1()));
         when(repository.save(any())).thenReturn(modificado);
 
         VueloResponseDTO actual = service.editarVuelo(id, dto);

@@ -2,7 +2,6 @@ package agencias.service.utils;
 
 import agencias.service.models.dto.Request.ReservaRequestDTO;
 import agencias.service.models.dto.Request.ReservasByUserRequestDTO;
-import agencias.service.models.dto.Request.TicketDTO;
 import agencias.service.models.dto.Request.TicketRequestDTO;
 import agencias.service.models.dto.Response.TicketByUserResponseDTO;
 import agencias.service.models.entity.*;

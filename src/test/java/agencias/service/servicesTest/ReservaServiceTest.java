@@ -2,9 +2,7 @@ package agencias.service.servicesTest;
 
 import agencias.service.exceptions.CustomException;
 import agencias.service.exceptions.ReservaNotFoundException;
-import agencias.service.exceptions.VueloGenericException;
 import agencias.service.models.dto.Request.ReservaRequestDTO;
-import agencias.service.models.dto.Request.TicketCompleteDTO;
 import agencias.service.models.dto.Response.ReporteResponseDTO;
 import agencias.service.models.dto.Response.ReservaResponseDTO;
 import agencias.service.models.dto.Response.ReservasByUserResponseDTO;
@@ -16,7 +14,6 @@ import agencias.service.repository.UsuarioRepository;
 import agencias.service.repository.VueloRepository;
 import agencias.service.service.impl.ReservaServiceImpl;
 import agencias.service.utils.ReservaUtils;
-import agencias.service.utils.TicketUtils;
 import agencias.service.utils.UsuarioUtils;
 import agencias.service.utils.VueloUtils;
 import org.junit.jupiter.api.DisplayName;
