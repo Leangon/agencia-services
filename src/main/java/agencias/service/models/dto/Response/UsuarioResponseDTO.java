@@ -2,10 +2,7 @@ package agencias.service.models.dto.Response;
 
 import lombok.*;
 
-import java.time.LocalDate;
-
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioResponseDTO {
