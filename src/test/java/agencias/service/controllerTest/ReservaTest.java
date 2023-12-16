@@ -69,7 +69,7 @@ public class ReservaTest {
     }
 
     @Test
-    void TicketPorIdTestOK(){
+    void ReservaPorIdTestOK(){
         Usuario usuario = UsuarioUtils.usuario1();
         ReservasByUserResponseDTO respuesta = new ReservasByUserResponseDTO(
                 "Reservas efectuadas por " + usuario.getNombre() + usuario.getApellido() + ": ",
